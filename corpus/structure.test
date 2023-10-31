@@ -15,3 +15,57 @@ pipeline {}
 	(integer))
   (pipeline_block
     (identifier)))
+
+==================
+Jenkins-specific structure
+==================
+
+pipeline {
+  agent none
+  stages {
+    stage("hello world") {
+      steps {
+        sh abc
+        sh "hello world"
+      }
+    }
+    stage("Script") {
+      steps {
+        script {
+          def foo = bar
+        }
+      }
+    }
+  }
+}
+---
+(source_file
+  (pipeline_block
+    section_name: (identifier)
+    (step
+      step_name: (identifier)
+      arg: (identifier))
+    (pipeline_block
+      section_name: (identifier)
+      (pipeline_block
+        section_name: (function_call
+          function: (identifier)
+          args: (string))
+        (pipeline_block
+          section_name: (identifier)
+          (step
+            step_name: (identifier)
+            arg: (identifier))
+          (step
+            step_name: (identifier)
+            arg: (string))))
+      (pipeline_block
+        section_name: (function_call
+          function: (identifier)
+          args: (string))
+        (pipeline_block
+          section_name: (identifier)
+          (pipeline_block
+            (declaration
+              (identifier)
+              (identifier))))))))

@@ -3,6 +3,16 @@
   "version": "0.0.1",
   "description": "YOUR-LANGUAGE-NAME grammar for tree-sitter",
   "main": "bindings/node",
+  "tree-sitter": [
+    {
+      "scope": "source.jenkins",
+      "file-types": [
+        "pipeline",
+        "jenkins",
+        "Jenkinsfile"
+      ]
+    }
+  ],
   "keywords": [
     "parsing",
     "incremental"

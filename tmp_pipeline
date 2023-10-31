@@ -1,1 +1,3 @@
-hello(foo: bar, hello: world)
+def foo() {
+  echo("hello")
+}

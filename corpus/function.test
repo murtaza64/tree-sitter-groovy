@@ -43,3 +43,19 @@ hello(foo: bar, hello: world,)
       value: (identifier)
       key: (identifier)
       value: (identifier)))
+
+==================
+Simple function definition
+==================
+
+def foo() {
+  echo("hello")
+}
+---
+(source_file
+  (function_definition
+    (identifier)
+    (code_block
+      (function_call
+        function: (identifier)
+        args: (string)))))

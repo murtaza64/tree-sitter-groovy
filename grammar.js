@@ -2,6 +2,9 @@ module.exports = grammar({
   name: 'jenkins',
 
   extras: $ => [/\s/, $.comment],
+
+  word: $ => $.identifier,
+
   rules: {
     source_file: $ => seq(
       repeat($._statement),
@@ -12,6 +15,7 @@ module.exports = grammar({
       $.declaration,
       $.assignment,
       $.function_call,
+      $.function_definition,
     ),
 
     assignment: $ => seq(
@@ -23,10 +27,18 @@ module.exports = grammar({
       $._expression
     ),
 
-    _binary_op : $ => choice(
+    binary_op : $ => choice(
       prec.left(1, seq($._expression, '+', $._expression)),
       prec.left(2, seq($._expression, '*', $._expression)),
       //TODO
+    ),
+
+    boolean_literal: $ => choice('true', 'false'),
+
+    code_block: $ => seq(
+      '{',
+      repeat($._statement),
+      '}'
     ),
 
     comment: $ => choice(
@@ -35,16 +47,17 @@ module.exports = grammar({
     ),
 
     declaration: $ => seq(
-      choice($._type, 'def'),
+      choice($.type, 'def'),
       $.identifier,
       optional(seq('=', $._expression))
     ),
 
     _expression: $ => choice(
-      $._binary_op,
+      $.binary_op,
       $.identifier,
       $.index,
       $.integer, //TODO: other number types
+      $.boolean_literal,
       $.list,
       $.map,
       $.string,
@@ -53,20 +66,40 @@ module.exports = grammar({
 
     //TODO: function delcarations, x[3]()
     function_call: $ => seq(
-      field('function', $.identifier),
+      field('name', $.identifier),
       '(',
       field('args', seq(
         repeat(prec.left(seq(
-          choice($._expression, $._map_item),
+          choice($._expression, field('named_param', $.map_item)),
           ','
         ))),
         optional(seq(
-          choice($._expression, $._map_item),
+          choice($._expression, field('named_param', $.map_item)),
           optional(',')
         )),
       )),
       ')'
     ),
+
+    function_definition: $ => prec(2, seq(
+      choice($.type, 'def'),
+      field('name', $.identifier),
+      '(',
+      optional(seq(
+        $.type,
+        $.identifier,
+        optional(seq('=', $._expression)),
+      )),
+      repeat(seq(
+        $.type,
+        $.identifier,
+        optional(seq('=', $._expression)),
+        ',',
+      )),
+      optional(','),
+      ')',
+      $.code_block
+    )),
 
     identifier: $ => /[$_a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE][$_0-9a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE]*/,
     // identifier: $ => seq(
@@ -88,9 +121,9 @@ module.exports = grammar({
       ']'
     )),
 
-    _map_item: $ => seq(
+    map_item: $ => seq(
       field('key', choice(
-        $.identifier,
+        field('key_identifier', $.identifier),
         $.integer,
         seq('(', $._expression, ')'), //TODO: strings without parens??
       )),
@@ -102,11 +135,11 @@ module.exports = grammar({
       '[',
       repeat(
         prec.left(seq(
-          $._map_item,
+          $.map_item,
           ',',
         ))
       ),
-      $._map_item,
+      $.map_item,
       optional(','),
       ']',
     ),
@@ -116,22 +149,28 @@ module.exports = grammar({
 
     pipeline_block: $ => choice(
       seq(
-        $.identifier,
+        field('section_name', choice($.identifier, $.function_call)),
         '{',
-        repeat($.pipeline_block),
+        repeat(choice(
+          $.pipeline_block,
+          // $.oneline_directive,
+          $.step,
+        )),
         '}'
       ),
       seq(
-        "steps",
+        field('section_name', 'script'),
         '{',
-        repeat($.step),
+        repeat($._statement),
         '}'
       )
     ),
 
+    oneline_directive: $ => seq($.identifier, $.identifier),
+
     step: $ => seq(
-      $.identifier,
-      $._expression
+      field('step_name', $.identifier),
+      field('arg', $._expression)
     ),
     
     //TODO: external string parser
@@ -140,9 +179,20 @@ module.exports = grammar({
       /[^"]*/,
       '"'
     ),
+
+    _builtintype: $ => choice(
+      'int',
+      'boolean',
+      'char',
+      'short',
+      'int',
+      'long',
+      'float',
+      'double'
+    ),
     
     //TODO: array types
-    _type: $ => $.identifier,
+    type: $ => choice($._builtintype, $.identifier),
 
   }
 });

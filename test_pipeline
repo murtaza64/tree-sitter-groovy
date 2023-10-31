@@ -2,13 +2,26 @@ def key = val
 String str
 int x = 57
 String str2 = "hello world"
-// comment
+
+// this is a test pipeline
 pipeline {
-  steps {
-    step_1 "arg"
-    step_2(23)
-    step_3("multiline string")
-    step_3([1, 2, "hello", ["nested"]])
-    step_4([key: val, 2: "hello", (x): val3])
+  agent none
+  stages {
+    stage("hello world") {
+      steps {
+        sh abc
+        sh "hello world"
+	checkout([repo_name: "hello world", clone_depth: 20])
+      }
+    }
+    stage("Script") {
+      steps {
+        script {
+          def foo = bar
+	  sendTrackingEvents(arg1, 3 + 4 * 7, false)
+	  mapFunc(param1: val, param2: 4)
+        }
+      }
+    }
   }
 }
