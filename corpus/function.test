@@ -1,0 +1,56 @@
+==================
+Zero-argument function call
+==================
+
+hello()
+---
+(source_file
+  (statement
+    (function_call
+      (identifier))))
+
+==================
+One-argument function call
+==================
+
+hello(24)
+hello(24,)
+---
+(source_file
+  (statement
+    (function_call
+      (identifier)
+      (expression
+	(integer))))
+  (statement
+    (function_call
+      (identifier)
+      (expression
+	(integer)))))
+
+==================
+Map function call
+==================
+
+hello(foo: bar, hello: world)
+hello(foo: bar, hello: world,)
+---
+(source_file
+  (statement
+    (function_call
+      function: (identifier)
+      key: (identifier)
+      value: (expression
+        (identifier))
+      key: (identifier)
+      value: (expression
+        (identifier))))
+  (statement
+    (function_call
+      function: (identifier)
+      key: (identifier)
+      value: (expression
+        (identifier))
+      key: (identifier)
+      value: (expression
+        (identifier)))))

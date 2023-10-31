@@ -1,0 +1,55 @@
+==================
+Basic List literals
+==================
+
+def canon = [1, 2, "hello", "world"]
+def empty = []
+def trailing = [1, 2, 3,]
+def nested = ["hello", ["world", ["three"]]]
+
+---
+(source_file
+  (statement
+    (declaration
+      (identifier)
+      (expression
+        (list
+          (expression
+            (integer))
+          (expression
+            (integer))
+          (expression
+            (string))
+          (expression
+            (string))))))
+  (statement
+    (declaration
+      (identifier)
+      (expression
+        (list))))
+  (statement
+    (declaration
+      (identifier)
+      (expression
+        (list
+          (expression
+            (integer))
+          (expression
+            (integer))
+          (expression
+            (integer))))))
+  (statement
+    (declaration
+      (identifier)
+      (expression
+        (list
+          (expression
+            (string))
+          (expression
+            (list
+              (expression
+                (string))
+              (expression
+                (list
+                  (expression
+                    (string)))))))))))

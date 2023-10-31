@@ -1,0 +1,39 @@
+==================
+Basic List indexing
+==================
+
+def a = [1,2,3]
+def b = a[0]
+a[0] = 2
+
+---
+(source_file
+  (statement
+    (declaration
+      (identifier)
+      (expression
+	(list
+	  (expression
+	    (integer))
+	  (expression
+	    (integer))
+	  (expression
+	    (integer))))))
+  (statement
+    (declaration
+      (identifier)
+      (expression
+	(index
+	  (expression
+	    (identifier))
+	  (expression
+	    (integer))))))
+  (statement
+    (assignment
+      (index
+	(expression
+	  (identifier))
+	(expression
+	  (integer)))
+      (expression
+	(integer)))))

@@ -1,0 +1,65 @@
+==================
+Basic Map literals
+==================
+
+def canon = [hello: world, foo: bar]
+def trailing = [a: 1, b: 2,]
+def num_key = [1: 2]
+def expr_key = [(var): 3]
+def nested = [a: "hello", c: [b: "world"]]
+
+---
+(source_file
+  (statement
+    (declaration
+      (identifier)
+      (expression
+        (map
+          key: (identifier)
+          value: (expression
+            (identifier))
+          key: (identifier)
+          value: (expression
+            (identifier))))))
+  (statement
+    (declaration
+      (identifier)
+      (expression
+        (map
+          key: (identifier)
+          value: (expression
+            (integer))
+          key: (identifier)
+          value: (expression
+            (integer))))))
+  (statement
+    (declaration
+      (identifier)
+      (expression
+        (map
+          key: (integer)
+          value: (expression
+            (integer))))))
+  (statement
+    (declaration
+      (identifier)
+      (expression
+        (map
+          key: (expression
+            (identifier))
+          value: (expression
+            (integer))))))
+  (statement
+    (declaration
+      (identifier)
+      (expression
+        (map
+          key: (identifier)
+          value: (expression
+            (string))
+          key: (identifier)
+          value: (expression
+            (map
+              key: (identifier)
+              value: (expression
+                (string)))))))))

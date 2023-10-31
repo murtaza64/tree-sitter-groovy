@@ -1,0 +1,14 @@
+def key = val
+String str
+int x = 57
+String str2 = "hello world"
+// comment
+pipeline {
+  steps {
+    step_1 "arg"
+    step_2(23)
+    step_3("multiline string")
+    step_3([1, 2, "hello", ["nested"]])
+    step_4([key: val, 2: "hello", (x): val3])
+  }
+}

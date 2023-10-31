@@ -1,0 +1,21 @@
+==================
+Basic program structure
+==================
+
+def a = 1
+def b = 2
+pipeline {}
+---
+(source_file
+  (statement
+    (declaration
+      (identifier)
+      (expression
+	(integer))))
+  (statement
+    (declaration
+      (identifier)
+      (expression
+	(integer))))
+  (pipeline_block
+    (identifier)))
