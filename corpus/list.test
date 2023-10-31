@@ -9,47 +9,27 @@ def nested = ["hello", ["world", ["three"]]]
 
 ---
 (source_file
-  (statement
     (declaration
       (identifier)
-      (expression
         (list
-          (expression
-            (integer))
-          (expression
-            (integer))
-          (expression
-            (string))
-          (expression
-            (string))))))
-  (statement
+            (integer)
+            (integer)
+            (string)
+            (string)))
     (declaration
       (identifier)
-      (expression
-        (list))))
-  (statement
+        (list))
     (declaration
       (identifier)
-      (expression
         (list
-          (expression
-            (integer))
-          (expression
-            (integer))
-          (expression
-            (integer))))))
-  (statement
+            (integer)
+            (integer)
+            (integer)))
     (declaration
       (identifier)
-      (expression
         (list
-          (expression
-            (string))
-          (expression
+            (string)
             (list
-              (expression
-                (string))
-              (expression
+                (string)
                 (list
-                  (expression
-                    (string)))))))))))
+                    (string))))))

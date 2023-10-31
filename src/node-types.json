@@ -8,15 +8,27 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
-          "named": true
-        },
-        {
           "type": "identifier",
           "named": true
         },
         {
           "type": "index",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -35,29 +47,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "expression",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        },
         {
           "type": "identifier",
           "named": true
@@ -102,6 +91,14 @@
             "named": false
           },
           {
+            "type": "*",
+            "named": false
+          },
+          {
+            "type": "+",
+            "named": false
+          },
+          {
             "type": ",",
             "named": false
           },
@@ -110,15 +107,27 @@
             "named": false
           },
           {
-            "type": "expression",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
           {
+            "type": "index",
+            "named": true
+          },
+          {
             "type": "integer",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           }
         ]
@@ -146,15 +155,35 @@
             "named": false
           },
           {
-            "type": "expression",
-            "named": true
+            "type": "*",
+            "named": false
+          },
+          {
+            "type": "+",
+            "named": false
           },
           {
             "type": "identifier",
             "named": true
           },
           {
+            "type": "index",
+            "named": true
+          },
+          {
             "type": "integer",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           }
         ]
@@ -164,7 +193,43 @@
         "required": false,
         "types": [
           {
-            "type": "expression",
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "*",
+            "named": false
+          },
+          {
+            "type": "+",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "index",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           }
         ]
@@ -177,10 +242,30 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "expression",
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -195,7 +280,27 @@
       "required": false,
       "types": [
         {
-          "type": "expression",
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -218,15 +323,35 @@
             "named": false
           },
           {
-            "type": "expression",
-            "named": true
+            "type": "*",
+            "named": false
+          },
+          {
+            "type": "+",
+            "named": false
           },
           {
             "type": "identifier",
             "named": true
           },
           {
+            "type": "index",
+            "named": true
+          },
+          {
             "type": "integer",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           }
         ]
@@ -236,7 +361,43 @@
         "required": true,
         "types": [
           {
-            "type": "expression",
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "*",
+            "named": false
+          },
+          {
+            "type": "+",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "index",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           }
         ]
@@ -275,25 +436,6 @@
       "required": false,
       "types": [
         {
-          "type": "pipeline_block",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
           "type": "assignment",
           "named": true
         },
@@ -303,6 +445,10 @@
         },
         {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "pipeline_block",
           "named": true
         }
       ]
@@ -317,11 +463,27 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "identifier",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "index",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         }
       ]

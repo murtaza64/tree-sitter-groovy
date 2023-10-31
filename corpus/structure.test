@@ -7,15 +7,11 @@ def b = 2
 pipeline {}
 ---
 (source_file
-  (statement
     (declaration
       (identifier)
-      (expression
-	(integer))))
-  (statement
+	(integer))
     (declaration
       (identifier)
-      (expression
-	(integer))))
+	(integer))
   (pipeline_block
     (identifier)))

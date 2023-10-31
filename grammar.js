@@ -4,11 +4,11 @@ module.exports = grammar({
   extras: $ => [/\s/, $.comment],
   rules: {
     source_file: $ => seq(
-      repeat($.statement),
+      repeat($._statement),
       optional($.pipeline_block),
     ),
 
-    statement: $ => choice(
+    _statement: $ => choice(
       $.declaration,
       $.assignment,
       $.function_call,
@@ -20,12 +20,12 @@ module.exports = grammar({
         $.index
       ),
       '=',
-      $.expression
+      $._expression
     ),
 
     _binary_op : $ => choice(
-      prec.left(1, seq($.expression, '+', $.expression)),
-      prec.left(2, seq($.expression, '*', $.expression)),
+      prec.left(1, seq($._expression, '+', $._expression)),
+      prec.left(2, seq($._expression, '*', $._expression)),
       //TODO
     ),
 
@@ -33,16 +33,14 @@ module.exports = grammar({
       /\/\/[^\n]*/,
       // seq('/*', //, '*/')
     ),
-    
-    // statement: $ => $.declaration,
 
     declaration: $ => seq(
       choice($._type, 'def'),
       $.identifier,
-      optional(seq('=', $.expression))
+      optional(seq('=', $._expression))
     ),
 
-    expression: $ => choice(
+    _expression: $ => choice(
       $._binary_op,
       $.identifier,
       $.index,
@@ -50,7 +48,7 @@ module.exports = grammar({
       $.list,
       $.map,
       $.string,
-      seq('(', $.expression, ')')
+      seq('(', $._expression, ')')
     ),
 
     //TODO: function delcarations, x[3]()
@@ -59,11 +57,11 @@ module.exports = grammar({
       '(',
       field('args', seq(
         repeat(prec.left(seq(
-          choice($.expression, $._map_item),
+          choice($._expression, $._map_item),
           ','
         ))),
         optional(seq(
-          choice($.expression, $._map_item),
+          choice($._expression, $._map_item),
           optional(',')
         )),
       )),
@@ -77,16 +75,16 @@ module.exports = grammar({
     // ),
 
     index: $ => prec(1, seq(
-      $.expression,
+      $._expression,
       '[',
-      $.expression,
+      $._expression,
       ']',
     )),
 
     list: $ => prec(1, seq(
       '[',
-      repeat(prec.left(seq($.expression, ','))),
-      optional(seq($.expression, optional(','))),
+      repeat(prec.left(seq($._expression, ','))),
+      optional(seq($._expression, optional(','))),
       ']'
     )),
 
@@ -94,10 +92,10 @@ module.exports = grammar({
       field('key', choice(
         $.identifier,
         $.integer,
-        seq('(', $.expression, ')'), //TODO: strings without parens??
+        seq('(', $._expression, ')'), //TODO: strings without parens??
       )),
       ':',
-      field('value', $.expression),
+      field('value', $._expression),
     ),
 
     map: $ => seq(
@@ -133,7 +131,7 @@ module.exports = grammar({
 
     step: $ => seq(
       $.identifier,
-      $.expression
+      $._expression
     ),
     
     //TODO: external string parser
