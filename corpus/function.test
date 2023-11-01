@@ -1,61 +1,58 @@
-==================
+==========
 Zero-argument function call
-==================
-
+==========
 hello()
 ---
 (source_file
-    (function_call
-      (identifier)))
-
-==================
+  (function_call
+    (identifier)))
+==========
 One-argument function call
-==================
-
+==========
 hello(24)
 hello(24,)
 ---
 (source_file
-    (function_call
-      (identifier)
-	(integer))
-    (function_call
-      (identifier)
-	(integer)))
-
-==================
+  (function_call
+    name: (identifier)
+    args: (integer))
+  (function_call
+    name: (identifier)
+    args: (integer)))
+==========
 Map function call
-==================
-
+==========
 hello(foo: bar, hello: world)
 hello(foo: bar, hello: world,)
 ---
 (source_file
-    (function_call
-      function: (identifier)
-      key: (identifier)
-      value: (identifier)
-      key: (identifier)
+  (function_call
+    name: (identifier)
+    named_param: (map_item
+      key_identifier: (identifier)
       value: (identifier))
-    (function_call
-      function: (identifier)
-      key: (identifier)
-      value: (identifier)
-      key: (identifier)
+    named_param: (map_item
+      key_identifier: (identifier)
       value: (identifier)))
-
-==================
+  (function_call
+    name: (identifier)
+    named_param: (map_item
+      key_identifier: (identifier)
+      value: (identifier))
+    named_param: (map_item
+      key_identifier: (identifier)
+      value: (identifier))))
+==========
 Simple function definition
-==================
-
+==========
 def foo() {
   echo("hello")
 }
 ---
 (source_file
   (function_definition
-    (identifier)
+    name: (identifier)
     (code_block
       (function_call
-        function: (identifier)
+        name: (identifier)
         args: (string)))))

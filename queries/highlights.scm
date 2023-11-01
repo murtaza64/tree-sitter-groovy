@@ -21,28 +21,38 @@
 	     "*"
 	    ]) @operator)
 
-
-(pipeline_block . (identifier) @function.macro)
-(pipeline_block . ("script") @function.macro)
-(pipeline_block . (function_call name: (identifier) @function.macro))
-
-(step step_name: (identifier) @function.macro 
-      arg: (identifier) @constant
-      (#eq? @function.macro "agent")
-      (#any-of? @constant "any" "none"))
-
-(step step_name: (identifier) @function.builtin)
-
-(function_definition 
-  name: (identifier) @function)
-(function_call 
-  name: (identifier) @function)
-(function_call (map_item key_identifier: (identifier) @parameter))
-
 (type) @type
 (integer) @number
 (string) @string
 (comment) @comment
+
+
+(declaration ("=") @operator)
+(assignment ("=") @operator)
+
+
+(function_call 
+  name: (identifier) @function)
+(function_definition 
+  name: (identifier) @function)
+(function_call (map_item key_identifier: (identifier) @parameter))
+(function_call ("(") @punctuation.bracket)
+(function_call (")") @punctuation.bracket)
+
+(pipeline_block . (identifier) @function.macro)
+(pipeline_block . ("script") @function.macro)
+(pipeline_block . (function_call name: (identifier) @function.macro))
+(pipeline_block ("{") @punctuation.bracket)
+(pipeline_block ("}") @punctuation.bracket)
+
+(step step_name: (identifier) @function.builtin)
+(step step_name: (identifier) @function.macro 
+      arg: (identifier)
+      (#eq? @function.macro "agent"))
+(step step_name: (identifier) @function.macro
+      arg: (identifier) @constant
+      (#eq? @function.macro "agent")
+      (#any-of? @constant "any" "none"))
 
 
 (map (map_item key_identifier: (identifier) @parameter))

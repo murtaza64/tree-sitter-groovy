@@ -1,25 +1,22 @@
-==================
+==========
 Basic program structure
-==================
-
+==========
 def a = 1
 def b = 2
 pipeline {}
 ---
 (source_file
-    (declaration
-      (identifier)
-	(integer))
-    (declaration
-      (identifier)
-	(integer))
+  (declaration
+    (identifier)
+    (integer))
+  (declaration
+    (identifier)
+    (integer))
   (pipeline_block
-    (identifier)))
-
-==================
+    section_name: (identifier)))
+==========
 Jenkins-specific structure
-==================
-
+==========
 pipeline {
   agent none
   stages {
@@ -49,7 +46,7 @@ pipeline {
       section_name: (identifier)
       (pipeline_block
         section_name: (function_call
-          function: (identifier)
+          name: (identifier)
           args: (string))
         (pipeline_block
           section_name: (identifier)
@@ -61,7 +58,7 @@ pipeline {
             arg: (string))))
       (pipeline_block
         section_name: (function_call
-          function: (identifier)
+          name: (identifier)
           args: (string))
         (pipeline_block
           section_name: (identifier)
