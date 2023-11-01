@@ -1,0 +1,43 @@
+==========
+Math order of operations
+==========
+x = 1 + 2 * 3 - 2 ** 4
+---
+(source_file
+  (assignment
+    (identifier)
+    (binary_op
+      (binary_op
+        (integer)
+        (binary_op
+          (integer)
+          (integer)))
+      (binary_op
+        (integer)
+        (integer)))))
+==========
+!in
+==========
+x = 3 * 4 in y
+---
+(source_file
+  (assignment
+    (identifier)
+    (binary_op
+      (binary_op
+        (integer)
+        (integer))
+      (identifier))))
+==========
+Right assoc for **
+==========
+x = 1 ** 2 ** 3
+---
+(source_file
+  (assignment
+    (identifier)
+    (binary_op
+      (integer)
+      (binary_op
+        (integer)
+        (integer)))))

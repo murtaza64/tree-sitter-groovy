@@ -1,0 +1,19 @@
+==========
+Unary precedence
+==========
+x = ++ 5 ** y
+x = ~5 ** y
+---
+(source_file
+  (assignment
+    (identifier)
+    (unary_op
+      (binary_op
+        (integer)
+        (identifier))))
+  (assignment
+    (identifier)
+    (binary_op
+      (unary_op
+        (integer))
+      (identifier))))

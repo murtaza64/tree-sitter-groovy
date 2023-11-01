@@ -1,3 +1,21 @@
+const PREC = {
+  DEFAULT: 1,
+  PRIORITY: 2,
+  OR: 3, // ||
+  AND: 4, // &&
+  BIN_OR: 5, // |
+  BIN_XOR: 6, // ^
+  BIN_AND: 7, // &
+  COMPARE_EQ: 8, // == != <=> === !== =~ ==~
+  COMPARE: 9, // < <= > >= in !in instanceof !instanceof as
+  SHIFT: 10, // << >> >>> .. ..< <..< <..
+  PLUS: 11, // + -
+  STAR: 12, // * / %
+  UNARY: 13, // +x -x ++x --x
+  POW: 14, // **
+  TOP: 15, // new () [] {} . .& .@ ?. * *. *: ~ ! (type) x[y] ++ --
+  STATEMENT: 16
+}
 module.exports = grammar({
   name: 'jenkins',
 
@@ -8,16 +26,37 @@ module.exports = grammar({
   rules: {
     source_file: $ => seq(
       repeat($._statement),
-      optional($.pipeline_block),
+      optional($.pipeline_top_block)
     ),
 
-    _statement: $ => choice(
+    _statement: $ => prec.left(PREC.STATEMENT, choice(
       $.declaration,
       $.assignment,
       $.function_call,
       $.function_definition,
-    ),
+    )),
 
+    access_op: ($) =>
+      choice(
+        ...[
+          [".", PREC.TOP],
+          [".&", PREC.TOP],
+          [".@", PREC.TOP],
+          ["?.", PREC.TOP],
+          ["*.", PREC.TOP],
+        ].map(([operator, precedence]) =>
+          prec.left(precedence, seq($._expression, operator, $._expression))
+        ),
+        ...[
+          ["*", PREC.TOP],
+          ["*.", PREC.TOP],
+          ["*:", PREC.TOP],
+        ].map(([operator, precedence]) =>
+          prec.left(precedence, seq(operator, $._expression))
+        ),
+      ),
+
+    // TODO: +=, *= etc
     assignment: $ => seq(
       choice(
         $.identifier,
@@ -27,11 +66,47 @@ module.exports = grammar({
       $._expression
     ),
 
-    binary_op : $ => choice(
-      prec.left(1, seq($._expression, '+', $._expression)),
-      prec.left(2, seq($._expression, '*', $._expression)),
-      //TODO
-    ),
+    binary_op: ($) =>
+      choice(
+        ...[
+          ["%", PREC.STAR],
+          ["*", PREC.STAR],
+          ["/", PREC.STAR],
+          ["+", PREC.PLUS],
+          ["-", PREC.PLUS],
+          ["<<", PREC.SHIFT],
+          [">>", PREC.SHIFT],
+          [">>>", PREC.SHIFT],
+          ["..", PREC.SHIFT],
+          ["..<", PREC.SHIFT],
+          ["<..<", PREC.SHIFT],
+          ["<..", PREC.SHIFT],
+          ["<", PREC.COMPARE],
+          ["<=", PREC.COMPARE],
+          [">", PREC.COMPARE],
+          [">=", PREC.COMPARE],
+          ["in", PREC.COMPARE],
+          ["!in", PREC.COMPARE],
+          ["instanceof", PREC.COMPARE],
+          ["!instanceof", PREC.COMPARE],
+          ["as", PREC.COMPARE],
+          ["==", PREC.COMPARE_EQ],
+          ["!=", PREC.COMPARE_EQ],
+          ["<=>", PREC.COMPARE_EQ],
+          ["===", PREC.COMPARE_EQ],
+          ["!==", PREC.COMPARE_EQ],
+          ["=~", PREC.COMPARE_EQ],
+          ["==~", PREC.COMPARE_EQ],
+          ["&", PREC.BIN_AND],
+          ["^", PREC.BIN_XOR],
+          ["|", PREC.BIN_OR],
+          ["&&", PREC.AND],
+          ["||", PREC.OR],
+        ].map(([operator, precedence]) =>
+          prec.left(precedence, seq($._expression, operator, $._expression))
+        ),
+        prec.right(PREC.POW, seq($._expression, "**", $._expression))
+      ),
 
     boolean_literal: $ => choice('true', 'false'),
 
@@ -53,20 +128,23 @@ module.exports = grammar({
     ),
 
     _expression: $ => choice(
+      $.access_op,
       $.binary_op,
+      $.boolean_literal,
+      $.function_call,
       $.identifier,
       $.index,
       $.integer, //TODO: other number types
-      $.boolean_literal,
       $.list,
       $.map,
       $.string,
+      $.unary_op,
       seq('(', $._expression, ')')
     ),
 
     //TODO: function delcarations, x[3]()
-    function_call: $ => seq(
-      field('name', $.identifier),
+    function_call: $ => prec.left(PREC.PRIORITY, seq(
+      field('name', $._expression),
       '(',
       field('args', seq(
         repeat(prec.left(seq(
@@ -79,7 +157,7 @@ module.exports = grammar({
         )),
       )),
       ')'
-    ),
+    )),
 
     function_definition: $ => prec(2, seq(
       choice($.type, 'def'),
@@ -147,30 +225,67 @@ module.exports = grammar({
     //TODO: non-decimal integers
     integer: $ => /-?[0-9]+/,
 
-    pipeline_block: $ => choice(
+    pipeline_block_name: $ => choice(
+      $.identifier,
       seq(
-        field('section_name', choice($.identifier, $.function_call)),
-        '{',
-        repeat(choice(
-          $.pipeline_block,
-          // $.oneline_directive,
-          $.step,
-        )),
-        '}'
-      ),
-      seq(
-        field('section_name', 'script'),
-        '{',
-        repeat($._statement),
-        '}'
+        $.identifier,
+        '(',
+        repeat(prec.left(seq($._expression, ','))),
+        optional(seq($._expression, optional(','))),
+        ')'
       )
     ),
 
-    oneline_directive: $ => seq($.identifier, $.identifier),
+    pipeline_block: $ => seq(
+      field('block_name', $.pipeline_block_name),
+      '{',
+      repeat(choice(
+        $.pipeline_block,
+        // $.oneline_directive,
+        $.pipeline_script_block,
+        $.step,
+        // $._statement,
+      )),
+      '}'
+    ),
+
+    pipeline_top_block: $ => seq(
+      'pipeline',
+      '{',
+      repeat(choice(
+        $.pipeline_block,
+        // $.oneline_directive,
+        $.pipeline_script_block,
+        $.step,
+        // $._statement,
+      )),
+      '}'
+    ),
+    
+    pipeline_script_block: $ => seq(
+      'script',
+      '{',
+      repeat(choice(
+        $._statement,
+      )),
+      '}'
+    ),
 
     step: $ => seq(
       field('step_name', $.identifier),
-      field('arg', $._expression)
+      field('arg', choice(
+        $._expression,
+        prec(PREC.PRIORITY, seq(
+          repeat(
+            prec.left(seq(
+              $.map_item,
+              ',',
+            ))
+          ),
+          $.map_item,
+          optional(','),
+        )),
+      )),
     ),
     
     //TODO: external string parser
@@ -194,6 +309,20 @@ module.exports = grammar({
     //TODO: array types
     type: $ => choice($._builtintype, $.identifier),
 
+    unary_op: $ => 
+      choice(
+        ...[
+          ["+", PREC.UNARY],
+          ["-", PREC.UNARY],
+          ["++", PREC.UNARY],
+          ["--", PREC.UNARY],
+          ["~", PREC.TOP],
+          ["!", PREC.TOP],
+          ["new", PREC.TOP],
+        ].map(([operator, precedence]) =>
+          prec.left(precedence, seq(operator, $._expression))
+        ),
+      ),
   }
 });
 

@@ -11,7 +11,7 @@ from tree_sitter import Language, Parser
 
 Language.build_library(
   'build/languages.so',
-  ['..']
+  ['.']
 )
 JENKINS_LANGUAGE = Language('build/languages.so', 'jenkins')
 

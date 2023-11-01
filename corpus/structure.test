@@ -12,8 +12,7 @@ pipeline {}
   (declaration
     (identifier)
     (integer))
-  (pipeline_block
-    section_name: (identifier)))
+  (pipeline_top_block))
 ==========
 Jenkins-specific structure
 ==========
@@ -37,19 +36,20 @@ pipeline {
 }
 ---
 (source_file
-  (pipeline_block
-    section_name: (identifier)
+  (pipeline_top_block
     (step
       step_name: (identifier)
       arg: (identifier))
     (pipeline_block
-      section_name: (identifier)
+      block_name: (pipeline_block_name
+        (identifier))
       (pipeline_block
-        section_name: (function_call
-          name: (identifier)
-          args: (string))
+        block_name: (pipeline_block_name
+          (identifier)
+          (string))
         (pipeline_block
-          section_name: (identifier)
+          block_name: (pipeline_block_name
+            (identifier))
           (step
             step_name: (identifier)
             arg: (identifier))
@@ -57,12 +57,13 @@ pipeline {
             step_name: (identifier)
             arg: (string))))
       (pipeline_block
-        section_name: (function_call
-          name: (identifier)
-          args: (string))
+        block_name: (pipeline_block_name
+          (identifier)
+          (string))
         (pipeline_block
-          section_name: (identifier)
-          (pipeline_block
+          block_name: (pipeline_block_name
+            (identifier))
+          (pipeline_script_block
             (declaration
               (identifier)
               (identifier))))))))

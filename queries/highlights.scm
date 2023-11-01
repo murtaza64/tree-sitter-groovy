@@ -39,9 +39,8 @@
 (function_call ("(") @punctuation.bracket)
 (function_call (")") @punctuation.bracket)
 
-(pipeline_block . (identifier) @function.macro)
-(pipeline_block . ("script") @function.macro)
-(pipeline_block . (function_call name: (identifier) @function.macro))
+(pipeline_block (pipeline_block_name (identifier) @function.macro))
+(pipeline_script_block ("script") @function.macro)
 (pipeline_block ("{") @punctuation.bracket)
 (pipeline_block ("}") @punctuation.bracket)
 
