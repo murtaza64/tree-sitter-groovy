@@ -19,7 +19,7 @@ const PREC = {
 module.exports = grammar({
   name: 'jenkins',
 
-  extras: $ => [/\s/, $.comment],
+  extras: $ => [/\s/, $.comment, $.groovy_doc],
 
   word: $ => $.identifier,
 
@@ -118,8 +118,11 @@ module.exports = grammar({
 
     comment: $ => choice(
       /\/\/[^\n]*/,
-      // seq('/*', //, '*/')
+      seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/'),
     ),
+
+    groovy_doc: $ =>
+      seq('/**', /[^*]*\*+([^/*][^*]*\*+)*/, '/'),
 
     declaration: $ => seq(
       choice($.type, 'def'),
@@ -267,6 +270,7 @@ module.exports = grammar({
       '{',
       repeat(choice(
         $._statement,
+        $.step
       )),
       '}'
     ),
@@ -288,11 +292,104 @@ module.exports = grammar({
       )),
     ),
     
-    //TODO: external string parser
-    string: $ => seq(
-      '"',
-      /[^"]*/,
-      '"'
+    string: $ => choice(
+      $._plain_string,
+      $._interpolate_string,
+    ),
+
+    _plain_string: $ => choice(
+      seq(
+        '\'',
+        repeat(choice(
+          alias(token.immediate(prec(1, /[^\\'\n]+/)), $.string_content),
+          $.escape_sequence,
+        )),
+        '\'',
+      ),
+      seq(
+        "'''",
+        repeat(seq(
+          optional(alias(token.immediate(prec(0, /[']{1,2}/)), $.string_internal_quote)),
+          choice(
+            alias(token.immediate(prec(1, /([^$\\']|[']{1,2}[^'$\\])+/)), $.string_content),
+            seq(
+              optional(/[']{1,2}/), // edge case: these wont be in string_content
+              $.escape_sequence,
+            ),
+          ))),
+        "'''",
+      ),
+    ),
+
+    _interpolate_string: $ => choice(
+      seq(
+        '"',
+        repeat(choice(
+          alias(token.immediate(prec(1, /[^$\\"\n]+/)), $.string_content),
+          $.escape_sequence,
+          $.interpolation,
+        )),
+        '"',
+      ),
+      seq(
+        '"""',
+        repeat(seq(
+          // optional(alias(token.immediate(prec(0, /["]{1,2}/)), $.string_internal_quote)),
+          choice(
+            alias(token.immediate(prec(1, /([^$\\"]|["]{1,2}[^"$\\])+/)), $.string_content),
+            seq(
+              optional(/["]{1,2}/), // edge case: these wont be in string_content
+              $.escape_sequence,
+            ),
+            seq(
+              optional(/["]{1,2}/),
+              $.interpolation,
+            ),
+          ))),
+        '"""',
+      ),
+      seq( // slashy string, only slashes can be escaped
+        '/',
+        repeat1(choice(
+          alias(token.immediate(prec(1, /[^$\\\/]+/)), $.string_content),
+          alias('\\/', $.escape_sequence),
+          $.interpolation,
+        )),
+        '/',
+      ),
+      seq( // dollar slashy string
+        '$/',
+        repeat(choice(
+          alias(token.immediate(prec(1, 
+            /([^$\/]|\/[^$]|\$[^\/$a-zA-Z{])+/
+          )), $.string_content),
+          alias('$/', $.escape_sequence),
+          alias('$$', $.escape_sequence),
+          // alias(//, $.string_content),
+          $.interpolation,
+        )),
+        '/$',
+      ),
+    ),
+
+    escape_sequence: _ => token(prec(1, seq(
+      '\\',
+      choice(
+        /[$bfnrst\\'"]/,
+        /u[0-9a-fA-F]{4}/,
+      ),
+    ))),
+    
+    interpolation: $ => seq(
+      '$',
+      choice(
+        seq(
+          '{',
+          $._expression,
+          '}',
+        ),
+        token.immediate(/[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*/),
+      )
     ),
 
     _builtintype: $ => choice(
@@ -326,3 +423,7 @@ module.exports = grammar({
   }
 });
 
+// TODO
+// closures
+// classes
+// keywords

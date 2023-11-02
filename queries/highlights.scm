@@ -33,6 +33,9 @@
 
 (function_call 
   name: (identifier) @function)
+(function_call
+  name: (access_op
+	  (identifier) @function . ))
 (function_definition 
   name: (identifier) @function)
 (function_call (map_item key_identifier: (identifier) @parameter))

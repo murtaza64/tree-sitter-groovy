@@ -1,0 +1,11 @@
+pipeline {
+  agent none
+  def x = y
+  stages {
+    stage("hello") {
+      steps {
+        sh "hello"
+      }
+    }
+  }
+}

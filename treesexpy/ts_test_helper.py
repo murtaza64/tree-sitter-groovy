@@ -89,7 +89,9 @@ unupdated_failures = 0
 updates = 0
 for test_name, (code, expected_sexp) in tests.items():
     tree = jenkins_parser.parse(code)
+    print(tree.root_node.sexp())
     canonical_actual = str(sexpparse.parse(tree.root_node.sexp()))
+    print(canonical_actual)
     canonical_expected = str(sexpparse.parse(expected_sexp))
     if canonical_actual == canonical_expected:
         continue
