@@ -16,12 +16,21 @@ const PREC = {
   TOP: 15, // new () [] {} . .& .@ ?. * *. *: ~ ! (type) x[y] ++ --
   STATEMENT: 16
 }
+const list_of = (e) => seq(
+  repeat(prec.left(seq(e, ','))),
+  optional(seq(e, optional(','))),
+)
+
 module.exports = grammar({
   name: 'jenkins',
 
   extras: $ => [/\s/, $.comment, $.groovy_doc],
 
   word: $ => $.identifier,
+
+  conflicts: $ => [
+    [$.type, $.juxt_function_call],
+  ],
 
   rules: {
     source_file: $ => seq(
@@ -33,6 +42,8 @@ module.exports = grammar({
       $.declaration,
       $.assignment,
       $.function_call,
+      $.juxt_function_call,
+      // $.step,
       $.function_definition,
     )),
 
@@ -49,7 +60,6 @@ module.exports = grammar({
         ),
         ...[
           ["*", PREC.TOP],
-          ["*.", PREC.TOP],
           ["*:", PREC.TOP],
         ].map(([operator, precedence]) =>
           prec.left(precedence, seq(operator, $._expression))
@@ -125,9 +135,13 @@ module.exports = grammar({
       seq('/**', /[^*]*\*+([^/*][^*]*\*+)*/, '/'),
 
     declaration: $ => seq(
+      $.type_declaration,
+      optional(seq('=', $._expression))
+    ),
+    
+    type_declaration: $ => seq(
       choice($.type, 'def'),
       $.identifier,
-      optional(seq('=', $._expression))
     ),
 
     _expression: $ => choice(
@@ -146,21 +160,24 @@ module.exports = grammar({
     ),
 
     //TODO: function delcarations, x[3]()
-    function_call: $ => prec.left(PREC.PRIORITY, seq(
-      field('name', $._expression),
-      '(',
-      field('args', seq(
-        repeat(prec.left(seq(
-          choice($._expression, field('named_param', $.map_item)),
-          ','
-        ))),
-        optional(seq(
-          choice($._expression, field('named_param', $.map_item)),
-          optional(',')
+    function_call: $ =>
+      prec.left(1, seq(
+        field('name', $._expression),
+        '(',
+        field('args', list_of(choice($.map_item, $._expression))),
+        ')'
+      )),
+
+    juxt_function_call: $ => 
+      prec.left(0, seq(
+        field('name', $._expression),
+        field('args', seq(
+          choice($.map_item, $._expression),
+          repeat(
+            seq(',', choice($.map_item, $._expression)),
+          )
         )),
       )),
-      ')'
-    )),
 
     function_definition: $ => prec(2, seq(
       choice($.type, 'def'),
@@ -188,7 +205,7 @@ module.exports = grammar({
     //   repeat(choice($._letter, '[0-9]', '$', '_'))
     // ),
 
-    index: $ => prec(1, seq(
+    index: $ => prec(PREC.TOP, seq(
       $._expression,
       '[',
       $._expression,
@@ -201,6 +218,7 @@ module.exports = grammar({
       optional(seq($._expression, optional(','))),
       ']'
     )),
+
 
     map_item: $ => seq(
       field('key', choice(
@@ -228,69 +246,74 @@ module.exports = grammar({
     //TODO: non-decimal integers
     integer: $ => /-?[0-9]+/,
 
-    pipeline_block_name: $ => choice(
-      $.identifier,
-      seq(
-        $.identifier,
-        '(',
-        repeat(prec.left(seq($._expression, ','))),
-        optional(seq($._expression, optional(','))),
-        ')'
-      )
-    ),
-
-    pipeline_block: $ => seq(
-      field('block_name', $.pipeline_block_name),
-      '{',
-      repeat(choice(
-        $.pipeline_block,
-        // $.oneline_directive,
-        $.pipeline_script_block,
-        $.step,
-        // $._statement,
-      )),
-      '}'
-    ),
+    // pipeline_block_name: $ => choice(
+    //   $.identifier,
+    //   seq(
+    //     $.identifier,
+    //     '(',
+    //     repeat(prec.left(seq($._expression, ','))),
+    //     optional(seq($._expression, optional(','))),
+    //     ')'
+    //   )
+    // ),
+    //
+    // pipeline_block: $ => seq(
+    //   field('block_name', $.pipeline_block_name),
+    //   '{',
+    //   repeat(choice(
+    //     // $.pipeline_block,
+    //     // $.oneline_directive,
+    //     // $.pipeline_script_block,
+    //     $.step,
+    //     $._statement,
+    //   )),
+    //   '}'
+    // ),
 
     pipeline_top_block: $ => seq(
       'pipeline',
-      '{',
-      repeat(choice(
-        $.pipeline_block,
-        // $.oneline_directive,
-        $.pipeline_script_block,
-        $.step,
-        // $._statement,
-      )),
-      '}'
+      $.pipeline_script_body,
+      // '{',
+      // repeat(choice(
+      //   // $.pipeline_block,
+      //   // $.oneline_directive,
+      //   // $.pipeline_script_block,
+      //   $.step,
+      //   $._statement,
+      // )),
+      // '}'
     ),
     
-    pipeline_script_block: $ => seq(
-      'script',
+    // pipeline_script_block: $ => seq(
+    //   'script',
+    //   $.pipeline_script_body,
+    // ),
+    pipeline_script_body: $ => seq(
       '{',
       repeat(choice(
         $._statement,
-        $.step
+        // $.step
       )),
       '}'
     ),
 
-    step: $ => seq(
-      field('step_name', $.identifier),
-      field('arg', choice(
-        $._expression,
-        prec(PREC.PRIORITY, seq(
-          repeat(
-            prec.left(seq(
-              $.map_item,
-              ',',
-            ))
-          ),
-          $.map_item,
-          optional(','),
-        )),
-      )),
-    ),
+    // step: $ => seq(
+    //   field('step_name', $.identifier),
+    //   optional(field('arg', choice(
+    //     $._expression,
+    //     prec(PREC.PRIORITY, seq(
+    //       repeat(
+    //         prec.left(seq(
+    //           $.map_item,
+    //           ',',
+    //         ))
+    //       ),
+    //       $.map_item,
+    //       optional(','),
+    //     )),
+    //   ))),
+    //   optional(field('block', $.pipeline_script_body)),
+    // ),
     
     string: $ => choice(
       $._plain_string,
@@ -404,7 +427,7 @@ module.exports = grammar({
     ),
     
     //TODO: array types
-    type: $ => choice($._builtintype, $.identifier),
+    type: $ => choice($._builtintype, $._expression),
 
     unary_op: $ => 
       choice(
