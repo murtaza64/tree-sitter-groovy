@@ -5,7 +5,7 @@ x.y.z()
 ---
 (source_file
   (function_call
-    name: (access_op
+    function: (access_op
       (access_op
         (identifier)
         (identifier))

@@ -5,7 +5,7 @@ hello()
 ---
 (source_file
   (function_call
-    (identifier)))
+    function: (identifier)))
 ==========
 One-argument function call
 ==========
@@ -14,11 +14,13 @@ hello(24,)
 ---
 (source_file
   (function_call
-    name: (identifier)
-    args: (integer))
+    function: (identifier)
+    args: (argument_list
+      (integer)))
   (function_call
-    name: (identifier)
-    args: (integer)))
+    function: (identifier)
+    args: (argument_list
+      (integer))))
 ==========
 Map function call
 ==========
@@ -27,21 +29,23 @@ hello(foo: bar, hello: world,)
 ---
 (source_file
   (function_call
-    name: (identifier)
-    named_param: (map_item
-      key_identifier: (identifier)
-      value: (identifier))
-    named_param: (map_item
-      key_identifier: (identifier)
-      value: (identifier)))
+    function: (identifier)
+    args: (argument_list
+      (map_item
+        key: (identifier)
+        value: (identifier))
+      (map_item
+        key: (identifier)
+        value: (identifier))))
   (function_call
-    name: (identifier)
-    named_param: (map_item
-      key_identifier: (identifier)
-      value: (identifier))
-    named_param: (map_item
-      key_identifier: (identifier)
-      value: (identifier))))
+    function: (identifier)
+    args: (argument_list
+      (map_item
+        key: (identifier)
+        value: (identifier))
+      (map_item
+        key: (identifier)
+        value: (identifier)))))
 ==========
 Simple function definition
 ==========
@@ -51,8 +55,86 @@ def foo() {
 ---
 (source_file
   (function_definition
-    name: (identifier)
+    function: (identifier)
     (code_block
       (function_call
+        function: (identifier)
+        args: (argument_list
+          (string
+            (string_content)))))))
+==========
+Parameters
+==========
+def foo(int x, Boolean y = false) {
+  println("hi")
+}
+---
+(source_file
+  (function_definition
+    function: (identifier)
+    (parameter_list
+      (parameter
+        name: (identifier))
+      (parameter
+        type: (identifier)
         name: (identifier)
-        args: (string)))))
+        value: (boolean_literal)))
+    (code_block
+      (function_call
+        function: (identifier)
+        args: (argument_list
+          (string
+            (string_content)))))))
+==========
+Return
+==========
+def foo() {
+  return 1 + 2
+  return x
+  return
+}
+---
+(source_file
+  (function_definition
+    function: (identifier)
+    (code_block
+      (return
+        (binary_op
+          (integer)
+          (integer)))
+      (return
+        (identifier))
+      (return))))
+==========
+Juxtaposed function call
+==========
+f arg1: 2, arg2: "hello"
+g 3, 5
+h foo
+sh "hello"
+---
+(source_file
+  (juxt_function_call
+    function: (identifier)
+    args: (argument_list
+      (map_item
+        key: (identifier)
+        value: (integer))
+      (map_item
+        key: (identifier)
+        value: (string
+          (string_content)))))
+  (juxt_function_call
+    function: (identifier)
+    args: (argument_list
+      (integer)
+      (integer)))
+  (juxt_function_call
+    function: (identifier)
+    args: (argument_list
+      (identifier)))
+  (juxt_function_call
+    function: (identifier)
+    args: (argument_list
+      (string
+        (string_content)))))

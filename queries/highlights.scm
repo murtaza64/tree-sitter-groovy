@@ -1,11 +1,28 @@
 [
   "def"
+  "pipeline"
+  ; "break"
+  ; "continue"
+  (break)
+  (continue)
+  "assert"
+  "return"
+  "if"
+  "for"
+  "while"
+  "in"
+  "!in"
+  "instanceof"
+  "!instanceof"
+  "as"
 ] @keyword
 
 [
   "true"
   "false"
 ] @boolean
+
+(null) @constant
 
 [ "int"
   "char"
@@ -16,54 +33,74 @@
   "double"
 ] @type.builtin
 
-(binary_op ([
-	     "+"
-	     "*"
-	    ]) @operator)
-
-(type) @type
-(integer) @number
-(string) @string
 (comment) @comment
+(shebang) @comment
+(string) @string
+(string (escape_sequence) @operator)
+(string (interpolation ([ "$" "{" "}" ]) @operator))
+(string (interpolation) @normal)
 
+("(") @punctuation.bracket
+(")") @punctuation.bracket
+("[") @punctuation.bracket
+("]") @punctuation.bracket
+("{") @punctuation.bracket
+("}") @punctuation.bracket
+(":") @punctuation.delimiter
+(",") @punctuation.delimiter
+(".") @punctuation.delimiter
+
+(integer) @number
+(identifier) @variable
+((identifier) @constant
+  (#match? @constant "^[A-Z][A-Z_]+"))
+
+[ 
+  "%" "*" "/" "+" "-" "<<" ">>" ">>>" ".." "..<" "<..<" "<.." "<"
+  "<=" ">" ">=" "==" "!=" "<=>" "===" "!==" "=~" "==~" "&" "^" "|"
+  "&&" "||" "?:" "+" "*" ".&" ".@" "?." "*." "*" "*:" "++" "--" "!"
+] @operator
+
+(ternary_op ([ "?" ":" ]) @operator)
+
+(map (map_item key: (identifier) @parameter))
+
+
+(declaration type: (identifier) @type)
 
 (declaration ("=") @operator)
 (assignment ("=") @operator)
 
 
 (function_call 
-  name: (identifier) @function)
+  function: (identifier) @function)
 (function_call
-  name: (access_op
+  function: (access_op
 	  (identifier) @function . ))
+(function_call (argument_list
+		 (map_item key: (identifier) @parameter)))
+(juxt_function_call 
+  function: (identifier) @function)
+(juxt_function_call
+  function: (access_op
+	  (identifier) @function . ))
+(juxt_function_call (argument_list 
+		      (map_item key: (identifier) @parameter)))
+
 (function_definition 
-  name: (identifier) @function)
-(function_call (map_item key_identifier: (identifier) @parameter))
-(function_call ("(") @punctuation.bracket)
-(function_call (")") @punctuation.bracket)
+  function: (identifier) @function)
 
-(pipeline_block (pipeline_block_name (identifier) @function.macro))
-(pipeline_script_block ("script") @function.macro)
-(pipeline_block ("{") @punctuation.bracket)
-(pipeline_block ("}") @punctuation.bracket)
+"pipeline" @keyword
 
-(step step_name: (identifier) @function.builtin)
-(step step_name: (identifier) @function.macro 
-      arg: (identifier)
-      (#eq? @function.macro "agent"))
-(step step_name: (identifier) @function.macro
-      arg: (identifier) @constant
-      (#eq? @function.macro "agent")
-      (#any-of? @constant "any" "none"))
+(section section_name: (identifier) @function.macro)
+(section ("expression") @function.macro)
+(section
+  section_name: (function_call 
+    function: (identifier) @function.macro))
+(section
+  section_name: (function_call
+    function: (access_op
+		(identifier) @function.macro)))
 
 
-(map (map_item key_identifier: (identifier) @parameter))
 
-(map_item (":") @punctuation.delimiter)
-(map ("[") @punctuation.bracket)
-(map ("]") @punctuation.bracket)
-(map (",") @punctuation.delimiter)
-
-(list ("[") @punctuation.bracket)
-(list ("]") @punctuation.bracket)
-(list (",") @punctuation.delimiter)

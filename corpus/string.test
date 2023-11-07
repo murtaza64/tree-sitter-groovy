@@ -97,6 +97,7 @@ y = """
 this is a multiline string with "quotes" inside
 as well as ""double quotes""
 escapes \$
+plain backslashes \
 and ${interpolation}
 """
 ---
@@ -110,6 +111,8 @@ and ${interpolation}
       (string_content)
       (escape_sequence)
       (string_content)
+      (escape_sequence)
+      (string_content)
       (interpolation
         (identifier)))))
 ==========
@@ -119,11 +122,12 @@ print("""hello world ""${0}""")
 ---
 (source_file
   (function_call
-    name: (identifier)
-    args: (string
-      (string_content)
-      (interpolation
-        (integer)))))
+    function: (identifier)
+    args: (argument_list
+      (string
+        (string_content)
+        (interpolation
+          (integer))))))
 ==========
 Single quoted string
 ==========

@@ -9,44 +9,46 @@ def nested = [a: "hello", c: [b: "world"]]
 ---
 (source_file
   (declaration
-    (identifier)
-    (map
+    name: (identifier)
+    value: (map
       (map_item
-        key_identifier: (identifier)
+        key: (identifier)
         value: (identifier))
       (map_item
-        key_identifier: (identifier)
+        key: (identifier)
         value: (identifier))))
   (declaration
-    (identifier)
-    (map
+    name: (identifier)
+    value: (map
       (map_item
-        key_identifier: (identifier)
+        key: (identifier)
         value: (integer))
-      (map_item
-        key_identifier: (identifier)
-        value: (integer))))
-  (declaration
-    (identifier)
-    (map
-      (map_item
-        key: (integer)
-        value: (integer))))
-  (declaration
-    (identifier)
-    (map
       (map_item
         key: (identifier)
         value: (integer))))
   (declaration
-    (identifier)
-    (map
+    name: (identifier)
+    value: (map
       (map_item
-        key_identifier: (identifier)
-        value: (string))
+        key: (integer)
+        value: (integer))))
+  (declaration
+    name: (identifier)
+    value: (map
       (map_item
-        key_identifier: (identifier)
+        key: (identifier)
+        value: (integer))))
+  (declaration
+    name: (identifier)
+    value: (map
+      (map_item
+        key: (identifier)
+        value: (string
+          (string_content)))
+      (map_item
+        key: (identifier)
         value: (map
           (map_item
-            key_identifier: (identifier)
-            value: (string)))))))
+            key: (identifier)
+            value: (string
+              (string_content))))))))

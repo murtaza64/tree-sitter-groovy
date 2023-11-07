@@ -2,17 +2,19 @@
 Basic program structure
 ==========
 def a = 1
-def b = 2
+String b = 2
 pipeline {}
 ---
 (source_file
   (declaration
-    (identifier)
-    (integer))
+    name: (identifier)
+    value: (integer))
   (declaration
-    (identifier)
-    (integer))
-  (pipeline_top_block))
+    type: (identifier)
+    name: (identifier)
+    value: (integer))
+  (pipeline
+    (pipeline_block)))
 ==========
 Jenkins-specific structure
 ==========
@@ -36,34 +38,51 @@ pipeline {
 }
 ---
 (source_file
-  (pipeline_top_block
-    (step
-      step_name: (identifier)
-      arg: (identifier))
+  (pipeline
     (pipeline_block
-      block_name: (pipeline_block_name
-        (identifier))
-      (pipeline_block
-        block_name: (pipeline_block_name
-          (identifier)
-          (string))
-        (pipeline_block
-          block_name: (pipeline_block_name
-            (identifier))
-          (step
-            step_name: (identifier)
-            arg: (identifier))
-          (step
-            step_name: (identifier)
-            arg: (string))))
-      (pipeline_block
-        block_name: (pipeline_block_name
-          (identifier)
-          (string))
-        (pipeline_block
-          block_name: (pipeline_block_name
-            (identifier))
-          (pipeline_script_block
-            (declaration
-              (identifier)
-              (identifier))))))))
+      (step
+        (juxt_function_call
+          function: (identifier)
+          args: (argument_list
+            (identifier))))
+      (section
+        section_name: (identifier)
+        body: (pipeline_block
+          (section
+            section_name: (function_call
+              function: (identifier)
+              args: (argument_list
+                (string
+                  (string_content))))
+            body: (pipeline_block
+              (section
+                section_name: (identifier)
+                body: (pipeline_block
+                  (step
+                    (juxt_function_call
+                      function: (identifier)
+                      args: (argument_list
+                        (identifier))))
+                  (step
+                    (juxt_function_call
+                      function: (identifier)
+                      args: (argument_list
+                        (string
+                          (string_content)))))))))
+          (section
+            section_name: (function_call
+              function: (identifier)
+              args: (argument_list
+                (string
+                  (string_content))))
+            body: (pipeline_block
+              (section
+                section_name: (identifier)
+                body: (pipeline_block
+                  (section
+                    section_name: (identifier)
+                    body: (pipeline_block
+                      (step
+                        (declaration
+                          name: (identifier)
+                          value: (identifier))))))))))))))

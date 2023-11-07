@@ -1,2 +1,4 @@
-a.b()
-b()
+def foo() {
+	x = y
+	return z
+}
