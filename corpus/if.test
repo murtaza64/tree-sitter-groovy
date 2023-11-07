@@ -1,0 +1,63 @@
+==========
+Basic if statement
+==========
+if(x == y) {
+  println("hello world")
+}
+---
+(source_file
+  (if_statement
+    condition: (binary_op
+      (identifier)
+      (identifier))
+    body: (code_block
+      (function_call
+        function: (identifier)
+        args: (argument_list
+          (string
+            (string_content)))))))
+==========
+Else ifs
+==========
+if(a) {
+  f(a)
+} else if (b) {
+  f(b)
+} else {
+  error()
+}
+---
+(source_file
+  (if_statement
+    condition: (identifier)
+    body: (code_block
+      (function_call
+        function: (identifier)
+        args: (argument_list
+          (identifier))))
+    else: (if_statement
+      condition: (identifier)
+      body: (code_block
+        (function_call
+          function: (identifier)
+          args: (argument_list
+            (identifier))))
+      else: (code_block
+        (function_call
+          function: (identifier))))))
+==========
+No braces
+==========
+if (x) println(x) else println(y)
+---
+(source_file
+  (if_statement
+    condition: (identifier)
+    body: (function_call
+      function: (identifier)
+      args: (argument_list
+        (identifier)))
+    else: (function_call
+      function: (identifier)
+      args: (argument_list
+        (identifier)))))

@@ -1,0 +1,11 @@
+==========
+Shebang
+==========
+#!/usr/bin/env groovy
+pipeline {
+}
+---
+(source_file
+  (shebang)
+  (pipeline
+    (pipeline_block)))

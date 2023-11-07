@@ -1,0 +1,71 @@
+==========
+Basic for loop
+==========
+for (int i = 0; i < 10; i++) {
+  println("hello!")
+}
+---
+(source_file
+  (for_loop
+    initializer: (declaration
+      name: (identifier)
+      value: (integer))
+    condition: (binary_op
+      (identifier)
+      (integer))
+    increment: (assignment
+      (increment_op
+        (identifier)))
+    body: (code_block
+      (function_call
+        function: (identifier)
+        args: (argument_list
+          (string
+            (string_content)))))))
+==========
+Multiple initializers and increments
+==========
+for (int x = 0, y = 0; x + y < 10; x++, y *= 2) {
+  println("hello!")
+}
+---
+(source_file
+  (for_loop
+    initializer: (declaration
+      name: (identifier)
+      value: (integer))
+    initializer: (assignment
+      (identifier)
+      (integer))
+    condition: (binary_op
+      (binary_op
+        (identifier)
+        (identifier))
+      (integer))
+    increment: (assignment
+      (increment_op
+        (identifier)))
+    increment: (assignment
+      (identifier)
+      (integer))
+    body: (code_block
+      (function_call
+        function: (identifier)
+        args: (argument_list
+          (string
+            (string_content)))))))
+==========
+Infinite loop
+==========
+for (;;) {
+  println("to infinity and beyond")
+}
+---
+(source_file
+  (for_loop
+    body: (code_block
+      (function_call
+        function: (identifier)
+        args: (argument_list
+          (string
+            (string_content)))))))
