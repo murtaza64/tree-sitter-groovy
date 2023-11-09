@@ -36,10 +36,6 @@
           "named": true
         },
         {
-          "type": "integer",
-          "named": true
-        },
-        {
           "type": "list",
           "named": true
         },
@@ -49,6 +45,10 @@
         },
         {
           "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         },
         {
@@ -103,10 +103,6 @@
           "named": true
         },
         {
-          "type": "integer",
-          "named": true
-        },
-        {
           "type": "list",
           "named": true
         },
@@ -120,6 +116,10 @@
         },
         {
           "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         },
         {
@@ -174,10 +174,6 @@
           "named": true
         },
         {
-          "type": "integer",
-          "named": true
-        },
-        {
           "type": "list",
           "named": true
         },
@@ -187,6 +183,10 @@
         },
         {
           "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         },
         {
@@ -241,10 +241,6 @@
           "named": true
         },
         {
-          "type": "integer",
-          "named": true
-        },
-        {
           "type": "list",
           "named": true
         },
@@ -254,6 +250,10 @@
         },
         {
           "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         },
         {
@@ -308,10 +308,6 @@
           "named": true
         },
         {
-          "type": "integer",
-          "named": true
-        },
-        {
           "type": "list",
           "named": true
         },
@@ -321,6 +317,10 @@
         },
         {
           "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         },
         {
@@ -352,11 +352,23 @@
       "required": false,
       "types": [
         {
+          "type": "access_op",
+          "named": true
+        },
+        {
           "type": "assertion",
           "named": true
         },
         {
           "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "binary_op",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
           "named": true
         },
         {
@@ -372,6 +384,14 @@
           "named": true
         },
         {
+          "type": "do_while_loop",
+          "named": true
+        },
+        {
+          "type": "for_in_loop",
+          "named": true
+        },
+        {
           "type": "for_loop",
           "named": true
         },
@@ -384,7 +404,19 @@
           "named": true
         },
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "increment_op",
+          "named": true
+        },
+        {
+          "type": "index",
           "named": true
         },
         {
@@ -392,7 +424,43 @@
           "named": true
         },
         {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "pipeline_step_with_block",
+          "named": true
+        },
+        {
           "type": "return",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "ternary_op",
+          "named": true
+        },
+        {
+          "type": "try_statement",
+          "named": true
+        },
+        {
+          "type": "unary_op",
           "named": true
         },
         {
@@ -482,10 +550,6 @@
             "named": false
           },
           {
-            "type": "integer",
-            "named": true
-          },
-          {
             "type": "list",
             "named": true
           },
@@ -499,6 +563,10 @@
           },
           {
             "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
             "named": true
           },
           {
@@ -560,7 +628,153 @@
             "named": true
           },
           {
-            "type": "integer",
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "ternary_op",
+            "named": true
+          },
+          {
+            "type": "unary_op",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "do_while_loop",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "assertion",
+            "named": true
+          },
+          {
+            "type": "assignment",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "code_block",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "declaration",
+            "named": true
+          },
+          {
+            "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "for_in_loop",
+            "named": true
+          },
+          {
+            "type": "for_loop",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "function_definition",
+            "named": true
+          },
+          {
+            "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "juxt_function_call",
+            "named": true
+          },
+          {
+            "type": "pipeline_step_with_block",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "try_statement",
+            "named": true
+          },
+          {
+            "type": "while_loop",
+            "named": true
+          }
+        ]
+      },
+      "condition": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "access_op",
+            "named": true
+          },
+          {
+            "type": "binary_op",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "increment_op",
+            "named": true
+          },
+          {
+            "type": "index",
             "named": true
           },
           {
@@ -576,6 +790,10 @@
             "named": true
           },
           {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
@@ -585,6 +803,166 @@
           },
           {
             "type": "unary_op",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "for_in_loop",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "assertion",
+            "named": true
+          },
+          {
+            "type": "assignment",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "code_block",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "declaration",
+            "named": true
+          },
+          {
+            "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "for_in_loop",
+            "named": true
+          },
+          {
+            "type": "for_loop",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "function_definition",
+            "named": true
+          },
+          {
+            "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "juxt_function_call",
+            "named": true
+          },
+          {
+            "type": "pipeline_step_with_block",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "try_statement",
+            "named": true
+          },
+          {
+            "type": "while_loop",
+            "named": true
+          }
+        ]
+      },
+      "collection": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "access_op",
+            "named": true
+          },
+          {
+            "type": "binary_op",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "increment_op",
+            "named": true
+          },
+          {
+            "type": "index",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "ternary_op",
+            "named": true
+          },
+          {
+            "type": "unary_op",
+            "named": true
+          }
+        ]
+      },
+      "variable": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
             "named": true
           }
         ]
@@ -624,6 +1002,14 @@
             "named": true
           },
           {
+            "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "for_in_loop",
+            "named": true
+          },
+          {
             "type": "for_loop",
             "named": true
           },
@@ -644,7 +1030,15 @@
             "named": true
           },
           {
+            "type": "pipeline_step_with_block",
+            "named": true
+          },
+          {
             "type": "return",
+            "named": true
+          },
+          {
+            "type": "try_statement",
             "named": true
           },
           {
@@ -694,10 +1088,6 @@
             "named": true
           },
           {
-            "type": "integer",
-            "named": true
-          },
-          {
             "type": "list",
             "named": true
           },
@@ -707,6 +1097,10 @@
           },
           {
             "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
             "named": true
           },
           {
@@ -752,6 +1146,14 @@
             "named": true
           },
           {
+            "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "for_in_loop",
+            "named": true
+          },
+          {
             "type": "for_loop",
             "named": true
           },
@@ -772,7 +1174,15 @@
             "named": true
           },
           {
+            "type": "pipeline_step_with_block",
+            "named": true
+          },
+          {
             "type": "return",
+            "named": true
+          },
+          {
+            "type": "try_statement",
             "named": true
           },
           {
@@ -856,10 +1266,6 @@
             "named": true
           },
           {
-            "type": "integer",
-            "named": true
-          },
-          {
             "type": "list",
             "named": true
           },
@@ -869,6 +1275,10 @@
           },
           {
             "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
             "named": true
           },
           {
@@ -939,10 +1349,6 @@
           "named": true
         },
         {
-          "type": "integer",
-          "named": true
-        },
-        {
           "type": "list",
           "named": true
         },
@@ -952,6 +1358,10 @@
         },
         {
           "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         },
         {
@@ -1011,6 +1421,14 @@
             "named": true
           },
           {
+            "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "for_in_loop",
+            "named": true
+          },
+          {
             "type": "for_loop",
             "named": true
           },
@@ -1031,7 +1449,15 @@
             "named": true
           },
           {
+            "type": "pipeline_step_with_block",
+            "named": true
+          },
+          {
             "type": "return",
+            "named": true
+          },
+          {
+            "type": "try_statement",
             "named": true
           },
           {
@@ -1081,10 +1507,6 @@
             "named": true
           },
           {
-            "type": "integer",
-            "named": true
-          },
-          {
             "type": "list",
             "named": true
           },
@@ -1094,6 +1516,10 @@
           },
           {
             "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
             "named": true
           },
           {
@@ -1110,8 +1536,8 @@
           }
         ]
       },
-      "else": {
-        "multiple": true,
+      "else_body": {
+        "multiple": false,
         "required": false,
         "types": [
           {
@@ -1139,8 +1565,12 @@
             "named": true
           },
           {
-            "type": "else",
-            "named": false
+            "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "for_in_loop",
+            "named": true
           },
           {
             "type": "for_loop",
@@ -1163,7 +1593,15 @@
             "named": true
           },
           {
+            "type": "pipeline_step_with_block",
+            "named": true
+          },
+          {
             "type": "return",
+            "named": true
+          },
+          {
+            "type": "try_statement",
             "named": true
           },
           {
@@ -1211,10 +1649,6 @@
           "named": true
         },
         {
-          "type": "integer",
-          "named": true
-        },
-        {
           "type": "list",
           "named": true
         },
@@ -1224,6 +1658,10 @@
         },
         {
           "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         },
         {
@@ -1278,10 +1716,6 @@
           "named": true
         },
         {
-          "type": "integer",
-          "named": true
-        },
-        {
           "type": "list",
           "named": true
         },
@@ -1291,6 +1725,10 @@
         },
         {
           "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         },
         {
@@ -1345,10 +1783,6 @@
           "named": true
         },
         {
-          "type": "integer",
-          "named": true
-        },
-        {
           "type": "list",
           "named": true
         },
@@ -1358,6 +1792,10 @@
         },
         {
           "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         },
         {
@@ -1430,10 +1868,6 @@
             "named": true
           },
           {
-            "type": "integer",
-            "named": true
-          },
-          {
             "type": "list",
             "named": true
           },
@@ -1443,6 +1877,10 @@
           },
           {
             "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
             "named": true
           },
           {
@@ -1498,10 +1936,6 @@
           "named": true
         },
         {
-          "type": "integer",
-          "named": true
-        },
-        {
           "type": "list",
           "named": true
         },
@@ -1511,6 +1945,10 @@
         },
         {
           "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         },
         {
@@ -1534,7 +1972,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "map_item",
@@ -1588,10 +2026,6 @@
             "named": true
           },
           {
-            "type": "integer",
-            "named": true
-          },
-          {
             "type": "list",
             "named": true
           },
@@ -1601,6 +2035,10 @@
           },
           {
             "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
             "named": true
           },
           {
@@ -1658,10 +2096,6 @@
             "named": true
           },
           {
-            "type": "integer",
-            "named": true
-          },
-          {
             "type": "list",
             "named": true
           },
@@ -1671,6 +2105,10 @@
           },
           {
             "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
             "named": true
           },
           {
@@ -1688,6 +2126,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "number_literal",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "parameter",
@@ -1764,10 +2207,6 @@
             "named": false
           },
           {
-            "type": "integer",
-            "named": true
-          },
-          {
             "type": "list",
             "named": true
           },
@@ -1781,6 +2220,10 @@
           },
           {
             "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
             "named": true
           },
           {
@@ -1842,10 +2285,6 @@
             "named": true
           },
           {
-            "type": "integer",
-            "named": true
-          },
-          {
             "type": "list",
             "named": true
           },
@@ -1855,6 +2294,10 @@
           },
           {
             "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
             "named": true
           },
           {
@@ -1897,26 +2340,30 @@
       "required": true,
       "types": [
         {
-          "type": "pipeline_block",
+          "type": "code_block",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "pipeline_block",
+    "type": "pipeline_step_with_block",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "section",
+          "type": "code_block",
           "named": true
         },
         {
-          "type": "step",
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         }
       ]
@@ -1959,10 +2406,6 @@
           "named": true
         },
         {
-          "type": "integer",
-          "named": true
-        },
-        {
           "type": "list",
           "named": true
         },
@@ -1975,139 +2418,7 @@
           "named": true
         },
         {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "ternary_op",
-          "named": true
-        },
-        {
-          "type": "unary_op",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "section",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "pipeline_block",
-            "named": true
-          }
-        ]
-      },
-      "section_name": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "assertion",
-            "named": true
-          },
-          {
-            "type": "assignment",
-            "named": true
-          },
-          {
-            "type": "break",
-            "named": true
-          },
-          {
-            "type": "continue",
-            "named": true
-          },
-          {
-            "type": "declaration",
-            "named": true
-          },
-          {
-            "type": "for_loop",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "function_definition",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "if_statement",
-            "named": true
-          },
-          {
-            "type": "juxt_function_call",
-            "named": true
-          },
-          {
-            "type": "return",
-            "named": true
-          },
-          {
-            "type": "while_loop",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "access_op",
-          "named": true
-        },
-        {
-          "type": "binary_op",
-          "named": true
-        },
-        {
-          "type": "boolean_literal",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "increment_op",
-          "named": true
-        },
-        {
-          "type": "index",
-          "named": true
-        },
-        {
-          "type": "integer",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "map",
-          "named": true
-        },
-        {
-          "type": "null",
+          "type": "number_literal",
           "named": true
         },
         {
@@ -2159,6 +2470,14 @@
           "named": true
         },
         {
+          "type": "do_while_loop",
+          "named": true
+        },
+        {
+          "type": "for_in_loop",
+          "named": true
+        },
+        {
           "type": "for_loop",
           "named": true
         },
@@ -2183,6 +2502,10 @@
           "named": true
         },
         {
+          "type": "pipeline_step_with_block",
+          "named": true
+        },
+        {
           "type": "return",
           "named": true
         },
@@ -2191,62 +2514,7 @@
           "named": true
         },
         {
-          "type": "while_loop",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "step",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "assertion",
-          "named": true
-        },
-        {
-          "type": "assignment",
-          "named": true
-        },
-        {
-          "type": "break",
-          "named": true
-        },
-        {
-          "type": "continue",
-          "named": true
-        },
-        {
-          "type": "declaration",
-          "named": true
-        },
-        {
-          "type": "for_loop",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "function_definition",
-          "named": true
-        },
-        {
-          "type": "if_statement",
-          "named": true
-        },
-        {
-          "type": "juxt_function_call",
-          "named": true
-        },
-        {
-          "type": "return",
+          "type": "try_statement",
           "named": true
         },
         {
@@ -2328,10 +2596,6 @@
             "named": true
           },
           {
-            "type": "integer",
-            "named": true
-          },
-          {
             "type": "list",
             "named": true
           },
@@ -2341,6 +2605,10 @@
           },
           {
             "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
             "named": true
           },
           {
@@ -2398,10 +2666,6 @@
             "named": true
           },
           {
-            "type": "integer",
-            "named": true
-          },
-          {
             "type": "list",
             "named": true
           },
@@ -2411,6 +2675,10 @@
           },
           {
             "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
             "named": true
           },
           {
@@ -2468,7 +2736,167 @@
             "named": true
           },
           {
-            "type": "integer",
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "ternary_op",
+            "named": true
+          },
+          {
+            "type": "unary_op",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "try_statement",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "assertion",
+            "named": true
+          },
+          {
+            "type": "assignment",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "code_block",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "declaration",
+            "named": true
+          },
+          {
+            "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "for_in_loop",
+            "named": true
+          },
+          {
+            "type": "for_loop",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "function_definition",
+            "named": true
+          },
+          {
+            "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "juxt_function_call",
+            "named": true
+          },
+          {
+            "type": "pipeline_step_with_block",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "try_statement",
+            "named": true
+          },
+          {
+            "type": "while_loop",
+            "named": true
+          }
+        ]
+      },
+      "catch_body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "code_block",
+            "named": true
+          }
+        ]
+      },
+      "catch_exception": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "access_op",
+            "named": true
+          },
+          {
+            "type": "binary_op",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "declaration",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "increment_op",
+            "named": true
+          },
+          {
+            "type": "index",
             "named": true
           },
           {
@@ -2484,6 +2912,10 @@
             "named": true
           },
           {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
@@ -2493,6 +2925,16 @@
           },
           {
             "type": "unary_op",
+            "named": true
+          }
+        ]
+      },
+      "finally_body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "code_block",
             "named": true
           }
         ]
@@ -2536,10 +2978,6 @@
           "named": true
         },
         {
-          "type": "integer",
-          "named": true
-        },
-        {
           "type": "list",
           "named": true
         },
@@ -2549,6 +2987,10 @@
         },
         {
           "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         },
         {
@@ -2599,6 +3041,14 @@
             "named": true
           },
           {
+            "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "for_in_loop",
+            "named": true
+          },
+          {
             "type": "for_loop",
             "named": true
           },
@@ -2619,7 +3069,15 @@
             "named": true
           },
           {
+            "type": "pipeline_step_with_block",
+            "named": true
+          },
+          {
             "type": "return",
+            "named": true
+          },
+          {
+            "type": "try_statement",
             "named": true
           },
           {
@@ -2669,10 +3127,6 @@
             "named": true
           },
           {
-            "type": "integer",
-            "named": true
-          },
-          {
             "type": "list",
             "named": true
           },
@@ -2682,6 +3136,10 @@
           },
           {
             "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
             "named": true
           },
           {
@@ -2997,6 +3455,10 @@
     "named": true
   },
   {
+    "type": "catch",
+    "named": false
+  },
+  {
     "type": "char",
     "named": false
   },
@@ -3006,6 +3468,10 @@
   },
   {
     "type": "def",
+    "named": false
+  },
+  {
+    "type": "do",
     "named": false
   },
   {
@@ -3021,11 +3487,11 @@
     "named": true
   },
   {
-    "type": "expression",
+    "type": "false",
     "named": false
   },
   {
-    "type": "false",
+    "type": "finally",
     "named": false
   },
   {
@@ -3055,10 +3521,6 @@
   {
     "type": "int",
     "named": false
-  },
-  {
-    "type": "integer",
-    "named": true
   },
   {
     "type": "long",
@@ -3094,6 +3556,10 @@
   },
   {
     "type": "true",
+    "named": false
+  },
+  {
+    "type": "try",
     "named": false
   },
   {

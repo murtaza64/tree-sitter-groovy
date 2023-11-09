@@ -35,14 +35,14 @@ if(a) {
         function: (identifier)
         args: (argument_list
           (identifier))))
-    else: (if_statement
+    else_body: (if_statement
       condition: (identifier)
       body: (code_block
         (function_call
           function: (identifier)
           args: (argument_list
             (identifier))))
-      else: (code_block
+      else_body: (code_block
         (function_call
           function: (identifier))))))
 ==========
@@ -57,7 +57,7 @@ if (x) println(x) else println(y)
       function: (identifier)
       args: (argument_list
         (identifier)))
-    else: (function_call
+    else_body: (function_call
       function: (identifier)
       args: (argument_list
         (identifier)))))

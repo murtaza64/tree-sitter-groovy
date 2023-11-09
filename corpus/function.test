@@ -16,11 +16,11 @@ hello(24,)
   (function_call
     function: (identifier)
     args: (argument_list
-      (integer)))
+      (number_literal)))
   (function_call
     function: (identifier)
     args: (argument_list
-      (integer))))
+      (number_literal))))
 ==========
 Map function call
 ==========
@@ -100,8 +100,8 @@ def foo() {
     (code_block
       (return
         (binary_op
-          (integer)
-          (integer)))
+          (number_literal)
+          (number_literal)))
       (return
         (identifier))
       (return))))
@@ -119,7 +119,7 @@ sh "hello"
     args: (argument_list
       (map_item
         key: (identifier)
-        value: (integer))
+        value: (number_literal))
       (map_item
         key: (identifier)
         value: (string
@@ -127,8 +127,8 @@ sh "hello"
   (juxt_function_call
     function: (identifier)
     args: (argument_list
-      (integer)
-      (integer)))
+      (number_literal)
+      (number_literal)))
   (juxt_function_call
     function: (identifier)
     args: (argument_list

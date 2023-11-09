@@ -1,20 +1,21 @@
 [
-  "def"
-  "pipeline"
-  ; "break"
-  ; "continue"
-  (break)
-  (continue)
-  "assert"
-  "return"
-  "if"
-  "for"
-  "while"
-  "in"
   "!in"
-  "instanceof"
   "!instanceof"
   "as"
+  "assert"
+  "catch"
+  "def"
+  "finally"
+  "for"
+  "if"
+  "in"
+  "instanceof"
+  "pipeline"
+  "return"
+  "try"
+  "while"
+  (break)
+  (continue)
 ] @keyword
 
 [
@@ -50,7 +51,7 @@
 (",") @punctuation.delimiter
 (".") @punctuation.delimiter
 
-(integer) @number
+(number_literal) @number
 (identifier) @variable
 ((identifier) @constant
   (#match? @constant "^[A-Z][A-Z_]+"))
@@ -92,15 +93,51 @@
 
 "pipeline" @keyword
 
-(section section_name: (identifier) @function.macro)
-(section ("expression") @function.macro)
-(section
-  section_name: (function_call 
-    function: (identifier) @function.macro))
-(section
-  section_name: (function_call
-    function: (access_op
-		(identifier) @function.macro)))
+(pipeline_step_with_block (identifier) @function.builtin
+  (#any-of? @function.builtin
+    "aborted"
+    "agent"
+    "always"
+    "axes"
+    "axis"
+    "changed"
+    "cleanup"
+    "environment"
+    "fixed"
+    "input"
+    "matrix"
+    "name"
+    "options"
+    "parallel"
+    "parameters"
+    "post"
+    "regression"
+    "script"
+    "stage"
+    "stages"
+    "steps"
+    "success"
+    "tools"
+    "triggers"
+    "unstable"
+    "unsuccessful"
+    "values"
+    "when"
+   ))
+(pipeline_step_with_block 
+  (function_call (identifier) @function.builtin)
+  (#any-of? @function.builtin
+    "stage"
+  ))
+; (section section_name: (identifier) @function.macro)
+; (section ("expression") @function.macro)
+; (section
+;   section_name: (function_call 
+;     function: (identifier) @function.macro))
+; (section
+;   section_name: (function_call
+;     function: (access_op
+; 		(identifier) @function.macro)))
 
 
 

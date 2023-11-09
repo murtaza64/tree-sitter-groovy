@@ -8,13 +8,13 @@ x = 1 + 2 * 3 - 2 ** 4
     (identifier)
     (binary_op
       (binary_op
-        (integer)
+        (number_literal)
         (binary_op
-          (integer)
-          (integer)))
+          (number_literal)
+          (number_literal)))
       (binary_op
-        (integer)
-        (integer)))))
+        (number_literal)
+        (number_literal)))))
 ==========
 !in
 ==========
@@ -25,8 +25,8 @@ x = 3 * 4 in y
     (identifier)
     (binary_op
       (binary_op
-        (integer)
-        (integer))
+        (number_literal)
+        (number_literal))
       (identifier))))
 ==========
 Right assoc for **
@@ -37,7 +37,7 @@ x = 1 ** 2 ** 3
   (assignment
     (identifier)
     (binary_op
-      (integer)
+      (number_literal)
       (binary_op
-        (integer)
-        (integer)))))
+        (number_literal)
+        (number_literal)))))

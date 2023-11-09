@@ -9,11 +9,11 @@ x = ~5 ** y
     (identifier)
     (increment_op
       (binary_op
-        (integer)
+        (number_literal)
         (identifier))))
   (assignment
     (identifier)
     (binary_op
       (unary_op
-        (integer))
+        (number_literal))
       (identifier))))

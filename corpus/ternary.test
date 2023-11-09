@@ -27,14 +27,14 @@ int y = (x + 3 < 2 ? 0 :
       condition: (binary_op
         (binary_op
           (identifier)
-          (integer))
-        (integer))
-      then: (integer)
+          (number_literal))
+        (number_literal))
+      then: (number_literal)
       else: (ternary_op
         condition: (binary_op
           (binary_op
             (identifier)
-            (integer))
-          (integer))
-        then: (integer)
-        else: (integer)))))
+            (number_literal))
+          (number_literal))
+        then: (number_literal)
+        else: (number_literal)))))

@@ -22,22 +22,22 @@ def nested = [a: "hello", c: [b: "world"]]
     value: (map
       (map_item
         key: (identifier)
-        value: (integer))
+        value: (number_literal))
       (map_item
         key: (identifier)
-        value: (integer))))
+        value: (number_literal))))
   (declaration
     name: (identifier)
     value: (map
       (map_item
-        key: (integer)
-        value: (integer))))
+        key: (number_literal)
+        value: (number_literal))))
   (declaration
     name: (identifier)
     value: (map
       (map_item
         key: (identifier)
-        value: (integer))))
+        value: (number_literal))))
   (declaration
     name: (identifier)
     value: (map

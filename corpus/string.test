@@ -78,10 +78,10 @@ x = "hello \${3 + 4 * 2}"
       (string_content)
       (interpolation
         (binary_op
-          (integer)
+          (number_literal)
           (binary_op
-            (integer)
-            (integer))))
+            (number_literal)
+            (number_literal))))
       (string_content)))
   (assignment
     (identifier)
@@ -127,7 +127,7 @@ print("""hello world ""${0}""")
       (string
         (string_content)
         (interpolation
-          (integer))))))
+          (number_literal))))))
 ==========
 Single quoted string
 ==========

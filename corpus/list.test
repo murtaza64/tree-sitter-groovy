@@ -10,8 +10,8 @@ def nested = ["hello", ["world", ["three"]]]
   (declaration
     name: (identifier)
     value: (list
-      (integer)
-      (integer)
+      (number_literal)
+      (number_literal)
       (string
         (string_content))
       (string
@@ -22,9 +22,9 @@ def nested = ["hello", ["world", ["three"]]]
   (declaration
     name: (identifier)
     value: (list
-      (integer)
-      (integer)
-      (integer)))
+      (number_literal)
+      (number_literal)
+      (number_literal)))
   (declaration
     name: (identifier)
     value: (list

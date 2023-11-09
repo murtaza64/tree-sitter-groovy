@@ -48,12 +48,16 @@ module.exports = grammar({
       $.assertion,
       $.assignment,
       $.declaration,
+      $.do_while_loop,
+      $.for_in_loop,
       $.for_loop,
       $.function_call,
       $.function_definition,
       $.if_statement,
       $.juxt_function_call,
       $.return,
+      $.pipeline_step_with_block,
+      $.try_statement,
       $.while_loop,
       alias("break", $.break),
       alias("continue", $.continue),
@@ -81,7 +85,6 @@ module.exports = grammar({
 
     assertion: $ => seq('assert', $._expression),
 
-    // TODO: +=, *= etc
     // TODO: multi assignment (String x, int y) = [1, 3]
     assignment: $ => prec.left(-1, choice( //??? is -1 ok here? (fixes conflict with expression for ++)
       seq(
@@ -151,6 +154,7 @@ module.exports = grammar({
     code_block: $ => seq(
       '{',
       repeat($._statement),
+      optional($._expression),
       '}'
     ),
 
@@ -175,9 +179,8 @@ module.exports = grammar({
       $.function_call,
       $.identifier,
       $.increment_op,
-      //TODO: ternary operator x ? y : z
       $.index,
-      $.integer, //TODO: other number types
+      $.number_literal, //TODO: other number types
       $.list,
       $.map,
       alias("null", $.null),
@@ -185,6 +188,18 @@ module.exports = grammar({
       $.ternary_op,
       $.unary_op,
       seq('(', $._expression, ')'),
+    ),
+
+    do_while_loop: $ => seq(
+      'do',
+      field('body', choice(
+        $._statement,
+        $.code_block
+      )),
+      'while',
+      '(',
+      field('condition', $._expression),
+      ')',
     ),
 
     for_loop: $ => seq(
@@ -208,7 +223,19 @@ module.exports = grammar({
       )),
     ),
 
-    //TODO: function delcarations, x[3]()
+    for_in_loop: $ => prec(1, seq(
+      'for',
+      '(',
+      field('variable', $.identifier),
+      'in',
+      field('collection', $._expression),
+      ')',
+      field('body', choice(
+        $._statement,
+        $.code_block
+      )),
+    )),
+
     function_call: $ =>
       prec.left(1, seq(
         field('function', $._expression),
@@ -255,14 +282,11 @@ module.exports = grammar({
         $._statement,
         $.code_block,
       )),
-      field('else', 
-        optional(
-          seq('else', choice($._statement, $.code_block))
-        )
+      optional(
+        seq('else', field('else_body', choice($._statement, $.code_block)))
       )
     )),
 
-    //TODO: ranges [1..3]
     index: $ => prec(PREC.TOP, seq(
       $._expression,
       '[',
@@ -294,76 +318,48 @@ module.exports = grammar({
     map_item: $ => seq(
       field('key', choice(
         $.identifier,
-        $.integer,
+        $.number_literal,
         seq('(', $._expression, ')'), //TODO: strings without parens??
       )),
       ':',
       field('value', $._expression),
     ),
 
-    map: $ => seq(
-      '[',
-      repeat(
-        prec.left(seq(
-          $.map_item,
-          ',',
-        ))
+    map: $ => choice(
+      seq(
+        '[',
+        repeat(
+          prec.left(seq(
+            $.map_item,
+            ',',
+          ))
+        ),
+        $.map_item,
+        optional(','),
+        ']',
       ),
-      $.map_item,
-      optional(','),
-      ']',
+      seq('[', ':', ']'),
     ),
 
-    //TODO: non-decimal integers
-    integer: $ => /-?[0-9]+/,
+    number_literal: $ => choice(
+      /-?[0-9]+(_[0-9]+)*[DFGILdfgil]?/,
+      /-?0x[0-9a-fA-F]+(_[0-9a-fA-F]+)*[DFGILdfgil]?/,
+      /-?0b[0-1]+(_[0-1]+)*[DFGILdfgil]?/,
+      /-?0[0-7]+(_[0-7]+)*[DFGILdfgil]?/,
+      /-?[0-9]+(_[0-9]+)*\.[0-9]+(_[0-9]+)*([eE][0-9]+)?[DFGILdfgil]?/,
+    ),
 
     pipeline: $ => seq(
       'pipeline',
-      $.pipeline_block,
+      $.code_block,
     ),
     
-    pipeline_block: $ => seq(
-      '{',
-      repeat(choice(
-        alias($._statement, $.step),
-        $.section,
-      )),
-      '}'
+    pipeline_step_with_block: $ => seq(
+      choice($.function_call, $.identifier),
+      $.code_block,
     ),
 
     return: $ => prec.right(1, seq('return', optional($._expression))), //??????
-
-    section: $ => choice(
-      seq(
-        field('section_name', $._statement),
-        field('body', $.pipeline_block),
-      ),
-      seq(
-        field('section_name', $.identifier),
-        field('body', $.pipeline_block),
-      ),
-      seq(
-        'expression', '{', $._expression, '}'
-      ),
-    ),
-
-    // step: $ => seq(
-    //   field('step_name', $.identifier),
-    //   optional(field('arg', choice(
-    //     $._expression,
-    //     prec(PREC.PRIORITY, seq(
-    //       repeat(
-    //         prec.left(seq(
-    //           $.map_item,
-    //           ',',
-    //         ))
-    //       ),
-    //       $.map_item,
-    //       optional(','),
-    //     )),
-    //   ))),
-    //   optional(field('block', $.pipeline_block)),
-    // ),
     
     string: $ => choice(
       $._plain_string,
@@ -474,6 +470,35 @@ module.exports = grammar({
       field('else', $._expression),
     )),
 
+    try_statement: $ => prec.left(seq(
+      'try',
+      field('body', choice(
+        $._statement,
+        $.code_block,
+      )),
+      optional(
+        seq(
+          'catch',
+          '(',
+          field(
+            'catch_exception',
+            choice(
+              $.declaration,
+              $._expression
+            ),
+          ), //TODO multi-catch
+          ')',
+          field('catch_body', $.code_block),
+        )
+      ),
+      optional(
+        seq(
+          'finally',
+          field('finally_body', $.code_block),
+        )
+      )
+    )),
+
     _builtintype: $ => choice(
       'int',
       'boolean',
@@ -517,4 +542,3 @@ module.exports = grammar({
 // TODO
 // closures
 // classes
-// keywords

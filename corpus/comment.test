@@ -8,4 +8,4 @@ pipeline {
 (source_file
   (shebang)
   (pipeline
-    (pipeline_block)))
+    (code_block)))
