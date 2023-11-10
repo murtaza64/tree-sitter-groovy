@@ -1,13 +1,12 @@
 ==========
-Unary precedence
+Method call on dotted identifier
 ==========
 x.y.z()
 ---
 (source_file
   (function_call
-    function: (access_op
-      (access_op
-        (identifier)
-        (identifier))
+    function: (dotted_identifier
+      (identifier)
+      (identifier)
       (identifier))
     args: (argument_list)))

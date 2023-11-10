@@ -18,6 +18,8 @@ const PREC = {
   STATEMENT: 17
 }
 
+const IDENTIFIER_REGEX = /[$_a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE][$_0-9a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE]*/
+
 const list_of = (e) => seq(
   repeat(prec.left(seq(e, ','))),
   seq(e, optional(',')),
@@ -31,7 +33,7 @@ module.exports = grammar({
   word: $ => $.identifier,
 
   conflicts: $ => [
-    [$._type, $.juxt_function_call], //TODO: sort out conflict with dynamic prec
+    [$._juxt_function_name, $._type] //TODO: dynamic precedence, heuristics? eg capital letter
   ],
 
   rules: {
@@ -48,16 +50,19 @@ module.exports = grammar({
     _statement: $ => prec.left(PREC.STATEMENT, choice(
       $.assertion,
       $.assignment,
+      $.class_definition,
       $.declaration,
       $.do_while_loop,
       $.for_in_loop,
       $.for_loop,
       $.function_call,
+      $.function_declaration,
       $.function_definition,
       $.if_statement,
       $.juxt_function_call,
-      $.return,
       $.pipeline_step_with_block,
+      $.return,
+      $.switch_statement,
       $.try_statement,
       $.while_loop,
       alias("break", $.break),
@@ -68,7 +73,6 @@ module.exports = grammar({
     access_op: ($) =>
       choice(
         ...[
-          [".", PREC.TOP],
           [".&", PREC.TOP],
           [".@", PREC.TOP],
           ["?.", PREC.TOP],
@@ -84,15 +88,30 @@ module.exports = grammar({
         ),
       ),
 
+    dotted_identifier: $ => seq(
+      $.identifier,
+      repeat1(seq('.', $.identifier)),
+    ),
+
+    _prefix_expression: $ => prec.left(1, choice(
+      $.identifier,
+      $.dotted_identifier,
+      $.index,
+      $.function_call
+    )),
+
+    annotation: $ => seq(
+      '@',
+      alias(token.immediate(IDENTIFIER_REGEX), $.identifier),
+      optional($.argument_list),
+    ),
+
     assertion: $ => seq('assert', $._expression),
 
     // TODO: multi assignment (String x, int y) = [1, 3]
     assignment: $ => prec.left(-1, choice( //??? is -1 ok here? (fixes conflict with expression for ++)
       seq(
-        choice(
-          $.identifier,
-          $.index
-        ),
+        $._prefix_expression,
         choice('=', '**=', '*=', '/=', '%=', '+=', '-=', 
           '<<=', '>>=', '>>>=', '&=', '^=', '|=', '?='),
         $._expression
@@ -101,10 +120,10 @@ module.exports = grammar({
     )),
 
     increment_op: $ => choice(
-      prec.left(PREC.UNARY, seq($._expression, "++")),
-      prec.left(PREC.UNARY, seq($._expression, "--")),
-      prec.right(PREC.UNARY, seq("++", $._expression)),
-      prec.right(PREC.UNARY, seq("--", $._expression)),
+      prec.left(PREC.UNARY, seq($._prefix_expression, "++")),
+      prec.left(PREC.UNARY, seq($._prefix_expression, "--")),
+      prec.right(PREC.UNARY, seq("++", $._prefix_expression)),
+      prec.right(PREC.UNARY, seq("--", $._prefix_expression)),
     ),
 
     binary_op: ($) =>
@@ -152,6 +171,34 @@ module.exports = grammar({
 
     boolean_literal: $ => choice('true', 'false'),
 
+    class_definition: $ => seq(
+      optional($.annotation),
+      optional($.access_modifier),
+      repeat($.modifier),
+      choice('@interface', 'interface', 'class'),
+      field('name', $.identifier),
+      optional(field('generics', $.generic_parameters)),
+      optional(seq(
+        'extends',
+        field('superclass', $._prefix_expression),
+      )),
+      field('body', $.code_block),
+    ),
+
+    generic_parameters: $ => seq(
+      '<',
+      list_of($.generic_param),
+      '>'
+    ),
+
+    generic_param: $ => seq(
+      field('name', $.identifier),
+      optional(seq(
+        'extends',
+        field('superclass', $._type),
+      ))
+    ),
+
     code_block: $ => seq(
       '{',
       repeat($._statement),
@@ -166,7 +213,6 @@ module.exports = grammar({
 
     groovy_doc: $ =>
       // seq('/**', /[^*]*\*+([^/*][^*]*\*+)*\//),
-    // TODO: highlight groovydoc tags
       seq(
         '/**',
         // optional(
@@ -199,6 +245,9 @@ module.exports = grammar({
       /@[a-z]+/,
 
     declaration: $ => seq(
+      optional($.annotation),
+      optional($.access_modifier),
+      repeat($.modifier),
       choice(field('type', $._type), 'def'),
       field('name', $.identifier),
       optional(seq('=', field('value', $._expression)))
@@ -213,7 +262,7 @@ module.exports = grammar({
       "this",
       $.increment_op,
       $.index,
-      $.number_literal, //TODO: other number types
+      $.number_literal,
       $.list,
       $.map,
       alias("null", $.null),
@@ -273,8 +322,8 @@ module.exports = grammar({
     )),
 
     function_call: $ =>
-      prec.left(1, seq(
-        field('function', $._expression),
+      prec.left(2, seq( //higher precedence than juxt_function_call
+        field('function', $._prefix_expression),
         field('args', $.argument_list),
       )),
 
@@ -299,14 +348,26 @@ module.exports = grammar({
       optional(seq('=', field('value', $._expression))),
     ),
 
+    function_declaration: $ => prec(2, seq(
+      optional($.annotation),
+      optional($.access_modifier),
+      repeat($.modifier),
+      field('type', choice($._type, 'def')),
+      field('function', $.identifier),
+      field('parameters', $.parameter_list),
+    )),
+
     function_definition: $ => prec(2, seq(
+      optional($.annotation),
+      optional($.access_modifier),
+      repeat($.modifier),
       field('type', choice($._type, 'def')),
       field('function', $.identifier),
       field('parameters', $.parameter_list),
       field('body', $.code_block), //TODO: optional return
     )),
 
-    identifier: $ => /[$_a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE][$_0-9a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE]*/,
+    identifier: $ => IDENTIFIER_REGEX,
     // identifier: $ => seq(
     //   choice($._letter, '$', '_'),
     //   repeat(choice($._letter, '[0-9]', '$', '_'))
@@ -327,17 +388,19 @@ module.exports = grammar({
     )),
 
     index: $ => prec(PREC.TOP, seq(
-      $._expression,
+      $._prefix_expression,
       '[',
       $._expression,
       ']',
     )),
 
     juxt_function_call: $ => 
-      prec.left(0, seq(
-        field('function', $._expression),
+      prec.left(1, seq(
+        field('function', $._juxt_function_name),
         field('args', alias($._juxt_argument_list, $.argument_list)),
       )),
+
+    _juxt_function_name: $ => prec.left(1, $._prefix_expression),
 
     _juxt_argument_list: $ => prec.left(seq(
       choice($.map_item, $._expression),
@@ -394,7 +457,7 @@ module.exports = grammar({
     ),
     
     pipeline_step_with_block: $ => seq(
-      choice($.function_call, $.identifier),
+      $._prefix_expression,
       $.code_block,
     ),
 
@@ -429,7 +492,6 @@ module.exports = grammar({
       ),
     ),
 
-    // TODO: "interpolate $without braces"
     _interpolate_string: $ => choice(
       seq(
         '"',
@@ -502,6 +564,28 @@ module.exports = grammar({
       )
     ),
 
+    switch_statement: $ => seq(
+      'switch',
+      '(',
+      field('value', $._expression),
+      ')',
+      field('body', $.switch_block),
+    ),
+
+    switch_block: $ => seq(
+      '{',
+      repeat($.case),
+      '}'
+    ),
+
+    case: $ => seq(
+      choice(
+        seq('case', field('value', $._expression), ':'),
+        seq('default', ':'),
+      ),
+      repeat($._statement)
+    ),
+
     ternary_op: $ => prec.right(seq(
       field('condition', $._expression),
       '?',
@@ -551,8 +635,31 @@ module.exports = grammar({
       'void',
     ),
     
-    //TODO: array types
-    _type: $ => choice($.builtintype, $._expression),
+    _type: $ => prec.left(1, choice(
+      $.builtintype,
+      $._prefix_expression,
+      $.array_type, //TODO: int[5]?
+      $.type_with_generics,
+    )),
+
+    array_type: $ => seq($._type, '[]'),
+
+    access_modifier: $ => choice(
+      'public',
+      'protected',
+      'private'
+    ),
+
+    modifier: $ => choice(
+      'static',
+      'final',
+      'synchronized'
+    ),
+
+    //TODO diamond operator
+    type_with_generics: $ => seq($._type, $.generics),
+
+    generics: $ => seq('<', list_of($._type), '>'),
 
     unary_op: $ => 
       choice(
@@ -582,6 +689,5 @@ module.exports = grammar({
 
 // TODO
 // closures
-// classes
-// decorators
-// switch
+// import
+// function declaration

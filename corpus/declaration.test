@@ -1,0 +1,37 @@
+==========
+Basic declaration
+==========
+String x = "hello"
+---
+(source_file
+  (declaration
+    type: (identifier)
+    name: (identifier)
+    value: (string
+      (string_content))))
+==========
+Generic type
+==========
+Map<string, int> m
+---
+(source_file
+  (declaration
+    type: (type_with_generics
+      (identifier)
+      (generics
+        (identifier)
+        (builtintype)))
+    name: (identifier)))
+==========
+Array type
+==========
+int[][] x = [[]]
+---
+(source_file
+  (declaration
+    type: (array_type
+      (array_type
+        (builtintype)))
+    name: (identifier)
+    value: (list
+      (list))))

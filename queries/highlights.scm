@@ -4,8 +4,10 @@
   "as"
   "assert"
   "catch"
+  "class"
   "def"
   "else"
+  "extends"
   "finally"
   "for"
   "if"
@@ -37,6 +39,15 @@
   "double"
   "void"
 ] @type.builtin
+
+[ 
+  "final"
+  "private"
+  "protected"
+  "public"
+  "static"
+  "synchronized"
+] @type.qualifier
 
 (comment) @comment
 (shebang) @comment

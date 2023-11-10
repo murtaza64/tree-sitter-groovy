@@ -1,15 +1,15 @@
 ==========
 Unary precedence
 ==========
-x = ++ 5 ** y
+x =  5 ** ++y
 x = ~5 ** y
 ---
 (source_file
   (assignment
     (identifier)
-    (increment_op
-      (binary_op
-        (number_literal)
+    (binary_op
+      (number_literal)
+      (increment_op
         (identifier))))
   (assignment
     (identifier)

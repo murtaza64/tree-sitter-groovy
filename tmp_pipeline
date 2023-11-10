@@ -1,7 +1,4 @@
-/** hello world
-* @param abc - thing
-* @throws Exc
-* @asdf ghjkl
-* @return
-*/
-x = hi
+@annotation(withArgs)
+def foo() {
+
+}

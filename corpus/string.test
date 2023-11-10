@@ -177,7 +177,9 @@ $/ escaped slash
       (string_content)
       (escape_sequence)
       (string_content)
-      (interpolation)
-      (interpolation)
+      (interpolation
+        (identifier))
+      (interpolation
+        (identifier))
       (escape_sequence)
       (string_content))))

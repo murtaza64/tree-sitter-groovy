@@ -85,7 +85,7 @@ for (x in m.values()) {
   (for_in_loop
     variable: (identifier)
     collection: (function_call
-      function: (access_op
+      function: (dotted_identifier
         (identifier)
         (identifier))
       args: (argument_list))
