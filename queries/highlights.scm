@@ -5,6 +5,7 @@
   "assert"
   "catch"
   "def"
+  "else"
   "finally"
   "for"
   "if"
@@ -24,22 +25,21 @@
 ] @boolean
 
 (null) @constant
+"this" @variable.builtin
 
-[ "int"
+[ 
+  "int"
   "char"
   "short"
   "long"
   "boolean"
   "float"
   "double"
+  "void"
 ] @type.builtin
 
 (comment) @comment
 (shebang) @comment
-(string) @string
-(string (escape_sequence) @operator)
-(string (interpolation ([ "$" "{" "}" ]) @operator))
-(string (interpolation) @normal)
 
 ("(") @punctuation.bracket
 (")") @punctuation.bracket
@@ -53,6 +53,9 @@
 
 (number_literal) @number
 (identifier) @variable
+((identifier) @parameter
+  (#is? @parameter "parameter"))
+
 ((identifier) @constant
   (#match? @constant "^[A-Z][A-Z_]+"))
 
@@ -68,6 +71,9 @@
 
 
 (declaration type: (identifier) @type)
+(parameter type: (identifier) @type name: (identifier) @parameter)
+(function_definition type: (identifier) @type)
+; TODO: Class literals with PascalCase
 
 (declaration ("=") @operator)
 (assignment ("=") @operator)
@@ -138,6 +144,20 @@
 ;   section_name: (function_call
 ;     function: (access_op
 ; 		(identifier) @function.macro)))
+(groovy_doc) @comment.documentation
+(groovy_doc 
+  [
+    (groovy_doc_param)
+    (groovy_doc_throws)
+    (groovy_doc_tag)
+  ] @string.special)
+(groovy_doc (groovy_doc_param (identifier) @parameter))
+(groovy_doc (groovy_doc_throws (identifier) @class))
+(groovy_doc (first_line) @text)
 
+(string) @string
+(string (escape_sequence) @operator)
+(string (interpolation ([ "$" "{" "}" ]) @operator))
+(string (interpolation) @normal)
 
 

@@ -17,6 +17,7 @@ const PREC = {
   TOP: 16, // new () [] {} . .& .@ ?. * *. *: ~ ! (type) x[y] ++ --
   STATEMENT: 17
 }
+
 const list_of = (e) => seq(
   repeat(prec.left(seq(e, ','))),
   seq(e, optional(',')),
@@ -160,11 +161,42 @@ module.exports = grammar({
 
     comment: $ => choice(
       /\/\/[^\n]*/,
-      seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/'),
+      seq('/*', /[^*]*\*+([^/*][^*]*\*+)*\//), // not sure why comments work better as seq
     ),
 
     groovy_doc: $ =>
-      seq('/**', /[^*]*\*+([^/*][^*]*\*+)*/, '/'),
+      // seq('/**', /[^*]*\*+([^/*][^*]*\*+)*\//),
+    // TODO: highlight groovydoc tags
+      seq(
+        '/**',
+        // optional(
+          token.immediate(/[*\n\s]+/),
+          alias(token.immediate(/[^\n\.]+[\.]?/), $.first_line),
+        // ),
+        repeat(
+          choice(
+            // /[^*\s]*(\*[^/][^*\s]+)*/
+            $.groovy_doc_param,
+            $.groovy_doc_throws,
+            $.groovy_doc_tag,
+            /([^@*]|\*[^/])([^*\s@]|[^\s@]|\*[^/])+/,
+          ),
+        ),
+        '*/'
+      ),
+
+    groovy_doc_param: $ => seq (
+      '@param',
+      $.identifier
+    ),
+
+    groovy_doc_throws: $ => seq (
+      '@throws',
+      $.identifier
+    ),
+
+    groovy_doc_tag: $ => 
+      /@[a-z]+/,
 
     declaration: $ => seq(
       choice(field('type', $._type), 'def'),
@@ -178,6 +210,7 @@ module.exports = grammar({
       $.boolean_literal,
       $.function_call,
       $.identifier,
+      "this",
       $.increment_op,
       $.index,
       $.number_literal, //TODO: other number types
@@ -202,8 +235,7 @@ module.exports = grammar({
       ')',
     ),
 
-    for_loop: $ => seq(
-      'for',
+    for_parameters: $ => seq (
       '(',
       field('initializer', optional(seq(
         $.declaration,
@@ -217,6 +249,10 @@ module.exports = grammar({
         repeat(seq(',', $._statement))
       ))),
       ')',
+    ),
+    for_loop: $ => seq(
+      'for',
+      $.for_parameters,
       field('body', choice(
         $._statement,
         $.code_block
@@ -239,18 +275,23 @@ module.exports = grammar({
     function_call: $ =>
       prec.left(1, seq(
         field('function', $._expression),
-        '(',
-        field('args', optional($.argument_list)),
-        ')'
+        field('args', $.argument_list),
       )),
 
     argument_list: $ =>
-      prec(1, list_of(choice($.map_item, $._expression))),
-
-    parameter_list: $ =>
-      prec(1, list_of(
-        $.parameter
+      prec(1, seq(
+        '(',
+        optional(
+          list_of(choice($.map_item, $._expression)),
+        ),
+        ')',
       )),
+
+    parameter_list: $ => prec(1, seq(
+      '(',
+      optional(list_of($.parameter)),
+      ')'
+    )),
 
     parameter: $ => seq(
       field('type', $._type),
@@ -259,12 +300,10 @@ module.exports = grammar({
     ),
 
     function_definition: $ => prec(2, seq(
-      choice($._type, 'def'),
+      field('type', choice($._type, 'def')),
       field('function', $.identifier),
-      '(',
-      optional($.parameter_list),
-      ')',
-      $.code_block //TODO: optional return
+      field('parameters', $.parameter_list),
+      field('body', $.code_block), //TODO: optional return
     )),
 
     identifier: $ => /[$_a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE][$_0-9a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE]*/,
@@ -390,6 +429,7 @@ module.exports = grammar({
       ),
     ),
 
+    // TODO: "interpolate $without braces"
     _interpolate_string: $ => choice(
       seq(
         '"',
@@ -499,7 +539,7 @@ module.exports = grammar({
       )
     )),
 
-    _builtintype: $ => choice(
+    builtintype: $ => choice(
       'int',
       'boolean',
       'char',
@@ -507,11 +547,12 @@ module.exports = grammar({
       'int',
       'long',
       'float',
-      'double'
+      'double',
+      'void',
     ),
     
     //TODO: array types
-    _type: $ => choice($._builtintype, $._expression),
+    _type: $ => choice($.builtintype, $._expression),
 
     unary_op: $ => 
       choice(
@@ -542,3 +583,5 @@ module.exports = grammar({
 // TODO
 // closures
 // classes
+// decorators
+// switch

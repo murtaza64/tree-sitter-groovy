@@ -44,7 +44,8 @@ if(a) {
             (identifier))))
       else_body: (code_block
         (function_call
-          function: (identifier))))))
+          function: (identifier)
+          args: (argument_list))))))
 ==========
 No braces
 ==========

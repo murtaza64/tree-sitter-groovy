@@ -1,4 +1,7 @@
-def foo() {
-	x = y
-	return z
-}
+/** hello world
+* @param abc - thing
+* @throws Exc
+* @asdf ghjkl
+* @return
+*/
+x = hi

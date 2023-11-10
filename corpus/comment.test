@@ -9,3 +9,47 @@ pipeline {
   (shebang)
   (pipeline
     (code_block)))
+==========
+Single line comment
+==========
+//hello
+x = 5 //TODO
+---
+(source_file
+  (comment)
+  (assignment
+    (identifier)
+    (number_literal))
+  (comment))
+==========
+Multiline comment
+==========
+/*hello
+* / */
+---
+(source_file
+  (comment))
+==========
+groovydoc
+==========
+/**
+* hello world
+* @param abc - thing
+* @throws Exc
+* @asdf ghjkl
+* @return
+*/
+x = hi
+---
+(source_file
+  (groovy_doc
+    (first_line)
+    (groovy_doc_param
+      (identifier))
+    (groovy_doc_throws
+      (identifier))
+    (groovy_doc_tag)
+    (groovy_doc_tag))
+  (assignment
+    (identifier)
+    (identifier)))

@@ -5,7 +5,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "access_op",
@@ -72,7 +72,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "access_op",
@@ -143,7 +143,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "access_op",
@@ -277,7 +277,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "access_op",
@@ -340,6 +340,11 @@
   },
   {
     "type": "boolean_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "builtintype",
     "named": true,
     "fields": {}
   },
@@ -510,24 +515,12 @@
             "named": true
           },
           {
-            "type": "boolean",
-            "named": false
-          },
-          {
             "type": "boolean_literal",
             "named": true
           },
           {
-            "type": "char",
-            "named": false
-          },
-          {
-            "type": "double",
-            "named": false
-          },
-          {
-            "type": "float",
-            "named": false
+            "type": "builtintype",
+            "named": true
           },
           {
             "type": "function_call",
@@ -546,16 +539,8 @@
             "named": true
           },
           {
-            "type": "int",
-            "named": false
-          },
-          {
             "type": "list",
             "named": true
-          },
-          {
-            "type": "long",
-            "named": false
           },
           {
             "type": "map",
@@ -570,16 +555,16 @@
             "named": true
           },
           {
-            "type": "short",
-            "named": false
-          },
-          {
             "type": "string",
             "named": true
           },
           {
             "type": "ternary_op",
             "named": true
+          },
+          {
+            "type": "this",
+            "named": false
           },
           {
             "type": "unary_op",
@@ -650,6 +635,10 @@
           {
             "type": "ternary_op",
             "named": true
+          },
+          {
+            "type": "this",
+            "named": false
           },
           {
             "type": "unary_op",
@@ -802,6 +791,10 @@
             "named": true
           },
           {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "unary_op",
             "named": true
           }
@@ -952,6 +945,10 @@
             "named": true
           },
           {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "unary_op",
             "named": true
           }
@@ -1046,7 +1043,23 @@
             "named": true
           }
         ]
-      },
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "for_parameters",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_parameters",
+    "named": true,
+    "fields": {
       "condition": {
         "multiple": true,
         "required": false,
@@ -1110,6 +1123,10 @@
           {
             "type": "ternary_op",
             "named": true
+          },
+          {
+            "type": "this",
+            "named": false
           },
           {
             "type": "unary_op",
@@ -1217,7 +1234,7 @@
     "fields": {
       "args": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "argument_list",
@@ -1290,6 +1307,10 @@
             "named": true
           },
           {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "unary_op",
             "named": true
           }
@@ -1301,6 +1322,16 @@
     "type": "function_definition",
     "named": true,
     "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "code_block",
+            "named": true
+          }
+        ]
+      },
       "function": {
         "multiple": false,
         "required": true,
@@ -1310,83 +1341,157 @@
             "named": true
           }
         ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "access_op",
+            "named": true
+          },
+          {
+            "type": "binary_op",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "builtintype",
+            "named": true
+          },
+          {
+            "type": "def",
+            "named": false
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "increment_op",
+            "named": true
+          },
+          {
+            "type": "index",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "ternary_op",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": false
+          },
+          {
+            "type": "unary_op",
+            "named": true
+          }
+        ]
       }
-    },
+    }
+  },
+  {
+    "type": "groovy_doc",
+    "named": true,
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "access_op",
+          "type": "first_line",
           "named": true
         },
         {
-          "type": "binary_op",
+          "type": "groovy_doc_param",
           "named": true
         },
         {
-          "type": "boolean_literal",
+          "type": "groovy_doc_tag",
           "named": true
         },
         {
-          "type": "code_block",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "increment_op",
-          "named": true
-        },
-        {
-          "type": "index",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "map",
-          "named": true
-        },
-        {
-          "type": "null",
-          "named": true
-        },
-        {
-          "type": "number_literal",
-          "named": true
-        },
-        {
-          "type": "parameter_list",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "ternary_op",
-          "named": true
-        },
-        {
-          "type": "unary_op",
+          "type": "groovy_doc_throws",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "groovy_doc",
+    "type": "groovy_doc_param",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "groovy_doc_throws",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "if_statement",
@@ -1531,6 +1636,10 @@
             "named": true
           },
           {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "unary_op",
             "named": true
           }
@@ -1618,7 +1727,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "access_op",
@@ -1685,7 +1794,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "access_op",
@@ -1892,6 +2001,10 @@
             "named": true
           },
           {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "unary_op",
             "named": true
           }
@@ -2050,6 +2163,10 @@
             "named": true
           },
           {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "unary_op",
             "named": true
           }
@@ -2120,6 +2237,10 @@
             "named": true
           },
           {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "unary_op",
             "named": true
           }
@@ -2167,24 +2288,12 @@
             "named": true
           },
           {
-            "type": "boolean",
-            "named": false
-          },
-          {
             "type": "boolean_literal",
             "named": true
           },
           {
-            "type": "char",
-            "named": false
-          },
-          {
-            "type": "double",
-            "named": false
-          },
-          {
-            "type": "float",
-            "named": false
+            "type": "builtintype",
+            "named": true
           },
           {
             "type": "function_call",
@@ -2203,16 +2312,8 @@
             "named": true
           },
           {
-            "type": "int",
-            "named": false
-          },
-          {
             "type": "list",
             "named": true
-          },
-          {
-            "type": "long",
-            "named": false
           },
           {
             "type": "map",
@@ -2227,16 +2328,16 @@
             "named": true
           },
           {
-            "type": "short",
-            "named": false
-          },
-          {
             "type": "string",
             "named": true
           },
           {
             "type": "ternary_op",
             "named": true
+          },
+          {
+            "type": "this",
+            "named": false
           },
           {
             "type": "unary_op",
@@ -2309,6 +2410,10 @@
             "named": true
           },
           {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "unary_op",
             "named": true
           }
@@ -2322,7 +2427,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "parameter",
@@ -2620,6 +2725,10 @@
             "named": true
           },
           {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "unary_op",
             "named": true
           }
@@ -2690,6 +2799,10 @@
             "named": true
           },
           {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "unary_op",
             "named": true
           }
@@ -2758,6 +2871,10 @@
           {
             "type": "ternary_op",
             "named": true
+          },
+          {
+            "type": "this",
+            "named": false
           },
           {
             "type": "unary_op",
@@ -2924,6 +3041,10 @@
             "named": true
           },
           {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "unary_op",
             "named": true
           }
@@ -2947,7 +3068,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "access_op",
@@ -3151,6 +3272,10 @@
             "named": true
           },
           {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "unary_op",
             "named": true
           }
@@ -3248,6 +3373,10 @@
   },
   {
     "type": "*.",
+    "named": false
+  },
+  {
+    "type": "*/",
     "named": false
   },
   {
@@ -3423,6 +3552,14 @@
     "named": false
   },
   {
+    "type": "@param",
+    "named": false
+  },
+  {
+    "type": "@throws",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -3495,12 +3632,20 @@
     "named": false
   },
   {
+    "type": "first_line",
+    "named": true
+  },
+  {
     "type": "float",
     "named": false
   },
   {
     "type": "for",
     "named": false
+  },
+  {
+    "type": "groovy_doc_tag",
+    "named": true
   },
   {
     "type": "identifier",
@@ -3555,11 +3700,19 @@
     "named": true
   },
   {
+    "type": "this",
+    "named": false
+  },
+  {
     "type": "true",
     "named": false
   },
   {
     "type": "try",
+    "named": false
+  },
+  {
+    "type": "void",
     "named": false
   },
   {

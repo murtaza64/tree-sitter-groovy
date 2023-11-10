@@ -7,15 +7,17 @@ for (int i = 0; i < 10; i++) {
 ---
 (source_file
   (for_loop
-    initializer: (declaration
-      name: (identifier)
-      value: (number_literal))
-    condition: (binary_op
-      (identifier)
-      (number_literal))
-    increment: (assignment
-      (increment_op
-        (identifier)))
+    (for_parameters
+      initializer: (declaration
+        type: (builtintype)
+        name: (identifier)
+        value: (number_literal))
+      condition: (binary_op
+        (identifier)
+        (number_literal))
+      increment: (assignment
+        (increment_op
+          (identifier))))
     body: (code_block
       (function_call
         function: (identifier)
@@ -31,23 +33,25 @@ for (int x = 0, y = 0; x + y < 10; x++, y *= 2) {
 ---
 (source_file
   (for_loop
-    initializer: (declaration
-      name: (identifier)
-      value: (number_literal))
-    initializer: (assignment
-      (identifier)
-      (number_literal))
-    condition: (binary_op
-      (binary_op
+    (for_parameters
+      initializer: (declaration
+        type: (builtintype)
+        name: (identifier)
+        value: (number_literal))
+      initializer: (assignment
         (identifier)
-        (identifier))
-      (number_literal))
-    increment: (assignment
-      (increment_op
-        (identifier)))
-    increment: (assignment
-      (identifier)
-      (number_literal))
+        (number_literal))
+      condition: (binary_op
+        (binary_op
+          (identifier)
+          (identifier))
+        (number_literal))
+      increment: (assignment
+        (increment_op
+          (identifier)))
+      increment: (assignment
+        (identifier)
+        (number_literal)))
     body: (code_block
       (function_call
         function: (identifier)
@@ -63,6 +67,7 @@ for (;;) {
 ---
 (source_file
   (for_loop
+    (for_parameters)
     body: (code_block
       (function_call
         function: (identifier)
@@ -82,7 +87,8 @@ for (x in m.values()) {
     collection: (function_call
       function: (access_op
         (identifier)
-        (identifier)))
+        (identifier))
+      args: (argument_list))
     body: (code_block
       (function_call
         function: (identifier)

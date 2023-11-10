@@ -9,4 +9,5 @@ x.y.z()
       (access_op
         (identifier)
         (identifier))
-      (identifier))))
+      (identifier))
+    args: (argument_list)))
