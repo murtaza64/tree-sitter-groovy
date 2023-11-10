@@ -41,6 +41,10 @@
 (comment) @comment
 (shebang) @comment
 
+(string) @string
+(string (escape_sequence) @operator)
+(string (interpolation ([ "$" ]) @operator))
+
 ("(") @punctuation.bracket
 (")") @punctuation.bracket
 ("[") @punctuation.bracket
@@ -155,9 +159,5 @@
 (groovy_doc (groovy_doc_throws (identifier) @class))
 (groovy_doc (first_line) @text)
 
-(string) @string
-(string (escape_sequence) @operator)
-(string (interpolation ([ "$" "{" "}" ]) @operator))
-(string (interpolation) @normal)
 
 

@@ -179,7 +179,7 @@ module.exports = grammar({
             $.groovy_doc_param,
             $.groovy_doc_throws,
             $.groovy_doc_tag,
-            /([^@*]|\*[^/])([^*\s@]|[^\s@]|\*[^/])+/,
+            /([^@*]|\*[^/])([^*\s@]|[^\s\n]@|\*[^/])+/,
           ),
         ),
         '*/'
@@ -498,7 +498,7 @@ module.exports = grammar({
           $._expression,
           '}',
         ),
-        token.immediate(/[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*/),
+        alias(token.immediate(/[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*/), $.identifier),
       )
     ),
 
