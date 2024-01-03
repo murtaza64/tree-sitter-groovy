@@ -9,14 +9,14 @@ try {
 ---
 (source_file
   (try_statement
-    body: (code_block
+    body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
           (string
             (string_content)))))
     catch_exception: (identifier)
-    catch_body: (code_block
+    catch_body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
@@ -35,20 +35,20 @@ try {
 ---
 (source_file
   (try_statement
-    body: (code_block
+    body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
           (string
             (string_content)))))
     catch_exception: (identifier)
-    catch_body: (code_block
+    catch_body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
           (string
             (string_content)))))
-    finally_body: (code_block
+    finally_body: (closure
       (function_call
         function: (identifier)
         args: (argument_list

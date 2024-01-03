@@ -10,7 +10,7 @@ while (x < 5) {
     condition: (binary_op
       (identifier)
       (number_literal))
-    body: (code_block
+    body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
@@ -25,7 +25,7 @@ do {
 ---
 (source_file
   (do_while_loop
-    body: (code_block
+    body: (closure
       (function_call
         function: (identifier)
         args: (argument_list

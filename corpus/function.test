@@ -58,7 +58,7 @@ def foo() {
   (function_definition
     function: (identifier)
     parameters: (parameter_list)
-    body: (code_block
+    body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
@@ -82,7 +82,7 @@ def foo(int x, Boolean y = false) {
         type: (identifier)
         name: (identifier)
         value: (boolean_literal)))
-    body: (code_block
+    body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
@@ -101,7 +101,7 @@ def foo() {
   (function_definition
     function: (identifier)
     parameters: (parameter_list)
-    body: (code_block
+    body: (closure
       (return
         (binary_op
           (number_literal)
@@ -133,10 +133,9 @@ sh "hello"
     args: (argument_list
       (number_literal)
       (number_literal)))
-  (juxt_function_call
-    function: (identifier)
-    args: (argument_list
-      (identifier)))
+  (declaration
+    type: (identifier)
+    name: (identifier))
   (juxt_function_call
     function: (identifier)
     args: (argument_list
@@ -154,6 +153,6 @@ int foo() {
     type: (builtintype)
     function: (identifier)
     parameters: (parameter_list)
-    body: (code_block
+    body: (closure
       (return
         (number_literal)))))

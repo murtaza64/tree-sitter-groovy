@@ -10,7 +10,7 @@ if(x == y) {
     condition: (binary_op
       (identifier)
       (identifier))
-    body: (code_block
+    body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
@@ -30,19 +30,19 @@ if(a) {
 (source_file
   (if_statement
     condition: (identifier)
-    body: (code_block
+    body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
           (identifier))))
     else_body: (if_statement
       condition: (identifier)
-      body: (code_block
+      body: (closure
         (function_call
           function: (identifier)
           args: (argument_list
             (identifier))))
-      else_body: (code_block
+      else_body: (closure
         (function_call
           function: (identifier)
           args: (argument_list))))))

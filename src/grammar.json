@@ -55,93 +55,110 @@
       "type": "PREC_LEFT",
       "value": 17,
       "content": {
-        "type": "CHOICE",
+        "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "assertion"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "assertion"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "assignment"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "class_definition"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "do_while_loop"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "for_in_loop"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "for_loop"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "function_call"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "function_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "function_definition"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "if_statement"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "juxt_function_call"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "return"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "switch_statement"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "try_statement"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "while_loop"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "closure"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "break"
+                },
+                "named": true,
+                "value": "break"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "continue"
+                },
+                "named": true,
+                "value": "continue"
+              }
+            ]
           },
           {
-            "type": "SYMBOL",
-            "name": "assignment"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "class_definition"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "declaration"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "do_while_loop"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "for_in_loop"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "for_loop"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "function_call"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "function_declaration"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "function_definition"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "if_statement"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "juxt_function_call"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "pipeline_step_with_block"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "return"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "switch_statement"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "try_statement"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "while_loop"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "STRING",
-              "value": "break"
-            },
-            "named": true,
-            "value": "break"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "STRING",
-              "value": "continue"
-            },
-            "named": true,
-            "value": "continue"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ";"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
         ]
       }
@@ -1383,7 +1400,7 @@
           "name": "body",
           "content": {
             "type": "SYMBOL",
-            "name": "code_block"
+            "name": "closure"
           }
         }
       ]
@@ -1485,12 +1502,33 @@
         }
       ]
     },
-    "code_block": {
+    "closure": {
       "type": "SEQ",
       "members": [
         {
           "type": "STRING",
           "value": "{"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "parameter_list"
+                },
+                {
+                  "type": "STRING",
+                  "value": "->"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "REPEAT",
@@ -1728,6 +1766,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "closure"
+        },
+        {
+          "type": "SYMBOL",
           "name": "function_call"
         },
         {
@@ -1817,7 +1859,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "code_block"
+                "name": "closure"
               }
             ]
           }
@@ -1978,7 +2020,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "code_block"
+                "name": "closure"
               }
             ]
           }
@@ -2035,7 +2077,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "code_block"
+                  "name": "closure"
                 }
               ]
             }
@@ -2349,7 +2391,7 @@
     },
     "function_definition": {
       "type": "PREC",
-      "value": 2,
+      "value": 3,
       "content": {
         "type": "SEQ",
         "members": [
@@ -2422,7 +2464,7 @@
             "name": "body",
             "content": {
               "type": "SYMBOL",
-              "name": "code_block"
+              "name": "closure"
             }
           }
         ]
@@ -2470,7 +2512,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "code_block"
+                  "name": "closure"
                 }
               ]
             }
@@ -2497,7 +2539,7 @@
                         },
                         {
                           "type": "SYMBOL",
-                          "name": "code_block"
+                          "name": "closure"
                         }
                       ]
                     }
@@ -2844,20 +2886,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "code_block"
-        }
-      ]
-    },
-    "pipeline_step_with_block": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_prefix_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "code_block"
+          "name": "closure"
         }
       ]
     },
@@ -3514,7 +3543,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "code_block"
+                  "name": "closure"
                 }
               ]
             }
@@ -3559,7 +3588,7 @@
                     "name": "catch_body",
                     "content": {
                       "type": "SYMBOL",
-                      "name": "code_block"
+                      "name": "closure"
                     }
                   }
                 ]
@@ -3584,7 +3613,7 @@
                     "name": "finally_body",
                     "content": {
                       "type": "SYMBOL",
-                      "name": "code_block"
+                      "name": "closure"
                     }
                   }
                 ]
@@ -3907,7 +3936,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "code_block"
+                "name": "closure"
               }
             ]
           }

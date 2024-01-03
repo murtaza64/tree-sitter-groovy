@@ -1,4 +1,15 @@
 @annotation(withArgs)
-def foo() {
+Map<String, int> foo() {
+
+}
+class Foo<T extends Collection> {
+
+}
+
+class Foo {
+
+}
+
+@interface Foo {
 
 }

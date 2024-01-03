@@ -7,7 +7,7 @@ class foo {
 (source_file
   (class_definition
     name: (identifier)
-    body: (code_block)))
+    body: (closure)))
 ==========
 Class with generics
 ==========
@@ -21,7 +21,7 @@ class Bar<T extends Collection> {
       (generic_param
         name: (identifier)
         superclass: (identifier)))
-    body: (code_block)))
+    body: (closure)))
 ==========
 Modifiers
 ==========
@@ -34,7 +34,7 @@ private static final class Baz {
     (modifier)
     (modifier)
     name: (identifier)
-    body: (code_block)))
+    body: (closure)))
 ==========
 Interface
 ==========
@@ -46,7 +46,7 @@ interface foo {
 (source_file
   (class_definition
     name: (identifier)
-    body: (code_block
+    body: (closure
       (function_declaration
         (access_modifier)
         type: (identifier)

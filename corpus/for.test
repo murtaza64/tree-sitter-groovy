@@ -18,7 +18,7 @@ for (int i = 0; i < 10; i++) {
       increment: (assignment
         (increment_op
           (identifier))))
-    body: (code_block
+    body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
@@ -52,7 +52,7 @@ for (int x = 0, y = 0; x + y < 10; x++, y *= 2) {
       increment: (assignment
         (identifier)
         (number_literal)))
-    body: (code_block
+    body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
@@ -68,7 +68,7 @@ for (;;) {
 (source_file
   (for_loop
     (for_parameters)
-    body: (code_block
+    body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
@@ -89,7 +89,7 @@ for (x in m.values()) {
         (identifier)
         (identifier))
       args: (argument_list))
-    body: (code_block
+    body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
@@ -108,7 +108,7 @@ for (x in 1..5) {
     collection: (binary_op
       (number_literal)
       (number_literal))
-    body: (code_block
+    body: (closure
       (function_call
         function: (identifier)
         args: (argument_list

@@ -14,7 +14,7 @@ pipeline {}
     name: (identifier)
     value: (number_literal))
   (pipeline
-    (code_block)))
+    (closure)))
 ==========
 Jenkins-specific structure
 ==========
@@ -39,46 +39,46 @@ pipeline {
 ---
 (source_file
   (pipeline
-    (code_block
+    (closure
+      (declaration
+        type: (identifier)
+        name: (identifier))
       (juxt_function_call
         function: (identifier)
         args: (argument_list
-          (identifier)))
-      (pipeline_step_with_block
-        (identifier)
-        (code_block
-          (pipeline_step_with_block
+          (closure
             (function_call
               function: (identifier)
               args: (argument_list
                 (string
                   (string_content))))
-            (code_block
-              (pipeline_step_with_block
-                (identifier)
-                (code_block
-                  (juxt_function_call
-                    function: (identifier)
-                    args: (argument_list
-                      (identifier)))
-                  (juxt_function_call
-                    function: (identifier)
-                    args: (argument_list
-                      (string
-                        (string_content))))))))
-          (pipeline_step_with_block
+            (closure
+              (juxt_function_call
+                function: (identifier)
+                args: (argument_list
+                  (closure
+                    (declaration
+                      type: (identifier)
+                      name: (identifier))
+                    (juxt_function_call
+                      function: (identifier)
+                      args: (argument_list
+                        (string
+                          (string_content))))))))
             (function_call
               function: (identifier)
               args: (argument_list
                 (string
                   (string_content))))
-            (code_block
-              (pipeline_step_with_block
-                (identifier)
-                (code_block
-                  (pipeline_step_with_block
-                    (identifier)
-                    (code_block
-                      (declaration
-                        name: (identifier)
-                        value: (identifier)))))))))))))
+            (closure
+              (juxt_function_call
+                function: (identifier)
+                args: (argument_list
+                  (closure
+                    (juxt_function_call
+                      function: (identifier)
+                      args: (argument_list
+                        (closure
+                          (declaration
+                            name: (identifier)
+                            value: (identifier)))))))))))))))

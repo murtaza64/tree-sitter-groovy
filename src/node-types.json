@@ -25,6 +25,10 @@
           "named": true
         },
         {
+          "type": "closure",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -108,6 +112,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "closure",
           "named": true
         },
         {
@@ -221,6 +229,10 @@
           "named": true
         },
         {
+          "type": "closure",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -285,6 +297,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "closure",
           "named": true
         },
         {
@@ -356,6 +372,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "closure",
           "named": true
         },
         {
@@ -444,6 +464,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -515,6 +539,10 @@
           "named": true
         },
         {
+          "type": "closure",
+          "named": true
+        },
+        {
           "type": "continue",
           "named": true
         },
@@ -555,10 +583,6 @@
           "named": true
         },
         {
-          "type": "pipeline_step_with_block",
-          "named": true
-        },
-        {
           "type": "return",
           "named": true
         },
@@ -586,7 +610,7 @@
         "required": true,
         "types": [
           {
-            "type": "code_block",
+            "type": "closure",
             "named": true
           }
         ]
@@ -654,7 +678,7 @@
     }
   },
   {
-    "type": "code_block",
+    "type": "closure",
     "named": true,
     "fields": {},
     "children": {
@@ -687,6 +711,10 @@
         },
         {
           "type": "class_definition",
+          "named": true
+        },
+        {
+          "type": "closure",
           "named": true
         },
         {
@@ -758,7 +786,7 @@
           "named": true
         },
         {
-          "type": "pipeline_step_with_block",
+          "type": "parameter_list",
           "named": true
         },
         {
@@ -870,6 +898,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -944,9 +976,13 @@
     "named": true,
     "fields": {
       "body": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": ";",
+            "named": false
+          },
           {
             "type": "assertion",
             "named": true
@@ -964,7 +1000,7 @@
             "named": true
           },
           {
-            "type": "code_block",
+            "type": "closure",
             "named": true
           },
           {
@@ -1008,10 +1044,6 @@
             "named": true
           },
           {
-            "type": "pipeline_step_with_block",
-            "named": true
-          },
-          {
             "type": "return",
             "named": true
           },
@@ -1051,6 +1083,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "closure",
             "named": true
           },
           {
@@ -1125,9 +1161,13 @@
     "named": true,
     "fields": {
       "body": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": ";",
+            "named": false
+          },
           {
             "type": "assertion",
             "named": true
@@ -1145,7 +1185,7 @@
             "named": true
           },
           {
-            "type": "code_block",
+            "type": "closure",
             "named": true
           },
           {
@@ -1189,10 +1229,6 @@
             "named": true
           },
           {
-            "type": "pipeline_step_with_block",
-            "named": true
-          },
-          {
             "type": "return",
             "named": true
           },
@@ -1232,6 +1268,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "closure",
             "named": true
           },
           {
@@ -1301,9 +1341,13 @@
     "named": true,
     "fields": {
       "body": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": ";",
+            "named": false
+          },
           {
             "type": "assertion",
             "named": true
@@ -1321,7 +1365,7 @@
             "named": true
           },
           {
-            "type": "code_block",
+            "type": "closure",
             "named": true
           },
           {
@@ -1362,10 +1406,6 @@
           },
           {
             "type": "juxt_function_call",
-            "named": true
-          },
-          {
-            "type": "pipeline_step_with_block",
             "named": true
           },
           {
@@ -1427,6 +1467,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -1485,6 +1529,10 @@
             "named": false
           },
           {
+            "type": ";",
+            "named": false
+          },
+          {
             "type": "assertion",
             "named": true
           },
@@ -1498,6 +1546,10 @@
           },
           {
             "type": "class_definition",
+            "named": true
+          },
+          {
+            "type": "closure",
             "named": true
           },
           {
@@ -1538,10 +1590,6 @@
           },
           {
             "type": "juxt_function_call",
-            "named": true
-          },
-          {
-            "type": "pipeline_step_with_block",
             "named": true
           },
           {
@@ -1711,7 +1759,7 @@
         "required": true,
         "types": [
           {
-            "type": "code_block",
+            "type": "closure",
             "named": true
           }
         ]
@@ -1960,9 +2008,13 @@
     "named": true,
     "fields": {
       "body": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": ";",
+            "named": false
+          },
           {
             "type": "assertion",
             "named": true
@@ -1980,7 +2032,7 @@
             "named": true
           },
           {
-            "type": "code_block",
+            "type": "closure",
             "named": true
           },
           {
@@ -2024,10 +2076,6 @@
             "named": true
           },
           {
-            "type": "pipeline_step_with_block",
-            "named": true
-          },
-          {
             "type": "return",
             "named": true
           },
@@ -2067,6 +2115,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "closure",
             "named": true
           },
           {
@@ -2120,9 +2172,13 @@
         ]
       },
       "else_body": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": ";",
+            "named": false
+          },
           {
             "type": "assertion",
             "named": true
@@ -2140,7 +2196,7 @@
             "named": true
           },
           {
-            "type": "code_block",
+            "type": "closure",
             "named": true
           },
           {
@@ -2181,10 +2237,6 @@
           },
           {
             "type": "juxt_function_call",
-            "named": true
-          },
-          {
-            "type": "pipeline_step_with_block",
             "named": true
           },
           {
@@ -2252,6 +2304,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "closure",
           "named": true
         },
         {
@@ -2323,6 +2379,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "closure",
           "named": true
         },
         {
@@ -2431,6 +2491,10 @@
           "named": true
         },
         {
+          "type": "closure",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -2521,6 +2585,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -2592,6 +2660,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "closure",
             "named": true
           },
           {
@@ -2729,6 +2801,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -2804,38 +2880,7 @@
       "required": true,
       "types": [
         {
-          "type": "code_block",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "pipeline_step_with_block",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "code_block",
-          "named": true
-        },
-        {
-          "type": "dotted_identifier",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "index",
+          "type": "closure",
           "named": true
         }
       ]
@@ -2859,6 +2904,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "closure",
           "named": true
         },
         {
@@ -2938,6 +2987,10 @@
           "named": true
         },
         {
+          "type": "closure",
+          "named": true
+        },
+        {
           "type": "continue",
           "named": true
         },
@@ -2979,10 +3032,6 @@
         },
         {
           "type": "pipeline",
-          "named": true
-        },
-        {
-          "type": "pipeline_step_with_block",
           "named": true
         },
         {
@@ -3089,6 +3138,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -3169,6 +3222,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -3240,6 +3297,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "closure",
             "named": true
           },
           {
@@ -3317,6 +3378,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -3373,9 +3438,13 @@
     "named": true,
     "fields": {
       "body": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": ";",
+            "named": false
+          },
           {
             "type": "assertion",
             "named": true
@@ -3393,7 +3462,7 @@
             "named": true
           },
           {
-            "type": "code_block",
+            "type": "closure",
             "named": true
           },
           {
@@ -3437,10 +3506,6 @@
             "named": true
           },
           {
-            "type": "pipeline_step_with_block",
-            "named": true
-          },
-          {
             "type": "return",
             "named": true
           },
@@ -3463,7 +3528,7 @@
         "required": false,
         "types": [
           {
-            "type": "code_block",
+            "type": "closure",
             "named": true
           }
         ]
@@ -3490,6 +3555,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "closure",
             "named": true
           },
           {
@@ -3551,7 +3620,7 @@
         "required": false,
         "types": [
           {
-            "type": "code_block",
+            "type": "closure",
             "named": true
           }
         ]
@@ -3622,6 +3691,10 @@
           "named": true
         },
         {
+          "type": "closure",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -3673,9 +3746,13 @@
     "named": true,
     "fields": {
       "body": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": ";",
+            "named": false
+          },
           {
             "type": "assertion",
             "named": true
@@ -3693,7 +3770,7 @@
             "named": true
           },
           {
-            "type": "code_block",
+            "type": "closure",
             "named": true
           },
           {
@@ -3737,10 +3814,6 @@
             "named": true
           },
           {
-            "type": "pipeline_step_with_block",
-            "named": true
-          },
-          {
             "type": "return",
             "named": true
           },
@@ -3780,6 +3853,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "closure",
             "named": true
           },
           {
@@ -3964,6 +4041,10 @@
   },
   {
     "type": "-=",
+    "named": false
+  },
+  {
+    "type": "->",
     "named": false
   },
   {

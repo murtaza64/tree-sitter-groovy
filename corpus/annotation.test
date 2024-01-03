@@ -24,7 +24,7 @@ def f() {
         (identifier)))
     function: (identifier)
     parameters: (parameter_list)
-    body: (code_block)))
+    body: (closure)))
 ==========
 Annotate class
 ==========
@@ -40,7 +40,7 @@ static class f {
         (identifier)))
     (modifier)
     name: (identifier)
-    body: (code_block)))
+    body: (closure)))
 ==========
 Create annotation
 ==========
@@ -51,4 +51,4 @@ private @interface annotation {
   (class_definition
     (access_modifier)
     name: (identifier)
-    body: (code_block)))
+    body: (closure)))

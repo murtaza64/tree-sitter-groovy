@@ -1,5 +1,5 @@
 [
-  (code_block)
+  (closure)
   (map)
   (list)
   (argument_list)
@@ -9,12 +9,12 @@
 
 ; (function_definition "(" @indent.begin)
 
-(code_block "}" @indent.end)
+(closure "}" @indent.end)
 (argument_list ")" @indent.end)
 (for_parameters ")" @indent.end)
 ((for_loop
   body: (_) @_body) @indent.begin
-  (#not-has-type? @_body code_block))
+  (#not-has-type? @_body closure))
 ; TODO: while, try
 
 (list "]" @indent.end)

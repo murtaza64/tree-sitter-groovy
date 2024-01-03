@@ -84,10 +84,20 @@
 
 (map (map_item key: (identifier) @parameter))
 
+(parameter type: (identifier) @type name: (identifier) @parameter)
+(generic_param name: (identifier) @parameter)
 
 (declaration type: (identifier) @type)
-(parameter type: (identifier) @type name: (identifier) @parameter)
 (function_definition type: (identifier) @type)
+(function_declaration type: (identifier) @type)
+(class_definition name: (identifier) @type)
+(class_definition superclass: (identifier) @type)
+(generic_param superclass: (identifier) @type)
+
+(type_with_generics (identifier) @type)
+(type_with_generics (generics (identifier) @type))
+(generics [ "<" ">" ] @punctuation.bracket)
+(generic_parameters [ "<" ">" ] @punctuation.bracket)
 ; TODO: Class literals with PascalCase
 
 (declaration ("=") @operator)
@@ -97,59 +107,66 @@
 (function_call 
   function: (identifier) @function)
 (function_call
-  function: (access_op
+  function: (dotted_identifier
 	  (identifier) @function . ))
 (function_call (argument_list
 		 (map_item key: (identifier) @parameter)))
 (juxt_function_call 
   function: (identifier) @function)
 (juxt_function_call
-  function: (access_op
+  function: (dotted_identifier
 	  (identifier) @function . ))
 (juxt_function_call (argument_list 
 		      (map_item key: (identifier) @parameter)))
 
 (function_definition 
   function: (identifier) @function)
+(function_declaration 
+  function: (identifier) @function)
+
+(annotation) @function.macro
+(annotation (identifier) @function.macro)
+"@interface" @function.macro
 
 "pipeline" @keyword
 
-(pipeline_step_with_block (identifier) @function.builtin
-  (#any-of? @function.builtin
-    "aborted"
-    "agent"
-    "always"
-    "axes"
-    "axis"
-    "changed"
-    "cleanup"
-    "environment"
-    "fixed"
-    "input"
-    "matrix"
-    "name"
-    "options"
-    "parallel"
-    "parameters"
-    "post"
-    "regression"
-    "script"
-    "stage"
-    "stages"
-    "steps"
-    "success"
-    "tools"
-    "triggers"
-    "unstable"
-    "unsuccessful"
-    "values"
-    "when"
-   ))
-(pipeline_step_with_block 
-  (function_call (identifier) @function.builtin)
-  (#any-of? @function.builtin
-    "stage"
-  ))
+; (pipeline_step_with_block (identifier) @function.builtin
+;   (#any-of? @function.builtin
+;     "aborted"
+;     "agent"
+;     "always"
+;     "axes"
+;     "axis"
+;     "changed"
+;     "cleanup"
+;     "environment"
+;     "failure"
+;     "fixed"
+;     "input"
+;     "matrix"
+;     "name"
+;     "options"
+;     "parallel"
+;     "parameters"
+;     "post"
+;     "regression"
+;     "script"
+;     "stage"
+;     "stages"
+;     "steps"
+;     "success"
+;     "tools"
+;     "triggers"
+;     "unstable"
+;     "unsuccessful"
+;     "values"
+;     "when"
+;    ))
+; (pipeline_step_with_block 
+;   (function_call (identifier) @function.builtin)
+;   (#any-of? @function.builtin
+;     "stage"
+;   ))
 ; (section section_name: (identifier) @function.macro)
 ; (section ("expression") @function.macro)
 ; (section

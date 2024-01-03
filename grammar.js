@@ -47,7 +47,7 @@ module.exports = grammar({
       '#!', /[^\n]*/
     ),
 
-    _statement: $ => prec.left(PREC.STATEMENT, choice(
+    _statement: $ => prec.left(PREC.STATEMENT, seq(choice(
       $.assertion,
       $.assignment,
       $.class_definition,
@@ -60,15 +60,16 @@ module.exports = grammar({
       $.function_definition,
       $.if_statement,
       $.juxt_function_call,
-      $.pipeline_step_with_block,
+      // $.pipeline_step_with_block,
       $.return,
       $.switch_statement,
       $.try_statement,
       $.while_loop,
+      $.closure,
       alias("break", $.break),
       alias("continue", $.continue),
       // $.step,
-    )),
+    ), optional(';'))),
 
     access_op: ($) =>
       choice(
@@ -182,7 +183,7 @@ module.exports = grammar({
         'extends',
         field('superclass', $._prefix_expression),
       )),
-      field('body', $.code_block),
+      field('body', $.closure),
     ),
 
     generic_parameters: $ => seq(
@@ -199,8 +200,10 @@ module.exports = grammar({
       ))
     ),
 
-    code_block: $ => seq(
+    closure: $ => seq(
       '{',
+      optional(seq($.parameter_list, '->')),
+      // repeat(choice($._statement, $._expression)),
       repeat($._statement),
       optional($._expression),
       '}'
@@ -257,6 +260,7 @@ module.exports = grammar({
       $.access_op,
       $.binary_op,
       $.boolean_literal,
+      $.closure,
       $.function_call,
       $.identifier,
       "this",
@@ -276,7 +280,7 @@ module.exports = grammar({
       'do',
       field('body', choice(
         $._statement,
-        $.code_block
+        $.closure
       )),
       'while',
       '(',
@@ -304,7 +308,7 @@ module.exports = grammar({
       $.for_parameters,
       field('body', choice(
         $._statement,
-        $.code_block
+        $.closure
       )),
     ),
 
@@ -317,7 +321,7 @@ module.exports = grammar({
       ')',
       field('body', choice(
         $._statement,
-        $.code_block
+        $.closure
       )),
     )),
 
@@ -357,14 +361,14 @@ module.exports = grammar({
       field('parameters', $.parameter_list),
     )),
 
-    function_definition: $ => prec(2, seq(
+    function_definition: $ => prec(3, seq(
       optional($.annotation),
       optional($.access_modifier),
       repeat($.modifier),
       field('type', choice($._type, 'def')),
       field('function', $.identifier),
       field('parameters', $.parameter_list),
-      field('body', $.code_block), //TODO: optional return
+      field('body', $.closure), //TODO: optional return
     )),
 
     identifier: $ => IDENTIFIER_REGEX,
@@ -380,10 +384,10 @@ module.exports = grammar({
       ')',
       field('body', choice(
         $._statement,
-        $.code_block,
+        $.closure,
       )),
       optional(
-        seq('else', field('else_body', choice($._statement, $.code_block)))
+        seq('else', field('else_body', choice($._statement, $.closure)))
       )
     )),
 
@@ -453,13 +457,13 @@ module.exports = grammar({
 
     pipeline: $ => seq(
       'pipeline',
-      $.code_block,
+      $.closure,
     ),
     
-    pipeline_step_with_block: $ => seq(
-      $._prefix_expression,
-      $.code_block,
-    ),
+    // pipeline_step_with_block: $ => seq(
+    //   $._prefix_expression,
+    //   $.closure,
+    // ),
 
     return: $ => prec.right(1, seq('return', optional($._expression))), //??????
     
@@ -598,7 +602,7 @@ module.exports = grammar({
       'try',
       field('body', choice(
         $._statement,
-        $.code_block,
+        $.closure,
       )),
       optional(
         seq(
@@ -612,13 +616,13 @@ module.exports = grammar({
             ),
           ), //TODO multi-catch
           ')',
-          field('catch_body', $.code_block),
+          field('catch_body', $.closure),
         )
       ),
       optional(
         seq(
           'finally',
-          field('finally_body', $.code_block),
+          field('finally_body', $.closure),
         )
       )
     )),
@@ -681,7 +685,7 @@ module.exports = grammar({
       ')',
       field('body', choice(
         $._statement,
-        $.code_block
+        $.closure
       )),
     ),
   }
