@@ -91,8 +91,9 @@ module.exports = grammar({
       ),
 
     dotted_identifier: $ => seq(
+      $._prefix_expression,
+      '.',
       $.identifier,
-      repeat1(seq('.', $.identifier)),
     ),
 
     groovy_import: $ => seq(
@@ -114,7 +115,8 @@ module.exports = grammar({
       $.identifier,
       $.dotted_identifier,
       $.index,
-      $.function_call
+      $.function_call,
+      $.string
     )),
 
     annotation: $ => seq(
@@ -277,6 +279,7 @@ module.exports = grammar({
       $.binary_op,
       $.boolean_literal,
       $.closure,
+      $.dotted_identifier,
       $.function_call,
       $.identifier,
       "this",
@@ -708,6 +711,8 @@ module.exports = grammar({
 });
 
 // TODO
-// closures
+// closures cleanup
+// highlight jenkins words
 // import
+// package and other keywords
 // function declaration

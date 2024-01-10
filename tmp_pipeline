@@ -1,15 +1,3 @@
-@annotation(withArgs)
-Map<String, int> foo() {
+Long buildTimestamp = currentBuild.startTimeInMillis.intdiv(1000)
+String username = "${env.ghprbPullAuthorLogin}".toLowerCase()
 
-}
-class Foo<T extends Collection> {
-
-}
-
-class Foo {
-
-}
-
-@interface Foo {
-
-}

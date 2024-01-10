@@ -295,23 +295,15 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_prefix_expression"
         },
         {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "."
-              },
-              {
-                "type": "SYMBOL",
-                "name": "identifier"
-              }
-            ]
-          }
+          "type": "STRING",
+          "value": "."
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
         }
       ]
     },
@@ -421,6 +413,10 @@
           {
             "type": "SYMBOL",
             "name": "function_call"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "string"
           }
         ]
       }
@@ -1856,6 +1852,10 @@
         {
           "type": "SYMBOL",
           "name": "closure"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dotted_identifier"
         },
         {
           "type": "SYMBOL",
