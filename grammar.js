@@ -49,6 +49,7 @@ module.exports = grammar({
 
     _statement: $ => prec.left(PREC.STATEMENT, seq(choice(
       $.assertion,
+      $.groovy_import,
       $.assignment,
       $.class_definition,
       $.declaration,
@@ -93,6 +94,21 @@ module.exports = grammar({
       $._prefix_expression,
       '.',
       $.identifier,
+    ),
+
+    groovy_import: $ => seq(
+      'import',
+      optional($.modifier),
+      field('import',
+          choice(
+            $.identifier,
+            $.dotted_identifier,
+            seq(choice($.identifier, $.dotted_identifier), '.*')
+          )
+      ),
+      optional(
+        seq('as', field('import_alias', $.identifier))
+      )
     ),
 
     _prefix_expression: $ => prec.left(1, choice(

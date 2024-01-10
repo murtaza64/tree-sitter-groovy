@@ -599,6 +599,10 @@
           "named": true
         },
         {
+          "type": "groovy_import",
+          "named": true
+        },
+        {
           "type": "if_statement",
           "named": true
         },
@@ -779,6 +783,10 @@
         },
         {
           "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "groovy_import",
           "named": true
         },
         {
@@ -1076,6 +1084,10 @@
             "named": true
           },
           {
+            "type": "groovy_import",
+            "named": true
+          },
+          {
             "type": "if_statement",
             "named": true
           },
@@ -1281,6 +1293,10 @@
             "named": true
           },
           {
+            "type": "groovy_import",
+            "named": true
+          },
+          {
             "type": "if_statement",
             "named": true
           },
@@ -1462,6 +1478,10 @@
           },
           {
             "type": "function_definition",
+            "named": true
+          },
+          {
+            "type": "groovy_import",
             "named": true
           },
           {
@@ -1650,6 +1670,10 @@
           },
           {
             "type": "function_definition",
+            "named": true
+          },
+          {
+            "type": "groovy_import",
             "named": true
           },
           {
@@ -2092,6 +2116,50 @@
     }
   },
   {
+    "type": "groovy_import",
+    "named": true,
+    "fields": {
+      "import": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ".*",
+            "named": false
+          },
+          {
+            "type": "dotted_identifier",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "import_alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "modifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "if_statement",
     "named": true,
     "fields": {
@@ -2153,6 +2221,10 @@
           },
           {
             "type": "function_definition",
+            "named": true
+          },
+          {
+            "type": "groovy_import",
             "named": true
           },
           {
@@ -2321,6 +2393,10 @@
           },
           {
             "type": "function_definition",
+            "named": true
+          },
+          {
+            "type": "groovy_import",
             "named": true
           },
           {
@@ -3151,6 +3227,10 @@
           "named": true
         },
         {
+          "type": "groovy_import",
+          "named": true
+        },
+        {
           "type": "if_statement",
           "named": true
         },
@@ -3642,6 +3722,10 @@
             "named": true
           },
           {
+            "type": "groovy_import",
+            "named": true
+          },
+          {
             "type": "if_statement",
             "named": true
           },
@@ -3962,6 +4046,10 @@
             "named": true
           },
           {
+            "type": "groovy_import",
+            "named": true
+          },
+          {
             "type": "if_statement",
             "named": true
           },
@@ -4213,6 +4301,10 @@
   },
   {
     "type": ".&",
+    "named": false
+  },
+  {
+    "type": ".*",
     "named": false
   },
   {
@@ -4477,6 +4569,10 @@
   },
   {
     "type": "if",
+    "named": false
+  },
+  {
+    "type": "import",
     "named": false
   },
   {

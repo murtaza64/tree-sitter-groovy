@@ -1,0 +1,50 @@
+==========
+Basic import statement
+==========
+import thing
+
+---
+(source_file
+  (groovy_import
+    (identifier)))
+==========
+Import with alias
+==========
+
+import thing as other_thing
+
+---
+(source_file
+  (groovy_import
+    (identifier)
+    (identifier)))
+==========
+Import with dotted ident
+==========
+import package.subpackage
+
+---
+(source_file
+ (groovy_import
+   (dotted_identifier
+   (identifier)
+   (identifier))))
+==========
+Star import
+==========
+import all_of_the_things.*
+
+---
+(source_file
+ (groovy_import
+   (identifier)))
+==========
+Static import statement
+==========
+import static thing
+
+---
+(source_file
+  (groovy_import
+    (modifier)
+    (identifier)))
