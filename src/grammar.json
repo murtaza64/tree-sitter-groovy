@@ -70,6 +70,10 @@
               },
               {
                 "type": "SYMBOL",
+                "name": "groovy_package"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "assignment"
               },
               {
@@ -387,6 +391,28 @@
             },
             {
               "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "groovy_package": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "package"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "dotted_identifier"
             }
           ]
         }
