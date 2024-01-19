@@ -1,3 +1,5 @@
-Long buildTimestamp = currentBuild.startTimeInMillis.intdiv(1000)
-String username = "${env.ghprbPullAuthorLogin}".toLowerCase()
-
+sh foo
+int foo
+String foo
+sh "foo"
+Map<string, int> foo

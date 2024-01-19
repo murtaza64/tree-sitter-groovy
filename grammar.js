@@ -33,7 +33,8 @@ module.exports = grammar({
   word: $ => $.identifier,
 
   conflicts: $ => [
-    [$._juxt_function_name, $._type] //TODO: dynamic precedence, heuristics? eg capital letter
+    // [$.juxt_function_call, $.declaration], //TODO: dynamic precedence, heuristics? eg capital letter
+    [$._juxt_function_name, $._type],
   ],
 
   rules: {
@@ -49,7 +50,6 @@ module.exports = grammar({
 
     _statement: $ => prec.left(PREC.STATEMENT, seq(choice(
       $.assertion,
-      $.groovy_import,
       $.assignment,
       $.class_definition,
       $.declaration,
@@ -59,6 +59,7 @@ module.exports = grammar({
       $.function_call,
       $.function_declaration,
       $.function_definition,
+      $.import,
       $.if_statement,
       $.juxt_function_call,
       // $.pipeline_step_with_block,
@@ -90,22 +91,20 @@ module.exports = grammar({
         ),
       ),
 
-    dotted_identifier: $ => seq(
+    dotted_identifier: $ => prec.left(PREC.TOP, seq(
       $._prefix_expression,
       '.',
       $.identifier,
-    ),
+    )),
 
-    groovy_import: $ => seq(
+    import: $ => seq(
       'import',
       optional($.modifier),
-      field('import',
-          choice(
-            $.identifier,
-            $.dotted_identifier,
-            seq(choice($.identifier, $.dotted_identifier), '.*')
-          )
-      ),
+      field('import', seq(
+        $.identifier,
+        repeat(seq('.', $.identifier)),
+        optional(seq('.', '*'))
+      )),
       optional(
         seq('as', field('import_alias', $.identifier))
       )
@@ -273,6 +272,7 @@ module.exports = grammar({
       field('name', $.identifier),
       optional(seq('=', field('value', $._expression)))
     ),
+    
 
     _expression: $ => choice(
       $.access_op,
@@ -417,13 +417,14 @@ module.exports = grammar({
       ']',
     )),
 
-    juxt_function_call: $ => 
+    juxt_function_call: $ => choice(
       prec.left(1, seq(
         field('function', $._juxt_function_name),
         field('args', alias($._juxt_argument_list, $.argument_list)),
       )),
+    ),
 
-    _juxt_function_name: $ => prec.left(1, $._prefix_expression),
+    _juxt_function_name: $ => prec.dynamic(1, prec.left(1, $._prefix_expression)),
 
     _juxt_argument_list: $ => prec.left(seq(
       choice($.map_item, $._expression),
@@ -659,8 +660,9 @@ module.exports = grammar({
     ),
     
     _type: $ => prec.left(1, choice(
-      $.builtintype,
-      $._prefix_expression,
+      prec.dynamic(2, $.builtintype),
+      alias(/[A-Z][A-Za-z]+/, $.identifier),
+      alias($._prefix_expression, $.prefix_expression),
       $.array_type, //TODO: int[5]?
       $.type_with_generics,
     )),

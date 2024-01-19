@@ -194,23 +194,11 @@
           "named": true
         },
         {
-          "type": "dotted_identifier",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
           "type": "identifier",
           "named": true
         },
         {
-          "type": "index",
-          "named": true
-        },
-        {
-          "type": "string",
+          "type": "prefix_expression",
           "named": true
         },
         {
@@ -599,11 +587,11 @@
           "named": true
         },
         {
-          "type": "groovy_import",
+          "type": "if_statement",
           "named": true
         },
         {
-          "type": "if_statement",
+          "type": "import",
           "named": true
         },
         {
@@ -786,15 +774,15 @@
           "named": true
         },
         {
-          "type": "groovy_import",
-          "named": true
-        },
-        {
           "type": "identifier",
           "named": true
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "import",
           "named": true
         },
         {
@@ -892,23 +880,11 @@
             "named": true
           },
           {
-            "type": "dotted_identifier",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
           {
-            "type": "index",
-            "named": true
-          },
-          {
-            "type": "string",
+            "type": "prefix_expression",
             "named": true
           },
           {
@@ -1084,11 +1060,11 @@
             "named": true
           },
           {
-            "type": "groovy_import",
+            "type": "if_statement",
             "named": true
           },
           {
-            "type": "if_statement",
+            "type": "import",
             "named": true
           },
           {
@@ -1293,11 +1269,11 @@
             "named": true
           },
           {
-            "type": "groovy_import",
+            "type": "if_statement",
             "named": true
           },
           {
-            "type": "if_statement",
+            "type": "import",
             "named": true
           },
           {
@@ -1481,11 +1457,11 @@
             "named": true
           },
           {
-            "type": "groovy_import",
+            "type": "if_statement",
             "named": true
           },
           {
-            "type": "if_statement",
+            "type": "import",
             "named": true
           },
           {
@@ -1673,11 +1649,11 @@
             "named": true
           },
           {
-            "type": "groovy_import",
+            "type": "if_statement",
             "named": true
           },
           {
-            "type": "if_statement",
+            "type": "import",
             "named": true
           },
           {
@@ -1805,23 +1781,11 @@
             "named": false
           },
           {
-            "type": "dotted_identifier",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
           {
-            "type": "index",
-            "named": true
-          },
-          {
-            "type": "string",
+            "type": "prefix_expression",
             "named": true
           },
           {
@@ -1901,23 +1865,11 @@
             "named": false
           },
           {
-            "type": "dotted_identifier",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
           {
-            "type": "index",
-            "named": true
-          },
-          {
-            "type": "string",
+            "type": "prefix_expression",
             "named": true
           },
           {
@@ -1973,23 +1925,11 @@
             "named": true
           },
           {
-            "type": "dotted_identifier",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
           {
-            "type": "index",
-            "named": true
-          },
-          {
-            "type": "string",
+            "type": "prefix_expression",
             "named": true
           },
           {
@@ -2032,23 +1972,11 @@
           "named": true
         },
         {
-          "type": "dotted_identifier",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
           "type": "identifier",
           "named": true
         },
         {
-          "type": "index",
-          "named": true
-        },
-        {
-          "type": "string",
+          "type": "prefix_expression",
           "named": true
         },
         {
@@ -2110,50 +2038,6 @@
       "types": [
         {
           "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "groovy_import",
-    "named": true,
-    "fields": {
-      "import": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ".*",
-            "named": false
-          },
-          {
-            "type": "dotted_identifier",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "import_alias": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "modifier",
           "named": true
         }
       ]
@@ -2224,11 +2108,11 @@
             "named": true
           },
           {
-            "type": "groovy_import",
+            "type": "if_statement",
             "named": true
           },
           {
-            "type": "if_statement",
+            "type": "import",
             "named": true
           },
           {
@@ -2396,11 +2280,11 @@
             "named": true
           },
           {
-            "type": "groovy_import",
+            "type": "if_statement",
             "named": true
           },
           {
-            "type": "if_statement",
+            "type": "import",
             "named": true
           },
           {
@@ -2425,6 +2309,50 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "import",
+    "named": true,
+    "fields": {
+      "import": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "*",
+            "named": false
+          },
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "import_alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "modifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2947,23 +2875,11 @@
             "named": true
           },
           {
-            "type": "dotted_identifier",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
           {
-            "type": "index",
-            "named": true
-          },
-          {
-            "type": "string",
+            "type": "prefix_expression",
             "named": true
           },
           {
@@ -3081,6 +2997,37 @@
       "types": [
         {
           "type": "closure",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "prefix_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "dotted_identifier",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -3227,11 +3174,11 @@
           "named": true
         },
         {
-          "type": "groovy_import",
+          "type": "if_statement",
           "named": true
         },
         {
-          "type": "if_statement",
+          "type": "import",
           "named": true
         },
         {
@@ -3722,11 +3669,11 @@
             "named": true
           },
           {
-            "type": "groovy_import",
+            "type": "if_statement",
             "named": true
           },
           {
-            "type": "if_statement",
+            "type": "import",
             "named": true
           },
           {
@@ -3876,14 +3823,6 @@
           "named": true
         },
         {
-          "type": "dotted_identifier",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
           "type": "generics",
           "named": true
         },
@@ -3892,11 +3831,7 @@
           "named": true
         },
         {
-          "type": "index",
-          "named": true
-        },
-        {
-          "type": "string",
+          "type": "prefix_expression",
           "named": true
         },
         {
@@ -4046,11 +3981,11 @@
             "named": true
           },
           {
-            "type": "groovy_import",
+            "type": "if_statement",
             "named": true
           },
           {
-            "type": "if_statement",
+            "type": "import",
             "named": true
           },
           {
@@ -4301,10 +4236,6 @@
   },
   {
     "type": ".&",
-    "named": false
-  },
-  {
-    "type": ".*",
     "named": false
   },
   {

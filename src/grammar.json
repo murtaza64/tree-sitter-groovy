@@ -66,10 +66,6 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "groovy_import"
-              },
-              {
-                "type": "SYMBOL",
                 "name": "assignment"
               },
               {
@@ -103,6 +99,10 @@
               {
                 "type": "SYMBOL",
                 "name": "function_definition"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "import"
               },
               {
                 "type": "SYMBOL",
@@ -291,23 +291,27 @@
       ]
     },
     "dotted_identifier": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_prefix_expression"
-        },
-        {
-          "type": "STRING",
-          "value": "."
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        }
-      ]
+      "type": "PREC_LEFT",
+      "value": 16,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_prefix_expression"
+          },
+          {
+            "type": "STRING",
+            "value": "."
+          },
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        ]
+      }
     },
-    "groovy_import": {
+    "import": {
       "type": "SEQ",
       "members": [
         {
@@ -330,35 +334,46 @@
           "type": "FIELD",
           "name": "import",
           "content": {
-            "type": "CHOICE",
+            "type": "SEQ",
             "members": [
               {
                 "type": "SYMBOL",
                 "name": "identifier"
               },
               {
-                "type": "SYMBOL",
-                "name": "dotted_identifier"
+                "type": "REPEAT",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "."
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "identifier"
+                    }
+                  ]
+                }
               },
               {
-                "type": "SEQ",
+                "type": "CHOICE",
                 "members": [
                   {
-                    "type": "CHOICE",
+                    "type": "SEQ",
                     "members": [
                       {
-                        "type": "SYMBOL",
-                        "name": "identifier"
+                        "type": "STRING",
+                        "value": "."
                       },
                       {
-                        "type": "SYMBOL",
-                        "name": "dotted_identifier"
+                        "type": "STRING",
+                        "value": "*"
                       }
                     ]
                   },
                   {
-                    "type": "STRING",
-                    "value": ".*"
+                    "type": "BLANK"
                   }
                 ]
               }
@@ -2669,41 +2684,50 @@
       }
     },
     "juxt_function_call": {
-      "type": "PREC_LEFT",
-      "value": 1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "FIELD",
-            "name": "function",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_juxt_function_name"
-            }
-          },
-          {
-            "type": "FIELD",
-            "name": "args",
-            "content": {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_juxt_argument_list"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PREC_LEFT",
+          "value": 1,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "function",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_juxt_function_name"
+                }
               },
-              "named": true,
-              "value": "argument_list"
-            }
+              {
+                "type": "FIELD",
+                "name": "args",
+                "content": {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_juxt_argument_list"
+                  },
+                  "named": true,
+                  "value": "argument_list"
+                }
+              }
+            ]
           }
-        ]
-      }
+        }
+      ]
     },
     "_juxt_function_name": {
-      "type": "PREC_LEFT",
+      "type": "PREC_DYNAMIC",
       "value": 1,
       "content": {
-        "type": "SYMBOL",
-        "name": "_prefix_expression"
+        "type": "PREC_LEFT",
+        "value": 1,
+        "content": {
+          "type": "SYMBOL",
+          "name": "_prefix_expression"
+        }
       }
     },
     "_juxt_argument_list": {
@@ -3763,12 +3787,30 @@
         "type": "CHOICE",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "builtintype"
+            "type": "PREC_DYNAMIC",
+            "value": 2,
+            "content": {
+              "type": "SYMBOL",
+              "name": "builtintype"
+            }
           },
           {
-            "type": "SYMBOL",
-            "name": "_prefix_expression"
+            "type": "ALIAS",
+            "content": {
+              "type": "PATTERN",
+              "value": "[A-Z][A-Za-z]+"
+            },
+            "named": true,
+            "value": "identifier"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_prefix_expression"
+            },
+            "named": true,
+            "value": "prefix_expression"
           },
           {
             "type": "SYMBOL",

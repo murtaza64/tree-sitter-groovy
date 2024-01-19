@@ -11,6 +11,7 @@
   "finally"
   "for"
   "if"
+  "import"
   "in"
   "instanceof"
   "pipeline"
@@ -73,6 +74,9 @@
 
 ((identifier) @constant
   (#match? @constant "^[A-Z][A-Z_]+"))
+
+((identifier) @type
+  (#match? @type "^[A-Z][A-Za-z]+"))
 
 [ 
   "%" "*" "/" "+" "-" "<<" ">>" ">>>" ".." "..<" "<..<" "<.." "<"
