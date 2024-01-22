@@ -13,7 +13,7 @@ Language.build_library(
   'build/languages.so',
   ['.']
 )
-JENKINS_LANGUAGE = Language('build/languages.so', 'jenkins')
+GROOVY_LANGUAGE = Language('build/languages.so', 'groovy')
 
 class TestFileParseError(Exception):
     pass
@@ -83,12 +83,12 @@ def print_diff(s1, s2):
 
 filename = argv[1]
 tests = parse_test_file_lines(open(filename).readlines())
-jenkins_parser = Parser()
-jenkins_parser.set_language(JENKINS_LANGUAGE)
+groovy_parser = Parser()
+groovy_parser.set_language(GROOVY_LANGUAGE)
 unupdated_failures = 0
 updates = 0
 for test_name, (code, expected_sexp) in tests.items():
-    tree = jenkins_parser.parse(code)
+    tree = groovy_parser.parse(code)
     # print(tree.root_node.sexp())
     canonical_actual = str(sexpparse.parse(tree.root_node.sexp()))
     # print(canonical_actual)

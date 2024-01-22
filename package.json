@@ -1,7 +1,7 @@
 {
-  "name": "tree-sitter-YOUR-LANGUAGE-NAME",
+  "name": "tree-sitter-groovy",
   "version": "0.0.1",
-  "description": "YOUR-LANGUAGE-NAME grammar for tree-sitter",
+  "description": "groovy grammar for tree-sitter",
   "main": "bindings/node",
   "tree-sitter": [
     {
@@ -10,6 +10,10 @@
         "pipeline",
         "jenkins",
         "Jenkinsfile"
+      ],
+      "scope": "source.groovy",
+      "file-types": [
+        "groovy"
       ]
     }
   ],

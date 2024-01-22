@@ -26,7 +26,7 @@ const list_of = (e) => seq(
 )
 
 module.exports = grammar({
-  name: 'jenkins',
+  name: 'groovy',
 
   extras: $ => [/\s/, $.comment, $.groovy_doc],
 
