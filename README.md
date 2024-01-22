@@ -9,6 +9,7 @@
    - imports
 - tree-sitter queries for
   - highlights
+  - indents
   - locals
 
 ## Screenshots
