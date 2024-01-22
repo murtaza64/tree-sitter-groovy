@@ -11,6 +11,7 @@
   - highlights
   - indents
   - locals
+- rich parse tree to support other extensions like TreeSJ, textobjs (WIP)
 
 ## Screenshots
 Comparing to [the original groovy parser](https://github.com/Decodetalkers/tree-sitter-groovy) 
