@@ -511,7 +511,7 @@ module.exports = grammar({
         repeat(seq(
           optional(alias(token.immediate(prec(0, /[']{1,2}/)), $.string_internal_quote)),
           choice(
-            alias(token.immediate(prec(1, /([^$\\']|[']{1,2}[^'$\\])+/)), $.string_content),
+            alias(token.immediate(prec(1, /([^\\']|[']{1,2}[^'\\])+/)), $.string_content),
             seq(
               optional(/[']{1,2}/), // edge case: these wont be in string_content
               $.escape_sequence,
@@ -719,6 +719,3 @@ module.exports = grammar({
 // TODO
 // closures cleanup
 // highlight jenkins words
-// import
-// package and other keywords
-// function declaration

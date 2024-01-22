@@ -3,18 +3,23 @@
   "!instanceof"
   "as"
   "assert"
+  "case"
   "catch"
   "class"
   "def"
+  "default"
   "else"
   "extends"
   "finally"
   "for"
   "if"
+  "import"
   "in"
   "instanceof"
+  "package"
   "pipeline"
   "return"
+  "switch"
   "try"
   "while"
   (break)
@@ -80,6 +85,8 @@
   "&&" "||" "?:" "+" "*" ".&" ".@" "?." "*." "*" "*:" "++" "--" "!"
 ] @operator
 
+(string ("/") @string)
+
 (ternary_op ([ "?" ":" ]) @operator)
 
 (map (map_item key: (identifier) @parameter))
@@ -130,52 +137,6 @@
 
 "pipeline" @keyword
 
-; (pipeline_step_with_block (identifier) @function.builtin
-;   (#any-of? @function.builtin
-;     "aborted"
-;     "agent"
-;     "always"
-;     "axes"
-;     "axis"
-;     "changed"
-;     "cleanup"
-;     "environment"
-;     "failure"
-;     "fixed"
-;     "input"
-;     "matrix"
-;     "name"
-;     "options"
-;     "parallel"
-;     "parameters"
-;     "post"
-;     "regression"
-;     "script"
-;     "stage"
-;     "stages"
-;     "steps"
-;     "success"
-;     "tools"
-;     "triggers"
-;     "unstable"
-;     "unsuccessful"
-;     "values"
-;     "when"
-;    ))
-; (pipeline_step_with_block 
-;   (function_call (identifier) @function.builtin)
-;   (#any-of? @function.builtin
-;     "stage"
-;   ))
-; (section section_name: (identifier) @function.macro)
-; (section ("expression") @function.macro)
-; (section
-;   section_name: (function_call 
-;     function: (identifier) @function.macro))
-; (section
-;   section_name: (function_call
-;     function: (access_op
-; 		(identifier) @function.macro)))
 (groovy_doc) @comment.documentation
 (groovy_doc 
   [
@@ -184,8 +145,5 @@
     (groovy_doc_tag)
   ] @string.special)
 (groovy_doc (groovy_doc_param (identifier) @parameter))
-(groovy_doc (groovy_doc_throws (identifier) @class))
+(groovy_doc (groovy_doc_throws (identifier) @type))
 (groovy_doc (first_line) @text)
-
-
-
