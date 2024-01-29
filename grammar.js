@@ -226,7 +226,7 @@ module.exports = grammar({
 
     closure: $ => seq(
       '{',
-      optional(seq($.parameter_list, '->')),
+      optional(choice('->', seq(alias($._param_list, $.parameter_list), '->'))),
       // repeat(choice($._statement, $._expression)),
       repeat($._statement),
       optional($._expression),
@@ -365,6 +365,8 @@ module.exports = grammar({
         ')',
       )),
 
+    _param_list: $ => prec(1, list_of($.parameter)),
+
     parameter_list: $ => prec(1, seq(
       '(',
       optional(list_of($.parameter)),
@@ -372,7 +374,7 @@ module.exports = grammar({
     )),
 
     parameter: $ => seq(
-      field('type', $._type),
+      optional(field('type', $._type)),
       field('name', $.identifier),
       optional(seq('=', field('value', $._expression))),
     ),
