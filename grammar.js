@@ -252,6 +252,7 @@ module.exports = grammar({
             $.groovy_doc_param,
             $.groovy_doc_throws,
             $.groovy_doc_tag,
+            $.groovy_doc_at_text,
             /([^@*]|\*[^/])([^*\s@]|[^\s\n]@|\*[^/])+/,
           ),
         ),
@@ -270,6 +271,9 @@ module.exports = grammar({
 
     groovy_doc_tag: $ => 
       /@[a-z]+/,
+
+    groovy_doc_at_text: $ =>
+      /@[^@\s*]*/,
 
     declaration: $ => seq(
       optional($.annotation),

@@ -1746,6 +1746,10 @@
                 "name": "groovy_doc_tag"
               },
               {
+                "type": "SYMBOL",
+                "name": "groovy_doc_at_text"
+              },
+              {
                 "type": "PATTERN",
                 "value": "([^@*]|\\*[^/])([^*\\s@]|[^\\s\\n]@|\\*[^/])+"
               }
@@ -1787,6 +1791,10 @@
     "groovy_doc_tag": {
       "type": "PATTERN",
       "value": "@[a-z]+"
+    },
+    "groovy_doc_at_text": {
+      "type": "PATTERN",
+      "value": "@[^@\\s*]*"
     },
     "declaration": {
       "type": "SEQ",

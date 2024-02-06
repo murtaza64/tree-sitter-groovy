@@ -1,10 +1,4 @@
-if() {
-a() {
-	b()
-}
-}
-stages {
-	c() {
-		hi()
-	}
-}
+/** hello
+hello world
+@ERROR @tag @HELLOWORLD */
+x = 5
