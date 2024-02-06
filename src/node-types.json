@@ -2095,6 +2095,10 @@
           "named": true
         },
         {
+          "type": "groovy_doc_at_text",
+          "named": true
+        },
+        {
           "type": "groovy_doc_param",
           "named": true
         },
@@ -4621,6 +4625,10 @@
   {
     "type": "for",
     "named": false
+  },
+  {
+    "type": "groovy_doc_at_text",
+    "named": true
   },
   {
     "type": "groovy_doc_tag",

@@ -53,3 +53,16 @@ x = hi
   (assignment
     (identifier)
     (identifier)))
+==========
+groovydoc with @TEXT
+==========
+/**
+hello world
+@THIS_IS_TEXT @tag
+*/
+---
+(source_file
+  (groovy_doc
+    (first_line)
+    (groovy_doc_at_text)
+    (groovy_doc_tag)))
