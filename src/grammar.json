@@ -3426,6 +3426,15 @@
                     "value": "escape_sequence"
                   },
                   {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "\\\\[^\\/]"
+                    },
+                    "named": true,
+                    "value": "string_content"
+                  },
+                  {
                     "type": "SYMBOL",
                     "name": "interpolation"
                   }

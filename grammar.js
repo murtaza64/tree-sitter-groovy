@@ -559,6 +559,7 @@ module.exports = grammar({
         repeat1(choice(
           alias(token.immediate(prec(1, /[^$\\\/]+/)), $.string_content),
           alias('\\/', $.escape_sequence),
+          alias(/\\[^\/]/, $.string_content),
           $.interpolation,
         )),
         '/',
