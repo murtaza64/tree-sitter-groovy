@@ -137,7 +137,7 @@ module.exports = grammar({
     assignment: $ => prec.left(-1, choice( //??? is -1 ok here? (fixes conflict with expression for ++)
       seq(
         $._prefix_expression,
-        choice('=', '**=', '*=', '/=', '%=', '+=', '-=', 
+        choice('=', '**=', '*=', '/=', '%=', '+=', '-=',
           '<<=', '>>=', '>>>=', '&=', '^=', '|=', '?='),
         $._expression
       ),
@@ -269,7 +269,7 @@ module.exports = grammar({
       $.identifier
     ),
 
-    groovy_doc_tag: $ => 
+    groovy_doc_tag: $ =>
       /@[a-z]+/,
 
     groovy_doc_at_text: $ =>
@@ -279,9 +279,17 @@ module.exports = grammar({
       optional($.annotation),
       optional($.access_modifier),
       repeat($.modifier),
-      choice(field('type', $._type), 'def'),
-      field('name', $.identifier),
-      optional(seq('=', field('value', $._expression)))
+      choice(
+        seq(
+          choice(field('type', $._type), 'def'),
+          field('name', $.identifier),
+          optional(seq('=', field('value', $._expression)))
+        ),
+        seq(
+          field('name', $.identifier),
+          seq('=', field('value', $._expression))
+        )
+      )
     ),
 
     _expression: $ => choice(
@@ -407,7 +415,7 @@ module.exports = grammar({
     //   choice($._letter, '$', '_'),
     //   repeat(choice($._letter, '[0-9]', '$', '_'))
     // ),
-    
+
     if_statement: $ => prec.left(seq(
       'if',
       '(',
@@ -429,7 +437,7 @@ module.exports = grammar({
       ']',
     )),
 
-    juxt_function_call: $ => 
+    juxt_function_call: $ =>
       prec.left(1, seq(
         field('function', $._juxt_function_name),
         field('args', alias($._juxt_argument_list, $.argument_list)),
@@ -490,14 +498,14 @@ module.exports = grammar({
       'pipeline',
       $.closure,
     ),
-    
+
     // pipeline_step_with_block: $ => seq(
     //   $._prefix_expression,
     //   $.closure,
     // ),
 
     return: $ => prec.right(1, seq('return', optional($._expression))), //??????
-    
+
     string: $ => choice(
       $._plain_string,
       $._interpolate_string,
@@ -567,7 +575,7 @@ module.exports = grammar({
       seq( // dollar slashy string
         '$/',
         repeat(choice(
-          alias(token.immediate(prec(1, 
+          alias(token.immediate(prec(1,
             /([^$\/]|\/[^$]|\$[^\/$a-zA-Z{])+/
           )), $.string_content),
           alias('$/', $.escape_sequence),
@@ -587,7 +595,7 @@ module.exports = grammar({
       ),
     ))),
 
-    
+
     interpolation: $ => seq(
       '$',
       choice(
@@ -670,7 +678,7 @@ module.exports = grammar({
       'double',
       'void',
     ),
-    
+
     _type: $ => prec.left(1, choice(
       $.builtintype,
       $._prefix_expression,
@@ -697,7 +705,7 @@ module.exports = grammar({
 
     generics: $ => seq('<', list_of($._type), '>'),
 
-    unary_op: $ => 
+    unary_op: $ =>
       choice(
         ...[
           ["+", PREC.UNARY],
