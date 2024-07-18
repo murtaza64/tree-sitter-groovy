@@ -547,11 +547,23 @@
       "required": false,
       "types": [
         {
+          "type": "access_op",
+          "named": true
+        },
+        {
           "type": "assertion",
           "named": true
         },
         {
           "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "binary_op",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
           "named": true
         },
         {
@@ -576,6 +588,10 @@
         },
         {
           "type": "do_while_loop",
+          "named": true
+        },
+        {
+          "type": "dotted_identifier",
           "named": true
         },
         {
@@ -607,7 +623,19 @@
           "named": true
         },
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "increment_op",
+          "named": true
+        },
+        {
+          "type": "index",
           "named": true
         },
         {
@@ -615,7 +643,31 @@
           "named": true
         },
         {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
           "type": "return",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         },
         {
@@ -623,7 +675,15 @@
           "named": true
         },
         {
+          "type": "ternary_op",
+          "named": true
+        },
+        {
           "type": "try_statement",
+          "named": true
+        },
+        {
+          "type": "unary_op",
           "named": true
         },
         {
@@ -815,6 +875,10 @@
         },
         {
           "type": "juxt_function_call",
+          "named": true
+        },
+        {
+          "type": "label",
           "named": true
         },
         {
@@ -1036,8 +1100,20 @@
         "required": true,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ";",
             "named": false
+          },
+          {
+            "type": "access_op",
+            "named": true
           },
           {
             "type": "assertion",
@@ -1045,6 +1121,14 @@
           },
           {
             "type": "assignment",
+            "named": true
+          },
+          {
+            "type": "binary_op",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
             "named": true
           },
           {
@@ -1069,6 +1153,10 @@
           },
           {
             "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "dotted_identifier",
             "named": true
           },
           {
@@ -1100,7 +1188,19 @@
             "named": true
           },
           {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "increment_op",
+            "named": true
+          },
+          {
+            "type": "index",
             "named": true
           },
           {
@@ -1108,7 +1208,31 @@
             "named": true
           },
           {
+            "type": "label",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "return",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           },
           {
@@ -1116,7 +1240,19 @@
             "named": true
           },
           {
+            "type": "ternary_op",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "try_statement",
+            "named": true
+          },
+          {
+            "type": "unary_op",
             "named": true
           },
           {
@@ -1249,8 +1385,20 @@
         "required": true,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ";",
             "named": false
+          },
+          {
+            "type": "access_op",
+            "named": true
           },
           {
             "type": "assertion",
@@ -1258,6 +1406,14 @@
           },
           {
             "type": "assignment",
+            "named": true
+          },
+          {
+            "type": "binary_op",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
             "named": true
           },
           {
@@ -1282,6 +1438,10 @@
           },
           {
             "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "dotted_identifier",
             "named": true
           },
           {
@@ -1313,7 +1473,19 @@
             "named": true
           },
           {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "increment_op",
+            "named": true
+          },
+          {
+            "type": "index",
             "named": true
           },
           {
@@ -1321,7 +1493,31 @@
             "named": true
           },
           {
+            "type": "label",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "return",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           },
           {
@@ -1329,7 +1525,19 @@
             "named": true
           },
           {
+            "type": "ternary_op",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "try_statement",
+            "named": true
+          },
+          {
+            "type": "unary_op",
             "named": true
           },
           {
@@ -1441,8 +1649,20 @@
         "required": true,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ";",
             "named": false
+          },
+          {
+            "type": "access_op",
+            "named": true
           },
           {
             "type": "assertion",
@@ -1450,6 +1670,14 @@
           },
           {
             "type": "assignment",
+            "named": true
+          },
+          {
+            "type": "binary_op",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
             "named": true
           },
           {
@@ -1474,6 +1702,10 @@
           },
           {
             "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "dotted_identifier",
             "named": true
           },
           {
@@ -1505,7 +1737,19 @@
             "named": true
           },
           {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "increment_op",
+            "named": true
+          },
+          {
+            "type": "index",
             "named": true
           },
           {
@@ -1513,7 +1757,31 @@
             "named": true
           },
           {
+            "type": "label",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "return",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           },
           {
@@ -1521,7 +1789,19 @@
             "named": true
           },
           {
+            "type": "ternary_op",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "try_statement",
+            "named": true
+          },
+          {
+            "type": "unary_op",
             "named": true
           },
           {
@@ -1633,6 +1913,14 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ",",
             "named": false
           },
@@ -1641,11 +1929,23 @@
             "named": false
           },
           {
+            "type": "access_op",
+            "named": true
+          },
+          {
             "type": "assertion",
             "named": true
           },
           {
             "type": "assignment",
+            "named": true
+          },
+          {
+            "type": "binary_op",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
             "named": true
           },
           {
@@ -1670,6 +1970,10 @@
           },
           {
             "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "dotted_identifier",
             "named": true
           },
           {
@@ -1701,7 +2005,19 @@
             "named": true
           },
           {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "increment_op",
+            "named": true
+          },
+          {
+            "type": "index",
             "named": true
           },
           {
@@ -1709,7 +2025,31 @@
             "named": true
           },
           {
+            "type": "label",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "return",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           },
           {
@@ -1717,7 +2057,19 @@
             "named": true
           },
           {
+            "type": "ternary_op",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "try_statement",
+            "named": true
+          },
+          {
+            "type": "unary_op",
             "named": true
           },
           {
@@ -2215,8 +2567,20 @@
         "required": true,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ";",
             "named": false
+          },
+          {
+            "type": "access_op",
+            "named": true
           },
           {
             "type": "assertion",
@@ -2224,6 +2588,14 @@
           },
           {
             "type": "assignment",
+            "named": true
+          },
+          {
+            "type": "binary_op",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
             "named": true
           },
           {
@@ -2248,6 +2620,10 @@
           },
           {
             "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "dotted_identifier",
             "named": true
           },
           {
@@ -2279,7 +2655,19 @@
             "named": true
           },
           {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "increment_op",
+            "named": true
+          },
+          {
+            "type": "index",
             "named": true
           },
           {
@@ -2287,7 +2675,31 @@
             "named": true
           },
           {
+            "type": "label",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "return",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           },
           {
@@ -2295,7 +2707,19 @@
             "named": true
           },
           {
+            "type": "ternary_op",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "try_statement",
+            "named": true
+          },
+          {
+            "type": "unary_op",
             "named": true
           },
           {
@@ -2391,8 +2815,20 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ";",
             "named": false
+          },
+          {
+            "type": "access_op",
+            "named": true
           },
           {
             "type": "assertion",
@@ -2400,6 +2836,14 @@
           },
           {
             "type": "assignment",
+            "named": true
+          },
+          {
+            "type": "binary_op",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
             "named": true
           },
           {
@@ -2424,6 +2868,10 @@
           },
           {
             "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "dotted_identifier",
             "named": true
           },
           {
@@ -2455,7 +2903,19 @@
             "named": true
           },
           {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "increment_op",
+            "named": true
+          },
+          {
+            "type": "index",
             "named": true
           },
           {
@@ -2463,7 +2923,31 @@
             "named": true
           },
           {
+            "type": "label",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "return",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           },
           {
@@ -2471,7 +2955,19 @@
             "named": true
           },
           {
+            "type": "ternary_op",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "try_statement",
+            "named": true
+          },
+          {
+            "type": "unary_op",
             "named": true
           },
           {
@@ -2699,6 +3195,22 @@
           },
           {
             "type": "string",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "label",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
             "named": true
           }
         ]
@@ -3230,11 +3742,23 @@
       "required": false,
       "types": [
         {
+          "type": "access_op",
+          "named": true
+        },
+        {
           "type": "assertion",
           "named": true
         },
         {
           "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "binary_op",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
           "named": true
         },
         {
@@ -3259,6 +3783,10 @@
         },
         {
           "type": "do_while_loop",
+          "named": true
+        },
+        {
+          "type": "dotted_identifier",
           "named": true
         },
         {
@@ -3290,11 +3818,43 @@
           "named": true
         },
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "if_statement",
           "named": true
         },
         {
+          "type": "increment_op",
+          "named": true
+        },
+        {
+          "type": "index",
+          "named": true
+        },
+        {
           "type": "juxt_function_call",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         },
         {
@@ -3310,11 +3870,23 @@
           "named": true
         },
         {
+          "type": "string",
+          "named": true
+        },
+        {
           "type": "switch_statement",
           "named": true
         },
         {
+          "type": "ternary_op",
+          "named": true
+        },
+        {
           "type": "try_statement",
+          "named": true
+        },
+        {
+          "type": "unary_op",
           "named": true
         },
         {
@@ -3725,8 +4297,20 @@
         "required": true,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ";",
             "named": false
+          },
+          {
+            "type": "access_op",
+            "named": true
           },
           {
             "type": "assertion",
@@ -3734,6 +4318,14 @@
           },
           {
             "type": "assignment",
+            "named": true
+          },
+          {
+            "type": "binary_op",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
             "named": true
           },
           {
@@ -3758,6 +4350,10 @@
           },
           {
             "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "dotted_identifier",
             "named": true
           },
           {
@@ -3789,7 +4385,19 @@
             "named": true
           },
           {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "increment_op",
+            "named": true
+          },
+          {
+            "type": "index",
             "named": true
           },
           {
@@ -3797,7 +4405,31 @@
             "named": true
           },
           {
+            "type": "label",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "return",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           },
           {
@@ -3805,7 +4437,19 @@
             "named": true
           },
           {
+            "type": "ternary_op",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "try_statement",
+            "named": true
+          },
+          {
+            "type": "unary_op",
             "named": true
           },
           {
@@ -4053,8 +4697,20 @@
         "required": true,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ";",
             "named": false
+          },
+          {
+            "type": "access_op",
+            "named": true
           },
           {
             "type": "assertion",
@@ -4062,6 +4718,14 @@
           },
           {
             "type": "assignment",
+            "named": true
+          },
+          {
+            "type": "binary_op",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
             "named": true
           },
           {
@@ -4086,6 +4750,10 @@
           },
           {
             "type": "do_while_loop",
+            "named": true
+          },
+          {
+            "type": "dotted_identifier",
             "named": true
           },
           {
@@ -4117,7 +4785,19 @@
             "named": true
           },
           {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "increment_op",
+            "named": true
+          },
+          {
+            "type": "index",
             "named": true
           },
           {
@@ -4125,7 +4805,31 @@
             "named": true
           },
           {
+            "type": "label",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "return",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           },
           {
@@ -4133,7 +4837,19 @@
             "named": true
           },
           {
+            "type": "ternary_op",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": false
+          },
+          {
             "type": "try_statement",
+            "named": true
+          },
+          {
+            "type": "unary_op",
             "named": true
           },
           {

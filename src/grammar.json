@@ -62,6 +62,18 @@
             "members": [
               {
                 "type": "SYMBOL",
+                "name": "label"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
                 "name": "assertion"
               },
               {
@@ -153,6 +165,10 @@
                 },
                 "named": true,
                 "value": "continue"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
               }
             ]
           },
@@ -170,6 +186,23 @@
           }
         ]
       }
+    },
+    "label": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        }
+      ]
     },
     "access_op": {
       "type": "CHOICE",
