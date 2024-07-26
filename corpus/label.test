@@ -25,27 +25,27 @@ class Test {
 ---
 (source_file
   (class_definition
-    (identifier)
-    (closure
+    name: (identifier)
+    body: (closure
       (function_definition
-        (identifier)
-  (parameter_list)
-  (closure
-    (label
-      (identifier))
-    (declaration
-      (identifier)
-        (number_literal))
+        function: (identifier)
+        parameters: (parameter_list)
+        body: (closure
+          (label
+            name: (identifier))
           (declaration
-      (identifier)
-        (number_literal))
-    (declaration
-      (identifier)
-      (binary_op
-        (identifier)
+            name: (identifier)
+            value: (number_literal))
+          (declaration
+            name: (identifier)
+            value: (number_literal))
+          (declaration
+            name: (identifier)
+            value: (binary_op
+              (identifier)
               (identifier)))
-    (label
-      (identifier))
+          (label
+            name: (identifier))
           (binary_op
-      (identifier)
-      (number_literal)))))))
+            (identifier)
+            (number_literal)))))))
