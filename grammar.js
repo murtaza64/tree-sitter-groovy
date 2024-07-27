@@ -121,10 +121,7 @@ module.exports = grammar({
       )
     ),
 
-    groovy_package: $ => seq(
-        'package',
-        choice($.identifier, $.dotted_identifier)
-    ),
+    groovy_package: $ => seq('package', alias($._import_name, $.qualified_name)),
 
     _prefix_expression: $ => prec.left(1, choice(
       $.identifier,

@@ -463,17 +463,13 @@
           "value": "package"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "identifier"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "dotted_identifier"
-            }
-          ]
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_import_name"
+          },
+          "named": true,
+          "value": "qualified_name"
         }
       ]
     },

@@ -2544,11 +2544,7 @@
       "required": true,
       "types": [
         {
-          "type": "dotted_identifier",
-          "named": true
-        },
-        {
-          "type": "identifier",
+          "type": "qualified_name",
           "named": true
         }
       ]
