@@ -104,18 +104,20 @@ module.exports = grammar({
       $.identifier,
     ),
 
+    _import_name: $ => choice(
+      $.identifier,
+      seq($._import_name, '.', $.identifier)
+    ),
+
     groovy_import: $ => seq(
       'import',
       optional($.modifier),
-      field('import',
-          choice(
-            $.identifier,
-            $.dotted_identifier,
-            seq(choice($.identifier, $.dotted_identifier), '.*')
-          )
-      ),
+      field('import', alias($._import_name, $.qualified_name)),
       optional(
-        seq('as', field('import_alias', $.identifier))
+          choice(
+            seq('.', alias(token.immediate('*'), $.wildcard_import)),
+            seq('as', field('import_alias', $.identifier))
+          ),
       )
     ),
 
