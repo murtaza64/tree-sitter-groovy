@@ -2500,19 +2500,11 @@
     "named": true,
     "fields": {
       "import": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
-            "type": ".*",
-            "named": false
-          },
-          {
-            "type": "dotted_identifier",
-            "named": true
-          },
-          {
-            "type": "identifier",
+            "type": "qualified_name",
             "named": true
           }
         ]
@@ -2529,11 +2521,15 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "modifier",
+          "named": true
+        },
+        {
+          "type": "wildcard_import",
           "named": true
         }
       ]
@@ -2548,11 +2544,7 @@
       "required": true,
       "types": [
         {
-          "type": "dotted_identifier",
-          "named": true
-        },
-        {
-          "type": "identifier",
+          "type": "qualified_name",
           "named": true
         }
       ]
@@ -3648,6 +3640,21 @@
       "types": [
         {
           "type": "closure",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "qualified_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
           "named": true
         }
       ]
@@ -5087,10 +5094,6 @@
     "named": false
   },
   {
-    "type": ".*",
-    "named": false
-  },
-  {
     "type": "..",
     "named": false
   },
@@ -5457,6 +5460,10 @@
   {
     "type": "while",
     "named": false
+  },
+  {
+    "type": "wildcard_import",
+    "named": true
   },
   {
     "type": "{",
