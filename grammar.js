@@ -470,6 +470,7 @@ module.exports = grammar({
       field('key', choice(
         $.identifier,
         $.number_literal,
+        $.string,
         seq('(', $._expression, ')'), //TODO: strings without parens??
       )),
       ':',

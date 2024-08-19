@@ -6,6 +6,7 @@ def trailing = [a: 1, b: 2,]
 def num_key = [1: 2]
 def expr_key = [(var): 3]
 def nested = [a: "hello", c: [b: "world"]]
+def str_key = ["hello": false]
 ---
 (source_file
   (declaration
@@ -51,4 +52,10 @@ def nested = [a: "hello", c: [b: "world"]]
           (map_item
             key: (identifier)
             value: (string
-              (string_content))))))))
+              (string_content)))))))
+  (declaration
+    name: (identifier)
+    value: (map
+      (map_item
+        key: (string (string_content))
+        value: (boolean_literal)))))

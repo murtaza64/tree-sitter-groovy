@@ -3038,6 +3038,10 @@
                 "name": "number_literal"
               },
               {
+                "type": "SYMBOL",
+                "name": "string"
+              },
+              {
                 "type": "SEQ",
                 "members": [
                   {
