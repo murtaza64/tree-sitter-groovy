@@ -1,0 +1,27 @@
+==========
+Basic each loop
+==========
+['11','17','21'].each {
+  println("hello!" + it)
+}
+---
+(source_file
+  (juxt_function_call
+    function: (dotted_identifier
+      (list
+        (string 
+          (string_content))
+        (string 
+          (string_content))
+        (string 
+          (string_content)))
+      (identifier))
+    args: (argument_list
+      (closure
+        (function_call
+          function: (identifier)
+          args: (argument_list
+            (binary_op
+              (string
+                (string_content))
+              (identifier))))))))

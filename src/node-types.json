@@ -210,6 +210,10 @@
           "named": true
         },
         {
+          "type": "list",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -748,6 +752,10 @@
             "named": true
           },
           {
+            "type": "list",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           }
@@ -977,6 +985,10 @@
           },
           {
             "type": "index",
+            "named": true
+          },
+          {
+            "type": "list",
             "named": true
           },
           {
@@ -1367,6 +1379,10 @@
         },
         {
           "type": "index",
+          "named": true
+        },
+        {
+          "type": "list",
           "named": true
         },
         {
@@ -2133,6 +2149,10 @@
             "named": true
           },
           {
+            "type": "list",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           }
@@ -2194,6 +2214,10 @@
           },
           {
             "type": "index",
+            "named": true
+          },
+          {
+            "type": "list",
             "named": true
           },
           {
@@ -2293,6 +2317,10 @@
             "named": true
           },
           {
+            "type": "list",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
@@ -2365,6 +2393,10 @@
             "named": true
           },
           {
+            "type": "list",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
@@ -2421,6 +2453,10 @@
         },
         {
           "type": "index",
+          "named": true
+        },
+        {
+          "type": "list",
           "named": true
         },
         {
@@ -2995,6 +3031,10 @@
           "named": true
         },
         {
+          "type": "list",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         }
@@ -3183,6 +3223,10 @@
           },
           {
             "type": "index",
+            "named": true
+          },
+          {
+            "type": "list",
             "named": true
           },
           {
@@ -3519,6 +3563,10 @@
           },
           {
             "type": "index",
+            "named": true
+          },
+          {
+            "type": "list",
             "named": true
           },
           {
@@ -4607,6 +4655,10 @@
         },
         {
           "type": "index",
+          "named": true
+        },
+        {
+          "type": "list",
           "named": true
         },
         {
