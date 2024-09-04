@@ -128,7 +128,8 @@ module.exports = grammar({
       $.dotted_identifier,
       $.index,
       $.function_call,
-      $.string
+      $.string,
+      $.list
     )),
 
     annotation: $ => seq(
