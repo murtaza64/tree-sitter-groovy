@@ -82,3 +82,20 @@ pipeline {
                           (declaration
                             name: (identifier)
                             value: (identifier)))))))))))))))
+==========
+Jenkins-import underscore
+==========
+@Library('my-library') _
+
+pipeline {
+}
+---
+(source_file
+  (declaration
+    (annotation
+      (identifier)
+      (argument_list
+        (string
+          (string_content)))))
+  (pipeline
+    (closure)))

@@ -951,7 +951,7 @@
     "fields": {
       "name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -5307,6 +5307,10 @@
   },
   {
     "type": "^=",
+    "named": false
+  },
+  {
+    "type": "_",
     "named": false
   },
   {
