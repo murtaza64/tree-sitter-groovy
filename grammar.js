@@ -287,6 +287,7 @@ module.exports = grammar({
       optional($.access_modifier),
       repeat($.modifier),
       choice(
+        '_',
         seq(
           choice(field('type', $._type), 'def'),
           field('name', $.identifier),

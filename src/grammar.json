@@ -1893,6 +1893,10 @@
           "type": "CHOICE",
           "members": [
             {
+              "type": "STRING",
+              "value": "_"
+            },
+            {
               "type": "SEQ",
               "members": [
                 {
