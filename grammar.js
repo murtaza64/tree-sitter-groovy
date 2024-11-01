@@ -204,7 +204,7 @@ module.exports = grammar({
     boolean_literal: $ => choice('true', 'false'),
 
     class_definition: $ => seq(
-      optional($.annotation),
+      repeat($.annotation),
       optional($.access_modifier),
       repeat($.modifier),
       choice('@interface', 'interface', 'class'),
@@ -283,7 +283,7 @@ module.exports = grammar({
       /@[^@\s*]*/,
 
     declaration: $ => seq(
-      optional($.annotation),
+      repeat($.annotation),
       optional($.access_modifier),
       repeat($.modifier),
       choice(
@@ -400,7 +400,7 @@ module.exports = grammar({
     ),
 
     function_declaration: $ => prec(2, seq(
-      optional($.annotation),
+      repeat($.annotation),
       optional($.access_modifier),
       repeat($.modifier),
       field('type', choice($._type, 'def')),
@@ -409,7 +409,7 @@ module.exports = grammar({
     )),
 
     function_definition: $ => prec(3, seq(
-      optional($.annotation),
+      repeat($.annotation),
       optional($.access_modifier),
       repeat($.modifier),
       field('type', choice($._type, 'def')),

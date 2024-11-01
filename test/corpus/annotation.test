@@ -52,3 +52,22 @@ private @interface annotation {
     (access_modifier)
     name: (identifier)
     body: (closure)))
+==========
+Multiple annotations
+==========
+@annotation(withArgs)
+@annotation2
+static class f {
+}
+---
+(source_file
+  (class_definition
+    (annotation
+      (identifier)
+      (argument_list
+        (identifier)))
+    (annotation
+      (identifier))
+    (modifier)
+    name: (identifier)
+    body: (closure)))
