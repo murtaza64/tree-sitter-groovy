@@ -50,12 +50,15 @@ module.exports = grammar({
     _statement: $ => prec.left(PREC.STATEMENT, seq(
       optional($.label),
       choice(
+        $.comment,
+        $.groovy_doc,
         $.assertion,
         $.groovy_import,
         $.groovy_package,
         $.assignment,
         $.class_definition,
         $.interface_definition,
+        $.trait_definition,
         $.declaration,
         $.do_while_loop,
         $.for_in_loop,
@@ -225,6 +228,20 @@ module.exports = grammar({
       optional($.access_modifier),
       repeat($.modifier),
       choice('@interface', 'interface'),
+      field('name', $.identifier),
+      optional(field('generics', $.generic_parameters)),
+      optional(seq(
+        'extends',
+        field('superclass', $._prefix_expression),
+      )),
+      field('body', $.closure),
+    ),
+
+    trait_definition: $ => seq(
+      repeat($.annotation),
+      optional($.access_modifier),
+      repeat($.modifier),
+      choice('trait'),
       field('name', $.identifier),
       optional(field('generics', $.generic_parameters)),
       optional(seq(
