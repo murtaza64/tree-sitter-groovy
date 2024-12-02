@@ -219,6 +219,12 @@ module.exports = grammar({
       optional(seq(
         'extends',
         field('superclass', $._prefix_expression),
+        repeat(seq(',', field('superclass', $._prefix_expression)))
+      )),
+      optional(seq(
+        'implements',
+        field('interface', $._prefix_expression),
+        repeat(seq(',', field('interface', $._prefix_expression)))
       )),
       field('body', $.closure),
     ),
@@ -233,6 +239,7 @@ module.exports = grammar({
       optional(seq(
         'extends',
         field('superclass', $._prefix_expression),
+        repeat(seq(',', field('superclass', $._prefix_expression)))
       )),
       field('body', $.closure),
     ),
@@ -247,6 +254,7 @@ module.exports = grammar({
       optional(seq(
         'extends',
         field('superclass', $._prefix_expression),
+        repeat(seq(',', field('superclass', $._prefix_expression)))
       )),
       field('body', $.closure),
     ),
