@@ -37,7 +37,8 @@ def str_key = ["hello": false]
     name: (identifier)
     value: (map
       (map_item
-        key: (identifier)
+        key: (parenthesized_expression
+          (identifier))
         value: (number_literal))))
   (declaration
     name: (identifier)

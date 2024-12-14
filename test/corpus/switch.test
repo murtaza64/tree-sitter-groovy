@@ -13,7 +13,8 @@ switch(x) {
 ---
 (source_file
   (switch_statement
-    value: (identifier)
+    value: (parenthesized_expression
+      (identifier))
     body: (switch_block
       (case
         value: (number_literal)

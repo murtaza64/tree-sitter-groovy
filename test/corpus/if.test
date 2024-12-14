@@ -7,9 +7,10 @@ if(x == y) {
 ---
 (source_file
   (if_statement
-    condition: (binary_op
-      (identifier)
-      (identifier))
+    condition: (parenthesized_expression
+      (binary_op
+        (identifier)
+        (identifier)))
     body: (closure
       (function_call
         function: (identifier)
@@ -29,14 +30,16 @@ if(a) {
 ---
 (source_file
   (if_statement
-    condition: (identifier)
+    condition: (parenthesized_expression
+      (identifier))
     body: (closure
       (function_call
         function: (identifier)
         args: (argument_list
           (identifier))))
     else_body: (if_statement
-      condition: (identifier)
+      condition: (parenthesized_expression
+        (identifier))
       body: (closure
         (function_call
           function: (identifier)
@@ -53,7 +56,8 @@ if (x) println(x) else println(y)
 ---
 (source_file
   (if_statement
-    condition: (identifier)
+    condition: (parenthesized_expression
+      (identifier))
     body: (function_call
       function: (identifier)
       args: (argument_list
