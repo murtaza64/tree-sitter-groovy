@@ -301,6 +301,7 @@ module.exports = grammar({
     ),
 
     _expression: $ => choice(
+      $.parenthesized_expression,
       $.access_op,
       $.binary_op,
       $.boolean_literal,
@@ -318,8 +319,10 @@ module.exports = grammar({
       $.string,
       $.ternary_op,
       $.unary_op,
-      seq('(', $._expression, ')'),
     ),
+
+    parenthesized_expression: ($) =>
+      prec(PREC.PRIORITY, seq("(", $._expression, ")")),
 
     do_while_loop: $ => seq(
       'do',
@@ -328,9 +331,7 @@ module.exports = grammar({
         $.closure
       )),
       'while',
-      '(',
-      field('condition', $._expression),
-      ')',
+      field('condition', $.parenthesized_expression),
     ),
 
     for_parameters: $ => seq (
@@ -426,9 +427,7 @@ module.exports = grammar({
 
     if_statement: $ => prec.left(seq(
       'if',
-      '(',
-      field('condition', $._expression),
-      ')',
+      field('condition', $.parenthesized_expression),
       field('body', choice(
         $._statement,
         $.closure,
@@ -473,7 +472,7 @@ module.exports = grammar({
         $.identifier,
         $.number_literal,
         $.string,
-        seq('(', $._expression, ')'), //TODO: strings without parens??
+        $.parenthesized_expression, //TODO: strings without parens??
       )),
       ':',
       field('value', $._expression),
@@ -619,9 +618,7 @@ module.exports = grammar({
 
     switch_statement: $ => seq(
       'switch',
-      '(',
-      field('value', $._expression),
-      ')',
+      field('value', $.parenthesized_expression),
       field('body', $.switch_block),
     ),
 
@@ -729,9 +726,7 @@ module.exports = grammar({
 
     while_loop: $ => seq(
       'while',
-      '(',
-      field('condition', $._expression),
-      ')',
+      field('condition', $.parenthesized_expression),
       field('body', choice(
         $._statement,
         $.closure
