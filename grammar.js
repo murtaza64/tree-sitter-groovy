@@ -28,7 +28,7 @@ const list_of = (e) => seq(
 module.exports = grammar({
   name: 'groovy',
 
-  extras: $ => [/\s/, $.comment, $.groovy_doc],
+  // extras: $ => [/\s/, $.comment, $.groovy_doc],
 
   word: $ => $.identifier,
 
@@ -50,11 +50,15 @@ module.exports = grammar({
     _statement: $ => prec.left(PREC.STATEMENT, seq(
       optional($.label),
       choice(
+        $.comment,
+        $.groovy_doc,
         $.assertion,
         $.groovy_import,
         $.groovy_package,
         $.assignment,
         $.class_definition,
+        $.interface_definition,
+        $.trait_definition,
         $.declaration,
         $.do_while_loop,
         $.for_in_loop,
@@ -62,6 +66,7 @@ module.exports = grammar({
         $.function_call,
         $.function_declaration,
         $.function_definition,
+        $.constructor_declaration,
         $.if_statement,
         $.juxt_function_call,
         // $.pipeline_step_with_block,
@@ -129,7 +134,8 @@ module.exports = grammar({
       $.index,
       $.function_call,
       $.string,
-      $.list
+      $.list,
+      "this"
     )),
 
     annotation: $ => seq(
@@ -207,12 +213,48 @@ module.exports = grammar({
       repeat($.annotation),
       optional($.access_modifier),
       repeat($.modifier),
-      choice('@interface', 'interface', 'class'),
+      choice('class'),
       field('name', $.identifier),
       optional(field('generics', $.generic_parameters)),
       optional(seq(
         'extends',
         field('superclass', $._prefix_expression),
+        repeat(seq(',', field('superclass', $._prefix_expression)))
+      )),
+      optional(seq(
+        'implements',
+        field('interface', $._prefix_expression),
+        repeat(seq(',', field('interface', $._prefix_expression)))
+      )),
+      field('body', $.closure),
+    ),
+
+    interface_definition: $ => seq(
+      repeat($.annotation),
+      optional($.access_modifier),
+      repeat($.modifier),
+      choice('@interface', 'interface'),
+      field('name', $.identifier),
+      optional(field('generics', $.generic_parameters)),
+      optional(seq(
+        'extends',
+        field('superclass', $._prefix_expression),
+        repeat(seq(',', field('superclass', $._prefix_expression)))
+      )),
+      field('body', $.closure),
+    ),
+
+    trait_definition: $ => seq(
+      repeat($.annotation),
+      optional($.access_modifier),
+      repeat($.modifier),
+      choice('trait'),
+      field('name', $.identifier),
+      optional(field('generics', $.generic_parameters)),
+      optional(seq(
+        'extends',
+        field('superclass', $._prefix_expression),
+        repeat(seq(',', field('superclass', $._prefix_expression)))
       )),
       field('body', $.closure),
     ),
@@ -414,6 +456,15 @@ module.exports = grammar({
       optional($.access_modifier),
       repeat($.modifier),
       field('type', choice($._type, 'def')),
+      field('function', $.identifier),
+      field('parameters', $.parameter_list),
+      field('body', $.closure), //TODO: optional return
+    )),
+
+    constructor_declaration: $ => prec(3, seq(
+      repeat($.annotation),
+      optional($.access_modifier),
+      repeat($.modifier),
       field('function', $.identifier),
       field('parameters', $.parameter_list),
       field('body', $.closure), //TODO: optional return
