@@ -24,18 +24,20 @@ int y = (x + 3 < 2 ? 0 :
   (declaration
     type: (builtintype)
     name: (identifier)
-    value: (ternary_op
-      condition: (binary_op
-        (binary_op
-          (identifier)
-          (number_literal))
-        (number_literal))
-      then: (number_literal)
-      else: (ternary_op
+    value: (parenthesized_expression
+      (ternary_op
         condition: (binary_op
           (binary_op
             (identifier)
             (number_literal))
           (number_literal))
         then: (number_literal)
-        else: (number_literal)))))
+        else: (parenthesized_expression
+          (ternary_op
+            condition: (binary_op
+              (binary_op
+                (identifier)
+                (number_literal))
+              (number_literal))
+            then: (number_literal)
+            else: (number_literal)))))))

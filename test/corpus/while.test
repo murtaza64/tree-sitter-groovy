@@ -7,9 +7,10 @@ while (x < 5) {
 ---
 (source_file
   (while_loop
-    condition: (binary_op
-      (identifier)
-      (number_literal))
+    condition: (parenthesized_expression
+      (binary_op
+        (identifier)
+        (number_literal)))
     body: (closure
       (function_call
         function: (identifier)
@@ -31,6 +32,7 @@ do {
         args: (argument_list
           (increment_op
             (identifier)))))
-    condition: (binary_op
-      (identifier)
-      (number_literal))))
+    condition: (parenthesized_expression
+      (binary_op
+        (identifier)
+        (number_literal)))))
