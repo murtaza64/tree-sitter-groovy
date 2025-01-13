@@ -9,11 +9,11 @@ Basic each loop
   (juxt_function_call
     function: (dotted_identifier
       (list
-        (string 
+        (string
           (string_content))
-        (string 
+        (string
           (string_content))
-        (string 
+        (string
           (string_content)))
       (identifier))
     args: (argument_list
@@ -25,3 +25,21 @@ Basic each loop
               (string
                 (string_content))
               (identifier))))))))
+==========
+Each loop on range syntax
+==========
+(1..<5).each{println it}
+---
+(source_file
+  (juxt_function_call
+    function: (dotted_identifier
+      (parenthesized_expression
+        (binary_op
+          (number_literal)
+          (number_literal)))
+      (identifier))
+    args: (argument_list
+      (closure
+        (declaration
+          type: (identifier)
+          name: (identifier))))))
