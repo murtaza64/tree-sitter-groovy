@@ -33,7 +33,8 @@ module.exports = grammar({
   word: $ => $.identifier,
 
   conflicts: $ => [
-    [$._juxt_function_name, $._type] //TODO: dynamic precedence, heuristics? eg capital letter
+    [$._juxt_function_name, $._type],
+    [$._juxt_function_name, $._type, $._expression] //TODO: dynamic precedence, heuristics? eg capital letter
   ],
 
   rules: {
@@ -99,7 +100,7 @@ module.exports = grammar({
       ),
 
     dotted_identifier: $ => seq(
-      $._prefix_expression,
+      $._primary_expression,
       '.',
       $.identifier,
     ),
@@ -123,27 +124,18 @@ module.exports = grammar({
 
     groovy_package: $ => seq('package', alias($._import_name, $.qualified_name)),
 
-    _prefix_expression: $ => prec.left(1, choice(
-      $.identifier,
-      $.dotted_identifier,
-      $.index,
-      $.function_call,
-      $.string,
-      $.list
-    )),
-
-    annotation: $ => seq(
+    annotation: $ => prec.right(seq(
       '@',
       alias(token.immediate(IDENTIFIER_REGEX), $.identifier),
       optional($.argument_list),
-    ),
+    )),
 
     assertion: $ => seq('assert', $._expression),
 
     // TODO: multi assignment (String x, int y) = [1, 3]
     assignment: $ => prec.left(-1, choice( //??? is -1 ok here? (fixes conflict with expression for ++)
       seq(
-        $._prefix_expression,
+        $._primary_expression,
         choice('=', '**=', '*=', '/=', '%=', '+=', '-=',
           '<<=', '>>=', '>>>=', '&=', '^=', '|=', '?='),
         $._expression
@@ -152,10 +144,10 @@ module.exports = grammar({
     )),
 
     increment_op: $ => choice(
-      prec.left(PREC.UNARY, seq($._prefix_expression, "++")),
-      prec.left(PREC.UNARY, seq($._prefix_expression, "--")),
-      prec.right(PREC.UNARY, seq("++", $._prefix_expression)),
-      prec.right(PREC.UNARY, seq("--", $._prefix_expression)),
+      prec.left(PREC.UNARY, seq($._primary_expression, "++")),
+      prec.left(PREC.UNARY, seq($._primary_expression, "--")),
+      prec.right(PREC.UNARY, seq("++", $._primary_expression)),
+      prec.right(PREC.UNARY, seq("--", $._primary_expression)),
     ),
 
     binary_op: ($) =>
@@ -212,7 +204,7 @@ module.exports = grammar({
       optional(field('generics', $.generic_parameters)),
       optional(seq(
         'extends',
-        field('superclass', $._prefix_expression),
+        field('superclass', $._primary_expression),
       )),
       field('body', $.closure),
     ),
@@ -300,29 +292,33 @@ module.exports = grammar({
       )
     ),
 
+    parenthesized_expression: ($) =>
+      prec(PREC.PRIORITY, seq("(", $._expression, ")")),
+
     _expression: $ => choice(
-      $.parenthesized_expression,
-      $.access_op,
+      $._primary_expression,
+      $.increment_op,
       $.binary_op,
-      $.boolean_literal,
+      $.ternary_op,
+      $.unary_op,
+      $.access_op,
       $.closure,
+      alias("null", $.null),
+    ),
+
+    _primary_expression: $ => prec.left(1, choice(
+      $.parenthesized_expression,
+      "this",
+      $.number_literal,
+      $.boolean_literal,
+      $.string,
       $.dotted_identifier,
       $.function_call,
       $.identifier,
-      "this",
-      $.increment_op,
       $.index,
-      $.number_literal,
       $.list,
       $.map,
-      alias("null", $.null),
-      $.string,
-      $.ternary_op,
-      $.unary_op,
-    ),
-
-    parenthesized_expression: ($) =>
-      prec(PREC.PRIORITY, seq("(", $._expression, ")")),
+    )),
 
     do_while_loop: $ => seq(
       'do',
@@ -373,7 +369,7 @@ module.exports = grammar({
 
     function_call: $ =>
       prec.left(2, seq( //higher precedence than juxt_function_call
-        field('function', $._prefix_expression),
+        field('function', $._primary_expression),
         field('args', $.argument_list),
       )),
 
@@ -438,7 +434,7 @@ module.exports = grammar({
     )),
 
     index: $ => prec(PREC.TOP, seq(
-      $._prefix_expression,
+      $._primary_expression,
       '[',
       $._expression,
       ']',
@@ -450,7 +446,7 @@ module.exports = grammar({
         field('args', alias($._juxt_argument_list, $.argument_list)),
       )),
 
-    _juxt_function_name: $ => prec.left(1, $._prefix_expression),
+    _juxt_function_name: $ => prec.left(1, $._primary_expression),
 
     _juxt_argument_list: $ => prec.left(seq(
       choice($.map_item, $._expression),
@@ -472,7 +468,7 @@ module.exports = grammar({
         $.identifier,
         $.number_literal,
         $.string,
-        $.parenthesized_expression, //TODO: strings without parens??
+        $.parenthesized_expression,
       )),
       ':',
       field('value', $._expression),
@@ -508,7 +504,7 @@ module.exports = grammar({
     ),
 
     // pipeline_step_with_block: $ => seq(
-    //   $._prefix_expression,
+    //   $._primary_expression,
     //   $.closure,
     // ),
 
@@ -687,7 +683,7 @@ module.exports = grammar({
 
     _type: $ => prec.left(1, choice(
       $.builtintype,
-      $._prefix_expression,
+      $._primary_expression,
       $.array_type, //TODO: int[5]?
       $.type_with_generics,
     )),
