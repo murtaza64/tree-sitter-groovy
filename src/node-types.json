@@ -2133,6 +2133,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "dotted_identifier",
             "named": true
           },

@@ -156,3 +156,16 @@ int foo() {
     body: (closure
       (return
         (number_literal)))))
+==========
+Immediately invoked closure
+==========
+({return "each"}())
+---
+(source_file
+  (parenthesized_expression
+    (function_call
+      function: (closure
+        (return
+          (string
+            (string_content))))
+      args: (argument_list))))

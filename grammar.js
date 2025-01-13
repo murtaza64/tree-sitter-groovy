@@ -369,7 +369,7 @@ module.exports = grammar({
 
     function_call: $ =>
       prec.left(2, seq( //higher precedence than juxt_function_call
-        field('function', $._primary_expression),
+        field('function', choice($._primary_expression, $.closure)),
         field('args', $.argument_list),
       )),
 
