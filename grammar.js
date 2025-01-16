@@ -409,14 +409,16 @@ module.exports = grammar({
       $.function_call,
     ),
 
-    argument_list: $ =>
-      prec(1, seq(
+    argument_list: $ => prec.right(1, seq(
+      prec.left(seq(
         '(',
         optional(
           list_of(choice($.map_item, $._expression)),
         ),
-        ')',
+        ')'
       )),
+      optional($.closure),
+    )),
 
     _param_list: $ => prec(1, list_of($.parameter)),
 
