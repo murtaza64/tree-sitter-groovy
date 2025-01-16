@@ -18,7 +18,11 @@ const PREC = {
   STATEMENT: 17
 }
 
-const IDENTIFIER_REGEX = /[$_a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE][$_0-9a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE]*/
+const regexp_or = (regexes) => new RegExp(regexes.map(r =>'(?:('+r.source+'))').join('|'))
+
+const VARIABLE_REGEX = /[$_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE][$_0-9a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE]*/
+const CONSTANT_REGEX = /[_A-Z][$_0-9A-Z]*/
+const IDENTIFIER_REGEX = regexp_or([VARIABLE_REGEX, CONSTANT_REGEX])
 const TYPE_REGEX =  /[A-Z][$_0-9a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE]*/
 
 const list_of = (e) => seq(
@@ -108,13 +112,15 @@ module.exports = grammar({
         '.',
         choice(
           $.identifier,
+          $._type_identifier,
           $.parenthesized_expression,
         ))),
       )),
 
     _import_name: $ => choice(
       $.identifier,
-      seq($._import_name, '.', $.identifier)
+      $._type_identifier,
+      seq($._import_name, '.', choice($.identifier, $._type_identifier)),
     ),
 
     groovy_import: $ => seq(
@@ -122,10 +128,10 @@ module.exports = grammar({
       optional($.modifier),
       field('import', alias($._import_name, $.qualified_name)),
       optional(
-          choice(
-            seq('.', alias(token.immediate('*'), $.wildcard_import)),
-            seq('as', field('import_alias', $.identifier))
-          ),
+        choice(
+          seq('.', alias(token.immediate('*'), $.wildcard_import)),
+          seq('as', field('import_alias', choice($.identifier, $._type_identifier))),
+        ),
       )
     ),
 
@@ -133,7 +139,7 @@ module.exports = grammar({
 
     annotation: $ => prec.right(seq(
       '@',
-      alias(token.immediate(IDENTIFIER_REGEX), $.identifier),
+      alias(token.immediate(regexp_or([IDENTIFIER_REGEX, TYPE_REGEX])), $.identifier),
       optional($.argument_list),
     )),
 
@@ -206,7 +212,7 @@ module.exports = grammar({
       optional($.access_modifier),
       repeat($.modifier),
       choice('@interface', 'interface', 'class'),
-      field('name', $.identifier),
+      field('name', choice($.identifier, $._type_identifier)),
       optional(field('generics', $.generic_parameters)),
       optional(seq(
         'extends',
@@ -453,9 +459,8 @@ module.exports = grammar({
       field('body', $.closure), //TODO: optional return
     )),
 
-    // _type_identifier: $ => TYPE_REGEX,
-    _type_identifier: $ => alias(TYPE_REGEX, $.identifier),
     identifier: $ => IDENTIFIER_REGEX,
+    _type_identifier: $ => alias(TYPE_REGEX, $.identifier),
 
     // identifier: $ => seq(
     //   choice($._letter, '$', '_'),
@@ -524,6 +529,7 @@ module.exports = grammar({
     map_item: $ => seq(
       field('key', choice(
         $.identifier,
+        $._type_identifier,
         $.number_literal,
         $.string,
         $.parenthesized_expression,
