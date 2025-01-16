@@ -426,7 +426,7 @@ module.exports = grammar({
     )),
 
     parameter: $ => prec(-1, seq(
-      optional(field('type', $._type)),
+      optional(field('type', choice($._type, 'def'))),
       field('name', $.identifier),
       optional(seq('=', field('value', $._expression))),
     )),
