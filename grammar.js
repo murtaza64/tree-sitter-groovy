@@ -102,14 +102,15 @@ module.exports = grammar({
       ),
 
     dotted_identifier: $ =>
-      seq(
-        $._primary_expression,
+      prec.left(seq(
+        choice($._primary_expression, $._type_identifier),
+        repeat1(seq(
         '.',
         choice(
           $.identifier,
           $.parenthesized_expression,
-        )
-      ),
+        ))),
+      )),
 
     _import_name: $ => choice(
       $.identifier,
