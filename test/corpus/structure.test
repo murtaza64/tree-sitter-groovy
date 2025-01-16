@@ -40,9 +40,10 @@ pipeline {
 (source_file
   (pipeline
     (closure
-      (declaration
-        type: (identifier)
-        name: (identifier))
+      (juxt_function_call
+        function: (identifier)
+        args: (argument_list
+          (identifier)))
       (juxt_function_call
         function: (identifier)
         args: (argument_list
@@ -57,9 +58,10 @@ pipeline {
                 function: (identifier)
                 args: (argument_list
                   (closure
-                    (declaration
-                      type: (identifier)
-                      name: (identifier))
+                    (juxt_function_call
+                      function: (identifier)
+                      args: (argument_list
+                        (identifier)))
                     (juxt_function_call
                       function: (identifier)
                       args: (argument_list
