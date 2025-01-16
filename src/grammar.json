@@ -3036,7 +3036,7 @@
     },
     "_juxt_argument_list": {
       "type": "PREC_LEFT",
-      "value": 0,
+      "value": 2,
       "content": {
         "type": "SEQ",
         "members": [
@@ -3049,7 +3049,76 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "_expression"
+                "name": "increment_op"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "binary_op"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "ternary_op"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "unary_op"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "access_op"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "closure"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "null"
+                },
+                "named": true,
+                "value": "null"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "number_literal"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "boolean_literal"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "string"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "list"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "map"
+              },
+              {
+                "type": "STRING",
+                "value": "this"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "function_call"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "dotted_identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "index"
               }
             ]
           },
@@ -3071,7 +3140,76 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "_expression"
+                      "name": "increment_op"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "binary_op"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "ternary_op"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "unary_op"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "access_op"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "closure"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "STRING",
+                        "value": "null"
+                      },
+                      "named": true,
+                      "value": "null"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "number_literal"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "boolean_literal"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "string"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "list"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "map"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "this"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "function_call"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "dotted_identifier"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "identifier"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "index"
                     }
                   ]
                 }
@@ -4361,12 +4499,16 @@
   ],
   "conflicts": [
     [
-      "declaration",
-      "_juxtable_expression"
+      "_callable_expression",
+      "juxt_function_call"
     ],
     [
       "_callable_expression",
-      "juxt_function_call"
+      "_juxt_argument_list"
+    ],
+    [
+      "_juxtable_expression",
+      "_juxt_argument_list"
     ]
   ],
   "precedences": [],
