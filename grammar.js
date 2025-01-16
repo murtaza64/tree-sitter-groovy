@@ -35,6 +35,8 @@ module.exports = grammar({
 
   conflicts: $ => [ //TODO: dynamic precedence, heuristics? eg capital letter
     [$._callable_expression, $.juxt_function_call],
+    [$._callable_expression, $._juxt_argument_list],
+    [$._juxtable_expression, $._juxt_argument_list],
   ],
 
   rules: {
@@ -481,12 +483,32 @@ module.exports = grammar({
       field('args', alias($._juxt_argument_list, $.argument_list)),
     ),
 
-    _juxt_argument_list: $ => prec.left(seq(
-      choice($.map_item, $._expression),
-      repeat(
-        seq(',', choice($.map_item, $._expression)),
+    _juxt_argument_list: $ => {
+      const juxt_argument = choice(
+        $.map_item,
+        $.increment_op,
+        $.binary_op,
+        $.ternary_op,
+        $.unary_op,
+        $.access_op,
+        $.closure,
+        alias("null", $.null),
+        $.number_literal,
+        $.boolean_literal,
+        $.string,
+        $.list,
+        $.map,
+        "this",
+        $.function_call,
+        $.dotted_identifier,
+        $.identifier,
+        $.index,
       )
-    )),
+
+      return prec.left(2,
+        seq(juxt_argument, repeat(seq(',', juxt_argument)))
+      )
+    },
 
     list: $ => prec(1, seq(
       '[',
