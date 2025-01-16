@@ -1,10 +1,9 @@
 ==========
-Nested juxtaposed function calls
+Nested pipeline style function calls
 ==========
 import static docker.DockerImage.Platform
 
 Map<String, Closure> prepareSteps(def steps, def agentMap, def labelPrefix='') {
-
   Platform.ALL.collectEntries { Platform platform ->
     [(labelPrefix + platform.label): {
       node(agentMap[platform]) {
