@@ -52,38 +52,38 @@ pipeline {
               function: (identifier)
               args: (argument_list
                 (string
-                  (string_content))))
-            (closure
-              (juxt_function_call
-                function: (identifier)
-                args: (argument_list
-                  (closure
-                    (juxt_function_call
-                      function: (identifier)
-                      args: (argument_list
-                        (identifier)))
-                    (juxt_function_call
-                      function: (identifier)
-                      args: (argument_list
-                        (string
-                          (string_content))))))))
+                  (string_content))
+                (closure
+                  (juxt_function_call
+                    function: (identifier)
+                    args: (argument_list
+                      (closure
+                        (juxt_function_call
+                          function: (identifier)
+                          args: (argument_list
+                            (identifier)))
+                        (juxt_function_call
+                          function: (identifier)
+                          args: (argument_list
+                            (string
+                              (string_content))))))))))
             (function_call
               function: (identifier)
               args: (argument_list
                 (string
-                  (string_content))))
-            (closure
-              (juxt_function_call
-                function: (identifier)
-                args: (argument_list
-                  (closure
-                    (juxt_function_call
-                      function: (identifier)
-                      args: (argument_list
-                        (closure
-                          (declaration
-                            name: (identifier)
-                            value: (identifier)))))))))))))))
+                  (string_content))
+                (closure
+                  (juxt_function_call
+                    function: (identifier)
+                    args: (argument_list
+                      (closure
+                        (juxt_function_call
+                          function: (identifier)
+                          args: (argument_list
+                            (closure
+                              (declaration
+                                name: (identifier)
+                                value: (identifier)))))))))))))))))
 ==========
 Jenkins-import underscore
 ==========
