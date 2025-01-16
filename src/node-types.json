@@ -3266,6 +3266,10 @@
             "named": true
           },
           {
+            "type": "def",
+            "named": false
+          },
+          {
             "type": "identifier",
             "named": true
           },
