@@ -330,7 +330,7 @@
     },
     "dotted_identifier": {
       "type": "PREC_LEFT",
-      "value": 0,
+      "value": 1,
       "content": {
         "type": "SEQ",
         "members": [
@@ -2221,6 +2221,10 @@
         {
           "type": "SYMBOL",
           "name": "_juxtable_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_type_identifier"
         }
       ]
     },
