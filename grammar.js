@@ -106,7 +106,7 @@ module.exports = grammar({
       ),
 
     dotted_identifier: $ =>
-      prec.left(seq(
+      prec.left(1, seq(
         choice($._primary_expression, $._type_identifier),
         repeat1(seq(
         '.',
@@ -347,6 +347,7 @@ module.exports = grammar({
       $.function_call,
       $.parenthesized_expression,
       $._juxtable_expression,
+      $._type_identifier,
     ),
 
     _juxtable_expression: $ => choice(
