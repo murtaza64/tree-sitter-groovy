@@ -99,11 +99,15 @@ module.exports = grammar({
         ),
       ),
 
-    dotted_identifier: $ => seq(
-      $._primary_expression,
-      '.',
-      $.identifier,
-    ),
+    dotted_identifier: $ =>
+      seq(
+        $._primary_expression,
+        '.',
+        choice(
+          $.identifier,
+          $.parenthesized_expression,
+        )
+      ),
 
     _import_name: $ => choice(
       $.identifier,
@@ -293,7 +297,11 @@ module.exports = grammar({
     ),
 
     parenthesized_expression: ($) =>
-      prec(PREC.PRIORITY, seq("(", $._expression, ")")),
+      prec(PREC.PRIORITY, choice(
+        seq("(",
+          choice($._expression, $._immediately_invoked_closure),
+          ")"),
+      )),
 
     _expression: $ => choice(
       $._primary_expression,
@@ -313,11 +321,11 @@ module.exports = grammar({
       $.boolean_literal,
       $.string,
       $.dotted_identifier,
-      $.function_call,
       $.identifier,
       $.index,
       $.list,
       $.map,
+      $.function_call,
     )),
 
     do_while_loop: $ => seq(
@@ -367,11 +375,18 @@ module.exports = grammar({
       )),
     )),
 
-    function_call: $ =>
-      prec.left(2, seq( //higher precedence than juxt_function_call
-        field('function', choice($._primary_expression, $.closure)),
-        field('args', $.argument_list),
-      )),
+    function_call: $ => prec.left(2, seq( //higher precedence than juxt_function_call
+      field('function', $._primary_expression),
+      field('args', $.argument_list),
+    )),
+
+    __immediately_invoked_closure: $ => prec.left(2,
+      seq(field('function', $.closure), field('args', $.argument_list))
+    ),
+    _immediately_invoked_closure: $ => alias(
+      $.__immediately_invoked_closure,
+      $.function_call,
+    ),
 
     argument_list: $ =>
       prec(1, seq(

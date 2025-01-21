@@ -169,3 +169,20 @@ Immediately invoked closure
           (string
             (string_content))))
       args: (argument_list))))
+==========
+NOT an immediately invoked closure
+==========
+def friend =
+{return "hysm"}(1..2)
+---
+(source_file
+  (declaration
+    name: (identifier)
+    value: (closure
+      (return
+        (string
+          (string_content)))))
+  (parenthesized_expression
+    (binary_op
+      (number_literal)
+      (number_literal))))
