@@ -12,7 +12,7 @@ String x = "hello"
 ==========
 Generic type
 ==========
-Map<string, int> m
+Map<String, int> m
 ---
 (source_file
   (declaration
