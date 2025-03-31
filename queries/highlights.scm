@@ -10,6 +10,7 @@
   "default"
   "else"
   "extends"
+  "implements"
   "finally"
   "for"
   "if"
@@ -99,6 +100,7 @@
 (function_declaration type: (identifier) @type)
 (class_definition name: (identifier) @type)
 (class_definition superclass: (identifier) @type)
+(class_definition interface: (identifier) @type)
 (generic_param superclass: (identifier) @type)
 
 (type_with_generics (identifier) @type)

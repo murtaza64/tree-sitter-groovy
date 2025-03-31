@@ -1589,19 +1589,15 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
+              "type": "CHOICE",
               "members": [
                 {
-                  "type": "STRING",
-                  "value": "extends"
+                  "type": "SYMBOL",
+                  "name": "_superclass"
                 },
                 {
-                  "type": "FIELD",
-                  "name": "superclass",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_primary_expression"
-                  }
+                  "type": "SYMBOL",
+                  "name": "_implementation"
                 }
               ]
             },
@@ -1619,6 +1615,60 @@
           }
         }
       ]
+    },
+    "_superclass": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "extends"
+        },
+        {
+          "type": "FIELD",
+          "name": "superclass",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_primary_expression"
+          }
+        }
+      ]
+    },
+    "_implementation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "implements"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_interface"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_interface"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_interface": {
+      "type": "FIELD",
+      "name": "interface",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_primary_expression"
+      }
     },
     "generic_parameters": {
       "type": "SEQ",
@@ -4608,5 +4658,6 @@
   "precedences": [],
   "externals": [],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }

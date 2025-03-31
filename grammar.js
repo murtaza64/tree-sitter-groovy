@@ -18,12 +18,12 @@ const PREC = {
   STATEMENT: 17
 }
 
-const regexp_or = (regexes) => new RegExp(regexes.map(r =>'(?:('+r.source+'))').join('|'))
+const regexp_or = (regexes) => new RegExp(regexes.map(r => '(?:(' + r.source + '))').join('|'))
 
 const VARIABLE_REGEX = /[$_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE][$_0-9a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE]*/
 const CONSTANT_REGEX = /[_A-Z][$_0-9A-Z]*/
 const IDENTIFIER_REGEX = regexp_or([VARIABLE_REGEX, CONSTANT_REGEX])
-const TYPE_REGEX =  /[A-Z][$_0-9a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE]*/
+const TYPE_REGEX = /[A-Z][$_0-9a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00F8\u0100-\uFFFE]*/
 
 const list_of = (e) => seq(
   repeat(prec.left(seq(e, ','))),
@@ -109,12 +109,12 @@ module.exports = grammar({
       prec.left(1, seq(
         choice($._primary_expression, $._type_identifier),
         repeat1(seq(
-        '.',
-        choice(
-          $.identifier,
-          $._type_identifier,
-          $.parenthesized_expression,
-        ))),
+          '.',
+          choice(
+            $.identifier,
+            $._type_identifier,
+            $.parenthesized_expression,
+          ))),
       )),
 
     _import_name: $ => choice(
@@ -214,12 +214,17 @@ module.exports = grammar({
       choice('@interface', 'interface', 'class'),
       field('name', choice($.identifier, $._type_identifier)),
       optional(field('generics', $.generic_parameters)),
-      optional(seq(
-        'extends',
-        field('superclass', $._primary_expression),
-      )),
+      optional(choice($._superclass, $._implementation)),
       field('body', $.closure),
     ),
+
+    _superclass: ($) =>
+      seq("extends", field("superclass", $._primary_expression)),
+
+    _implementation: ($) =>
+      seq("implements", $._interface, repeat(seq(",", $._interface))),
+
+    _interface: ($) => field("interface", $._primary_expression),
 
     generic_parameters: $ => seq(
       '<',
@@ -254,8 +259,8 @@ module.exports = grammar({
       seq(
         '/**',
         // optional(
-          token.immediate(/[*\n\s]+/),
-          alias(token.immediate(/[^\n\.]+[\.]?/), $.first_line),
+        token.immediate(/[*\n\s]+/),
+        alias(token.immediate(/[^\n\.]+[\.]?/), $.first_line),
         // ),
         repeat(
           choice(
@@ -270,12 +275,12 @@ module.exports = grammar({
         '*/'
       ),
 
-    groovy_doc_param: $ => seq (
+    groovy_doc_param: $ => seq(
       '@param',
       $.identifier
     ),
 
-    groovy_doc_throws: $ => seq (
+    groovy_doc_throws: $ => seq(
       '@throws',
       $.identifier
     ),
@@ -366,7 +371,7 @@ module.exports = grammar({
       field('condition', $.parenthesized_expression),
     ),
 
-    for_parameters: $ => seq (
+    for_parameters: $ => seq(
       '(',
       field('initializer', optional(seq(
         $.declaration,
