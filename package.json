@@ -1,7 +1,7 @@
 {
-  "name": "tree-sitter-groovy",
+  "name": "@vokturz/tree-sitter-groovy",
   "version": "0.0.1",
-  "description": "groovy grammar for tree-sitter",
+  "description": "A Tree-sitter Grammar for Groovy, forked from @murtaza64/tree-sitter-groovy. Only for CodeGPT internals",
   "main": "bindings/node",
   "types": "bindings/node",
   "tree-sitter": [
