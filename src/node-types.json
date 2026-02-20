@@ -967,6 +967,7 @@
   {
     "type": "comment",
     "named": true,
+    "extra": true,
     "fields": {}
   },
   {
@@ -2317,6 +2318,7 @@
   {
     "type": "groovy_doc",
     "named": true,
+    "extra": true,
     "fields": {},
     "children": {
       "multiple": true,

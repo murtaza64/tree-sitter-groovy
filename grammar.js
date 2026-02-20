@@ -246,7 +246,8 @@ module.exports = grammar({
 
     comment: $ => choice(
       /\/\/[^\n]*/,
-      seq('/*', /[^*]*\*+([^/*][^*]*\*+)*\//), // not sure why comments work better as seq
+      token(/\/\*\*+\//),                             // pure-star comments: /****/
+      seq('/*', /[^*]*\*+([^/*][^*]*\*+)*\//),       // regular block comments
     ),
 
     groovy_doc: $ =>

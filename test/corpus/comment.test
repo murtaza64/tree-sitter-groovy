@@ -54,6 +54,13 @@ x = hi
     (identifier)
     (identifier)))
 ==========
+Pure star block comment
+==========
+/********/
+---
+(source_file
+  (comment))
+==========
 groovydoc with @TEXT
 ==========
 /**
