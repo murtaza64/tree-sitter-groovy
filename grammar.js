@@ -33,7 +33,7 @@ const list_of = (e) => seq(
 module.exports = grammar({
   name: 'groovy',
 
-  extras: $ => [/\s/, $.comment, $.groovy_doc],
+  extras: $ => [/\s/, token(prec(2, /\\\n/)), $.comment, $.groovy_doc],
 
   word: $ => $.identifier,
 
@@ -46,8 +46,7 @@ module.exports = grammar({
   rules: {
     source_file: $ => seq(
       optional($.shebang),
-      repeat($._statement),
-      optional($.pipeline)
+      repeat(choice($._statement, $.pipeline)),
     ),
 
     shebang: $ => seq(
@@ -664,7 +663,7 @@ module.exports = grammar({
     escape_sequence: _ => token(prec(1, seq(
       '\\',
       choice(
-        /[$bfnrst\\'"\n]/,
+        /[$bfnrst\\'"]/,
         /u[0-9a-fA-F]{4}/,
       ),
     ))),
