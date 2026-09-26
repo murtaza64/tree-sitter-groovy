@@ -89,7 +89,8 @@
 
 (map (map_item key: (identifier) @variable.parameter))
 
-(parameter type: (identifier) @type name: (identifier) @variable.parameter)
+(parameter type: (identifier) @type)
+(parameter name: (identifier) @variable.parameter)
 (generic_param name: (identifier) @variable.parameter)
 
 (declaration type: (identifier) @type)
