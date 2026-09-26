@@ -91,7 +91,7 @@
 
 (parameter type: (identifier) @type)
 (parameter name: (identifier) @variable.parameter)
-(generic_param name: (identifier) @variable.parameter)
+(generic_param name: (identifier) @type)
 
 (declaration type: (identifier) @type)
 (function_definition type: (identifier) @type)
