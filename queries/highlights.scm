@@ -52,7 +52,7 @@
   "public"
   "static"
   "synchronized"
-] @type.qualifier
+] @keyword.modifier
 
 (comment) @comment
 (shebang) @comment
