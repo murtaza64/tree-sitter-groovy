@@ -58,7 +58,7 @@
 (shebang) @comment
 
 (string) @string
-(string (escape_sequence) @operator)
+(string (escape_sequence) @string.escape)
 (string (interpolation ([ "$" ]) @operator))
 
 ("(") @punctuation.bracket
