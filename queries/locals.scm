@@ -1,5 +1,6 @@
 [
   (function_definition)
+  (closure)
 ] @local.scope
 (parameter name: (identifier) @local.definition.parameter)
 
