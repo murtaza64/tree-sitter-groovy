@@ -75,7 +75,7 @@
 (identifier) @variable
 
 ((identifier) @constant
-  (#match? @constant "^[A-Z][A-Z_]+"))
+  (#match? @constant "^[A-Z][A-Z_0-9]+$"))
 
 [ 
   "%" "*" "/" "+" "-" "<<" ">>" ">>>" ".." "..<" "<..<" "<.." "<"
