@@ -73,8 +73,6 @@
 
 (number_literal) @number
 (identifier) @variable
-((identifier) @variable.parameter
-  (#is? @variable.parameter "local.parameter"))
 
 ((identifier) @constant
   (#match? @constant "^[A-Z][A-Z_]+"))
