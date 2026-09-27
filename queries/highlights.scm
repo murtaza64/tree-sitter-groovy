@@ -6,12 +6,16 @@
   "package"
 ] @keyword
 
-"class" @keyword.type
+[
+  "class"
+  "interface"
+] @keyword.type
 
 [
   "!in"
   "as"
   "in"
+  "new"
 ] @keyword.operator
 
 [
@@ -33,6 +37,7 @@
 "import" @keyword.import
 
 [
+  "do"
   "for"
   "while"
   (break)
@@ -96,11 +101,23 @@
   ":"
   ","
   "."
+  ";"
 ] @punctuation.delimiter
 
 (number_literal) @number
 
 (identifier) @variable
+
+(declaration
+  "_" @variable)
+
+(access_op
+  [
+    "?."
+    "*."
+    ".@"
+  ]
+  (identifier) @variable.member .)
 
 ((identifier) @constant
   (#match? @constant "^[A-Z][A-Z_0-9]+$"))
@@ -108,9 +125,11 @@
 [
   "%"
   "*"
+  "**"
   "/"
   "+"
   "-"
+  "->"
   "<<"
   ">>"
   ">>>"
@@ -143,6 +162,7 @@
   "++"
   "--"
   "!"
+  "~"
 ] @operator
 
 (wildcard_import) @character.special
@@ -187,6 +207,12 @@
 (generic_param
   superclass: (identifier) @type)
 
+(array_type
+  (identifier) @type)
+
+(array_type
+  "[]" @punctuation.bracket)
+
 (type_with_generics
   (identifier) @type)
 
@@ -207,11 +233,33 @@
   ] @punctuation.bracket)
 
 ; TODO: Class literals with PascalCase
+(parameter
+  "=" @operator)
+
 (declaration
   "=" @operator)
 
 (assignment
-  "=" @operator)
+  [
+    "="
+    "**="
+    "*="
+    "/="
+    "%="
+    "+="
+    "-="
+    "<<="
+    ">>="
+    ">>>="
+    "&="
+    "^="
+    "|="
+    "?="
+  ] @operator)
+
+(access_op
+  ".&"
+  (identifier) @function .)
 
 (function_call
   function: (identifier) @function)
