@@ -111,6 +111,14 @@
 (declaration
   "_" @variable)
 
+(access_op
+  [
+    "?."
+    "*."
+    ".@"
+  ]
+  (identifier) @variable.member .)
+
 ((identifier) @constant
   (#match? @constant "^[A-Z][A-Z_0-9]+$"))
 
