@@ -244,6 +244,10 @@
     "?="
   ] @operator)
 
+(access_op
+  ".&"
+  (identifier) @function .)
+
 (function_call
   function: (identifier) @function)
 
