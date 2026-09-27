@@ -108,6 +108,7 @@
 [
   "%"
   "*"
+  "**"
   "/"
   "+"
   "-"
@@ -143,6 +144,7 @@
   "++"
   "--"
   "!"
+  "~"
 ] @operator
 
 (wildcard_import) @character.special
@@ -211,7 +213,22 @@
   "=" @operator)
 
 (assignment
-  "=" @operator)
+  [
+    "="
+    "**="
+    "*="
+    "/="
+    "%="
+    "+="
+    "-="
+    "<<="
+    ">>="
+    ">>>="
+    "&="
+    "^="
+    "|="
+    "?="
+  ] @operator)
 
 (function_call
   function: (identifier) @function)
