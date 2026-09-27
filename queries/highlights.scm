@@ -189,6 +189,12 @@
 (generic_param
   superclass: (identifier) @type)
 
+(array_type
+  (identifier) @type)
+
+(array_type
+  "[]" @punctuation.bracket)
+
 (type_with_generics
   (identifier) @type)
 
