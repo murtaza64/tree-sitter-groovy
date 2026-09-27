@@ -6,12 +6,16 @@
   "package"
 ] @keyword
 
-"class" @keyword.type
+[
+  "class"
+  "interface"
+] @keyword.type
 
 [
   "!in"
   "as"
   "in"
+  "new"
 ] @keyword.operator
 
 [
@@ -33,6 +37,7 @@
 "import" @keyword.import
 
 [
+  "do"
   "for"
   "while"
   (break)
