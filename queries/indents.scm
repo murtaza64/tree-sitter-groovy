@@ -11,10 +11,11 @@
 
 (closure "}" @indent.end)
 (argument_list ")" @indent.end)
+(parameter_list ")" @indent.end)
 (for_parameters ")" @indent.end)
 ((for_loop
   body: (_) @_body) @indent.begin
-  (#not-has-type? @_body closure))
+  (#not-kind-eq? @_body "closure"))
 ; TODO: while, try
 
 (list "]" @indent.end)
