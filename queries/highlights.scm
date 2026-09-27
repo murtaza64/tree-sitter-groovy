@@ -101,6 +101,7 @@
   ":"
   ","
   "."
+  ";"
 ] @punctuation.delimiter
 
 (number_literal) @number
