@@ -52,13 +52,13 @@
   "public"
   "static"
   "synchronized"
-] @type.qualifier
+] @keyword.modifier
 
 (comment) @comment
 (shebang) @comment
 
 (string) @string
-(string (escape_sequence) @operator)
+(string (escape_sequence) @string.escape)
 (string (interpolation ([ "$" ]) @operator))
 
 ("(") @punctuation.bracket
@@ -73,11 +73,9 @@
 
 (number_literal) @number
 (identifier) @variable
-((identifier) @variable.parameter
-  (#is? @variable.parameter "local.parameter"))
 
 ((identifier) @constant
-  (#match? @constant "^[A-Z][A-Z_]+"))
+  (#match? @constant "^[A-Z][A-Z_0-9]+$"))
 
 [ 
   "%" "*" "/" "+" "-" "<<" ">>" ">>>" ".." "..<" "<..<" "<.." "<"
@@ -91,8 +89,9 @@
 
 (map (map_item key: (identifier) @variable.parameter))
 
-(parameter type: (identifier) @type name: (identifier) @variable.parameter)
-(generic_param name: (identifier) @variable.parameter)
+(parameter type: (identifier) @type)
+(parameter name: (identifier) @variable.parameter)
+(generic_param name: (identifier) @type)
 
 (declaration type: (identifier) @type)
 (function_definition type: (identifier) @type)
