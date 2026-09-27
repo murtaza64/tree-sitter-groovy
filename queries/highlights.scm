@@ -108,6 +108,9 @@
 
 (identifier) @variable
 
+(declaration
+  "_" @variable)
+
 ((identifier) @constant
   (#match? @constant "^[A-Z][A-Z_0-9]+$"))
 
