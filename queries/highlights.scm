@@ -209,6 +209,9 @@
   ] @punctuation.bracket)
 
 ; TODO: Class literals with PascalCase
+(parameter
+  "=" @operator)
+
 (declaration
   "=" @operator)
 
