@@ -21,21 +21,18 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "_statement"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_statement"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "pipeline"
+              }
+            ]
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "pipeline"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
         }
       ]
     },
@@ -4000,7 +3997,7 @@
               "members": [
                 {
                   "type": "PATTERN",
-                  "value": "[$bfnrst\\\\'\"\\n]"
+                  "value": "[$bfnrst\\\\'\"]"
                 },
                 {
                   "type": "PATTERN",
@@ -4611,6 +4608,17 @@
     {
       "type": "PATTERN",
       "value": "\\s"
+    },
+    {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 2,
+        "content": {
+          "type": "PATTERN",
+          "value": "\\\\\\n"
+        }
+      }
     },
     {
       "type": "SYMBOL",
