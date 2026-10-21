@@ -2670,8 +2670,13 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "SYMBOL",
-                    "name": "parameter"
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_closure_parameter"
+                    },
+                    "named": true,
+                    "value": "parameter"
                   },
                   {
                     "type": "STRING",
@@ -2685,8 +2690,13 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "parameter"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_closure_parameter"
+                },
+                "named": true,
+                "value": "parameter"
               },
               {
                 "type": "CHOICE",
@@ -2777,6 +2787,37 @@
       }
     },
     "parameter": {
+      "type": "PREC",
+      "value": -1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "annotation"
+            }
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "modifier"
+            }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_parameter_body"
+          }
+        ]
+      }
+    },
+    "_closure_parameter": {
+      "type": "SYMBOL",
+      "name": "_parameter_body"
+    },
+    "_parameter_body": {
       "type": "PREC",
       "value": -1,
       "content": {

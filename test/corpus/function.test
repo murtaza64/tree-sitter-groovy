@@ -202,3 +202,50 @@ def friend =
     (binary_op
       (number_literal)
       (number_literal))))
+==========
+Annotated parameters
+==========
+def show(@PathVariable Long id, @Body @Valid Map body) {
+}
+---
+(source_file
+  (function_definition
+    function: (identifier)
+    parameters: (parameter_list
+      (parameter
+        (annotation
+          (identifier))
+        type: (identifier)
+        name: (identifier))
+      (parameter
+        (annotation
+          (identifier))
+        (annotation
+          (identifier))
+        type: (identifier)
+        name: (identifier)))
+    body: (closure)))
+==========
+Annotated parameter with arguments and final parameter
+==========
+String list(@QueryValue('1') Integer page, final String sort) {
+}
+---
+(source_file
+  (function_definition
+    type: (identifier)
+    function: (identifier)
+    parameters: (parameter_list
+      (parameter
+        (annotation
+          (identifier)
+          (argument_list
+            (string
+              (string_content))))
+        type: (identifier)
+        name: (identifier))
+      (parameter
+        (modifier)
+        type: (identifier)
+        name: (identifier)))
+    body: (closure)))
