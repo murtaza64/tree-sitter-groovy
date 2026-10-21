@@ -428,7 +428,9 @@ module.exports = grammar({
       optional($.closure),
     )),
 
-    _param_list: $ => prec(1, list_of($.parameter)),
+    // closure parameters stay unannotated: a class body is a closure, so
+    // `@Ann Type name` there must keep parsing as an annotated field
+    _param_list: $ => prec(1, list_of(alias($._closure_parameter, $.parameter))),
 
     parameter_list: $ => prec(1, seq(
       '(',
@@ -437,6 +439,14 @@ module.exports = grammar({
     )),
 
     parameter: $ => prec(-1, seq(
+      repeat($.annotation),
+      repeat($.modifier),
+      $._parameter_body,
+    )),
+
+    _closure_parameter: $ => $._parameter_body,
+
+    _parameter_body: $ => prec(-1, seq(
       optional(field('type', choice($._type, 'def'))),
       field('name', $.identifier),
       optional(seq('=', field('value', $._expression))),

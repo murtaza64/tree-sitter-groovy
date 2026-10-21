@@ -63,3 +63,20 @@ interface foo {
           (parameter
             type: (builtintype)
             name: (identifier)))))))
+==========
+Annotated field is not a closure parameter
+==========
+class A {
+    @NonNull
+    UUID id
+}
+---
+(source_file
+  (class_definition
+    name: (identifier)
+    body: (closure
+      (declaration
+        (annotation
+          (identifier))
+        type: (identifier)
+        name: (identifier)))))
