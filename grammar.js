@@ -265,10 +265,10 @@ module.exports = grammar({
             $.groovy_doc_throws,
             $.groovy_doc_tag,
             $.groovy_doc_at_text,
-            /([^@*]|\*[^/])([^*\s@]|[^\s\n]@|\*[^/])+/,
+            /([^@*]|\*+[^*/])([^*\s@]|[^\s\n]@|\*+[^*/])+/,
           ),
         ),
-        '*/'
+        /\*+\//
       ),
 
     groovy_doc_param: $ => seq (
